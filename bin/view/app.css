@@ -1,5 +1,5 @@
 #loginPage{
-	-fx-background-image: url("assets/test.gif");
+	-fx-background-image: url("assets/test.jpeg");
 	-fx-background-repeat: stretch;   
     -fx-background-size: 800 600;
     -fx-background-position: center center;
@@ -19,6 +19,10 @@ Button{
 	-fx-font-weight: bold;
 }
 
-#password{
-	-fx-border-style: round;
+Button:hover{
+	-fx-background-color: #005580;
+}
+
+#Username{
+	
 }

@@ -1,5 +1,6 @@
 package app;
 
+import controller.LoginController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -13,6 +14,8 @@ public class PhotoAlbum extends Application {
 		FXMLLoader loader = new FXMLLoader();   
 	    loader.setLocation(getClass().getResource("/view/Login.fxml"));
 	    AnchorPane root = (AnchorPane)loader.load();
+	    LoginController login = loader.getController();
+	    login.start(primaryStage);
 	    
 	    Scene scene = new Scene(root, 800, 600);
 	    primaryStage.setScene(scene);
