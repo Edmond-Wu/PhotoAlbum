@@ -5,10 +5,17 @@
     -fx-background-position: center center;
 }
 
-Text{
+#name {
 	-fx-fill: WHITE;
 	-fx-alignment: center;
 	-fx-font: 64 helvetica;
+}
+
+#userwrong, #passwrong{
+	-fx-fill: #ff3333;
+	-fx-font: 16 helvetica;
+	-fx-font-weight: bold;
+	-fx-opacity: 0;
 }
 
 Button{
