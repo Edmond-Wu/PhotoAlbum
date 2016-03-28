@@ -1,5 +1,8 @@
 package model;
 
+/**
+ * @author Edmond Wu & Vincent Xie
+ */
 public abstract class User {
 	private String username;
 	private String password;

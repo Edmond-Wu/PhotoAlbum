@@ -6,16 +6,16 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane fx:id="loginPage" prefHeight="600.0" prefWidth="800.0" stylesheets="@app.css" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.LoginController">
+<AnchorPane fx:id="loginPage" prefHeight="600.0" prefWidth="800.0" stylesheets="@Login.css" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.LoginController">
 
    	<Text layoutX="215.0" layoutY="250.0" text="Photo Album" />
    	
    	<TextField layoutX="-300.0" layoutY="-300.0" prefHeight="0" prefWidth="0" />
  
-    <TextField fx:id="Username" layoutX="306.0" layoutY="300.0" prefHeight="45.0" prefWidth="190.0" promptText="Username" />
+    <TextField fx:id="Username" onMouseClicked="#resetUsername" layoutX="306.0" layoutY="300.0" prefHeight="45.0" prefWidth="190.0" promptText="Username" />
  
-    <PasswordField fx:id="Password" layoutX="306.0" layoutY="374.0" prefHeight="45.0" prefWidth="190.0" promptText="Password" />
+    <PasswordField fx:id="Password" onMouseClicked="#resetPassword" layoutX="306.0" layoutY="374.0" prefHeight="45.0" prefWidth="190.0" promptText="Password" />
         
-    <Button fx:id="Login" layoutX="352.0" layoutY="450.0" prefHeight="45.0" prefWidth="97.0" text="Login" />
+    <Button fx:id="Login" onAction="#login" layoutX="352.0" layoutY="450.0" prefHeight="45.0" prefWidth="97.0" text="Login" />
    	
 </AnchorPane>
