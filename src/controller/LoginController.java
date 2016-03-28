@@ -1,8 +1,8 @@
 package controller;
 
 import java.io.IOException;
-
 import app.PhotoAlbum;
+import java.io.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -40,12 +40,30 @@ public class LoginController extends Controller {
 	}
 	
 	/**
+	 * Updates the user list
+	 */
+	public void updateUserList() {
+		File dir = new File("data");
+		File[] directoryListing = dir.listFiles();
+		if (directoryListing != null) {
+			for (File child : directoryListing) {
+				//Do something with child
+		    }
+		} else {
+		    // Handle the case where dir is not really a directory.
+		    // Checking dir.isDirectory() above would not be sufficient
+		    // to avoid race conditions with another process that deletes
+		    // directories.
+		}
+	}
+	
+	/**
 	 * Logs the user in.
 	 * @param e Action event.
 	 * @throws IOException 
 	 */
 	public void login(ActionEvent e) throws IOException{
-		String username = Username.getText();
+		String username = Username.getText().toLowerCase();
 		String password = Password.getText();
 		if(username.equalsIgnoreCase("admin")){
 			FXMLLoader loader = new FXMLLoader();   

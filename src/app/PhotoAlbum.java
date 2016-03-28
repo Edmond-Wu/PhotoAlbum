@@ -33,5 +33,9 @@ public class PhotoAlbum extends Application {
 	
 	public static void main(String[] args) {
 		launch(args);
+		/*
+		User u = new Admin("admin", "admin");
+		u.serialize();
+		*/
 	}
 }
