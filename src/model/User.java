@@ -1,9 +1,12 @@
 package model;
 
+import java.io.*;
+
 /**
  * @author Edmond Wu & Vincent Xie
  */
-public abstract class User {
+public abstract class User implements Serializable {
+	
 	private String username;
 	private String password;
 	
@@ -26,5 +29,22 @@ public abstract class User {
 	 */
 	public String getPassword() {
 		return password;
+	}
+	
+	/**
+	 * Serializes the user data
+	 */
+	public void serialize() {
+		try {
+	         FileOutputStream fileOut =
+	         new FileOutputStream("data/" + username + ".ser");
+	         ObjectOutputStream out = new ObjectOutputStream(fileOut);
+	         out.writeObject(this);
+	         out.close();
+	         fileOut.close();
+	         System.out.printf("Serialized data is saved in data/" + username + ".ser");
+	      } catch(IOException i) {
+	          i.printStackTrace();
+	      }
 	}
 }

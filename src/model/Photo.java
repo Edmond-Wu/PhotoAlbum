@@ -1,5 +1,6 @@
 package model;
 
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 /**
@@ -8,9 +9,12 @@ import java.util.*;
 public class Photo {
 	
 	private Calendar date_time;
+	private SimpleDateFormat sdf;
+	private Date date;
 	private String file_name;
 	private ArrayList<String> tags;
 	private String caption;
+	
 	
 	/**
 	 * Constructor with file name
@@ -18,9 +22,11 @@ public class Photo {
 	 */
 	public Photo(String n) {
 		date_time = new GregorianCalendar();
+		date = date_time.getTime();
 		file_name = n;
 		tags = new ArrayList<String>();
 		caption = "";
+		sdf = new SimpleDateFormat("dd/M/yyyy");
 	}
 	
 	/**
@@ -37,8 +43,8 @@ public class Photo {
 	 * Gets the date-time of the photo (when last modified)
 	 * @return the date-time of the picture
 	 */
-	public Calendar getDate() {
-		return date_time;
+	public String getDate() {
+		return sdf.format(date_time.getTime());
 	}
 	
 	/**
