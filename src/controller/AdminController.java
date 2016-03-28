@@ -44,11 +44,11 @@ public class AdminController extends Controller implements Initializable {
 	
 	private ObservableList<String> obsList;     
 
-	public void start(Stage mainStage) {   
+	public void start(Stage mainStage) {
 		setController(mainStage);
 		obsList = FXCollections.observableArrayList();
-		for (int i = 0; i < PhotoAlbum.userArrayList.size(); i++) {
-			obsList.add(i, PhotoAlbum.userArrayList.get(i).getUsername());
+		for (int i = 0; i < PhotoAlbum.admin.getUserList().size(); i++) {
+			obsList.add(i, PhotoAlbum.admin.getUserList().get(i).getUsername());
 		}
 		list.setItems(obsList); 
 		list.getSelectionModel().select(0);
@@ -84,28 +84,28 @@ public class AdminController extends Controller implements Initializable {
 				return;
 			}
 			NonAdminUser user = new NonAdminUser(username, pass);
-			for(int i = 0; i < PhotoAlbum.userArrayList.size(); i++){
-				if(username.equals(PhotoAlbum.userArrayList.get(i).getUsername())){
+			for(int i = 0; i < PhotoAlbum.admin.getUserList().size(); i++){
+				if(username.equals(PhotoAlbum.admin.getUserList().get(i).getUsername())){
 					Alert error = new Alert(AlertType.INFORMATION);
 					error.setHeaderText("Error!");
 					error.setContentText("Username already in use.");
 					error.show();
 					return;
-				} else if (username.compareToIgnoreCase(PhotoAlbum.userArrayList.get(i).getUsername()) == 0){
-					PhotoAlbum.userArrayList.add(i, user);
+				} else if (username.compareToIgnoreCase(PhotoAlbum.admin.getUserList().get(i).getUsername()) == 0){
+					PhotoAlbum.admin.getUserList().add(i, user);
 					obsList.add(i, username);
 					list.getSelectionModel().select(i);
 					showInfo();
 					return;
-				} else if(username.compareToIgnoreCase(PhotoAlbum.userArrayList.get(i).getUsername()) < 0){
-					PhotoAlbum.userArrayList.add(i, user);
+				} else if(username.compareToIgnoreCase(PhotoAlbum.admin.getUserList().get(i).getUsername()) < 0){
+					PhotoAlbum.admin.getUserList().add(i, user);
 					obsList.add(i, username);
 					list.getSelectionModel().select(i);
 					showInfo();
 					return;
 				}
 			}
-			PhotoAlbum.userArrayList.add(user);
+			PhotoAlbum.admin.getUserList().add(user);
 			obsList.add(username);
 			list.getSelectionModel().select(obsList.size() - 1);
 			showInfo();
@@ -126,11 +126,11 @@ public class AdminController extends Controller implements Initializable {
 			dialog.getDialogPane().getButtonTypes().add(cancel);
 			dialog.setHeaderText("Confirm.");
 			dialog.setContentText("Are you sure you would like to delete user " + 
-					PhotoAlbum.userArrayList.get(index).getUsername() + "?");
+					PhotoAlbum.admin.getUserList().get(index).getUsername() + "?");
 			dialog.showAndWait().ifPresent(response -> {
 				if (response == ok) {
 					obsList.remove(index);
-					PhotoAlbum.userArrayList.remove(index);
+					PhotoAlbum.admin.getUserList().remove(index);
 					showInfo();
 				}
 			});
@@ -143,8 +143,8 @@ public class AdminController extends Controller implements Initializable {
 	private void showInfo() {                
 		int index = list.getSelectionModel().getSelectedIndex();
 		if(index >= 0){
-			username.setText("Username: " + PhotoAlbum.userArrayList.get(index).getUsername());
-			password.setText("Password: " + PhotoAlbum.userArrayList.get(index).getPassword());
+			username.setText("Username: " + PhotoAlbum.admin.getUserList().get(index).getUsername());
+			password.setText("Password: " + PhotoAlbum.admin.getUserList().get(index).getPassword());
 		} else {
 			username.setText("Username: ");
 			password.setText("Password: ");

@@ -1,6 +1,5 @@
 package app;
 
-import java.util.ArrayList;
 
 import controller.LoginController;
 import javafx.application.Application;
@@ -8,6 +7,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
+import model.Admin;
 import model.NonAdminUser;
 
 /**
@@ -15,10 +15,11 @@ import model.NonAdminUser;
  */
 public class PhotoAlbum extends Application {
 	
-	public static ArrayList<NonAdminUser> userArrayList = new ArrayList<NonAdminUser>();
+	public static Admin admin = new Admin("admin", "password");
 	
 	@Override
 	public void start(Stage primaryStage) throws Exception {
+		
 		FXMLLoader loader = new FXMLLoader();   
 	    loader.setLocation(getClass().getResource("/view/Login.fxml"));
 	    AnchorPane root = (AnchorPane)loader.load();

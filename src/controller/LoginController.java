@@ -13,6 +13,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import model.NonAdminUser;
+import model.User;
 
 /**
  * @author Edmond Wu & Vincent Xie
@@ -66,21 +67,28 @@ public class LoginController extends Controller {
 		String username = Username.getText().toLowerCase();
 		String password = Password.getText();
 		if(username.equalsIgnoreCase("admin")){
-			FXMLLoader loader = new FXMLLoader();   
-			loader.setLocation(getClass().getResource("/view/Admin.fxml"));
-		    AnchorPane root = (AnchorPane)loader.load();
-		    AdminController Admin = loader.getController();
-		    Admin.start(stage);
-		    
-		    Scene scene = new Scene(root, 800, 600);
-		    stage.setScene(scene);
-		    stage.setResizable(false);
-		    stage.show(); 
-			return;
+			if (password.equals(PhotoAlbum.admin.getPassword())) {
+				FXMLLoader loader = new FXMLLoader();   
+				loader.setLocation(getClass().getResource("/view/Admin.fxml"));
+			    AnchorPane root = (AnchorPane)loader.load();
+			    AdminController Admin = loader.getController();
+			    Admin.start(stage);
+			    
+			    Scene scene = new Scene(root, 800, 600);
+			    stage.setScene(scene);
+			    stage.setResizable(false);
+			    stage.show(); 
+				return;
+			}
+			else {
+				passwrong.setStyle("-fx-opacity: 1;");
+				Password.setStyle("-fx-text-box-border: red; -fx-focus-color: red;");
+				return;
+			}
 		} 
 		//search through list
-		for(int i = 0; i < PhotoAlbum.userArrayList.size(); i++){
-			NonAdminUser user = PhotoAlbum.userArrayList.get(i);
+		for(int i = 0; i < PhotoAlbum.admin.getUserList().size(); i++){
+			User user = PhotoAlbum.admin.getUserList().get(i);
 			if(user.getUsername().equals(username)){
 				if(user.getPassword().equals(password)){
 					Username.setStyle("-fx-text-box-border: white; -fx-focus-color: #008ED6;");
