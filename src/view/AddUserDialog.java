@@ -44,10 +44,18 @@ public class AddUserDialog extends Dialog<ButtonType> {
         getDialogPane().setContent(dPane);
     }
     
+    /**
+     * Extracts username from dialog box.
+     * @return username
+     */
     public String getUsername() {
     	return userText.getText();
     }
     
+    /**
+     * Extracts password from dialog box.
+     * @return password
+     */
     public String getPassword() {
     	return passText.getText();
     }

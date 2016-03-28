@@ -25,6 +25,7 @@ public abstract class Controller {
 	public void setController(Stage primaryStage){
 		this.stage = primaryStage;
 	}
+	
 	/**
 	 * Logs a user out.
 	 * @throws IOException
