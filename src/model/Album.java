@@ -54,4 +54,12 @@ public class Album {
 			System.out.println("The photo you're trying to remove doesn't exist!");
 		}
 	}
+	
+	/**
+	 * Changes the album name
+	 * @param n New name of the album
+	 */
+	public void changeName(String n) {
+		name = n;
+	}
 }

@@ -10,7 +10,7 @@ public class Photo {
 	
 	private Calendar date_time;
 	private SimpleDateFormat sdf;
-	private Date date;
+	//private Date date;
 	private String file_name;
 	private ArrayList<String> tags;
 	private String caption;
@@ -22,7 +22,7 @@ public class Photo {
 	 */
 	public Photo(String n) {
 		date_time = new GregorianCalendar();
-		date = date_time.getTime();
+		//date = date_time.getTime();
 		file_name = n;
 		tags = new ArrayList<String>();
 		caption = "";
