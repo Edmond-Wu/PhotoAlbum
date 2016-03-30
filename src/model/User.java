@@ -10,6 +10,11 @@ public abstract class User implements Serializable {
 	private String username;
 	private String password;
 	
+	/**
+	 * User constructor
+	 * @param n Username
+	 * @param p Password
+	 */
 	public User(String n, String p) {
 		username = n;
 		password = p;
@@ -44,7 +49,7 @@ public abstract class User implements Serializable {
 	         fileOut.close();
 	         System.out.printf("Serialized data is saved in data/" + username + ".ser");
 	      } catch(IOException i) {
-	          i.printStackTrace();
+	          System.out.println("Invalid serialization.");
 	      }
 	}
 }

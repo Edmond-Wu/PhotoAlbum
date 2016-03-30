@@ -1,6 +1,9 @@
 package app;
 
 
+import java.io.FileInputStream;
+import java.io.ObjectInputStream;
+
 import controller.LoginController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -9,6 +12,7 @@ import javafx.scene.layout.*;
 import javafx.stage.Stage;
 import model.Admin;
 import model.NonAdminUser;
+import model.User;
 
 /**
  * @author Edmond Wu & Vincent Xie
@@ -32,11 +36,33 @@ public class PhotoAlbum extends Application {
 	    primaryStage.show(); 
 	}
 	
+	/*
+	public static User deSerialize(String file_name) {
+		User u = null;
+	    try {
+	    	FileInputStream fileIn = new FileInputStream("data/" + file_name);
+	        ObjectInputStream in = new ObjectInputStream(fileIn);
+	        u = (User) in.readObject();
+	        in.close();
+	        fileIn.close();
+	    } catch(Exception e) {
+	         System.out.println("Invalid deserialization.");
+	         return null;
+	    } 
+	    return u;
+	}
+	*/
+	
 	public static void main(String[] args) {
 		launch(args);
+		
 		/*
 		User u = new Admin("admin", "admin");
 		u.serialize();
+		
+		User x = deSerialize(u.getUsername() + ".ser");
+		System.out.println();
+		System.out.println(x.getPassword());
 		*/
 	}
 }
