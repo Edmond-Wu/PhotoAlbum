@@ -74,7 +74,7 @@ public class AdminController extends Controller implements Initializable {
 		String click = result.get().getText();
 		
 		if (click.equals(ok)) {
-			String username = dialog.getUsername(), pass = dialog.getPassword();
+			String username = dialog.getUsername().toLowerCase(), pass = dialog.getPassword();
 			if (username.isEmpty() || pass.isEmpty()) {
 				Alert error = new Alert(AlertType.INFORMATION);
 				error.setHeaderText("Error!");
@@ -112,8 +112,8 @@ public class AdminController extends Controller implements Initializable {
 				}
 			}
 			PhotoAlbum.admin.getUserList().add(user);
-			user.serialize();
 			obsList.add(username);
+			user.serialize();
 			list.getSelectionModel().select(obsList.size() - 1);
 			showInfo();
 		}

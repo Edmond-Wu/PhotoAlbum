@@ -1,6 +1,7 @@
 package app;
 
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.ObjectInputStream;
 
@@ -24,6 +25,7 @@ public class PhotoAlbum extends Application {
 	
 	@Override
 	public void start(Stage primaryStage) throws Exception {
+		updateUserList();
 		stage = primaryStage;
 		FXMLLoader loader = new FXMLLoader();   
 	    loader.setLocation(getClass().getResource("/view/Login.fxml"));
@@ -37,8 +39,12 @@ public class PhotoAlbum extends Application {
 	    primaryStage.show(); 
 	}
 	
-	/*
-	public static User deSerialize(String file_name) {
+	/**
+	 * Retrieves a user object from a file name
+	 * @param file_name Name of the user file
+	 * @return User object with its relevant data
+	 */
+	public User deSerialize(String file_name) {
 		User u = null;
 	    try {
 	    	FileInputStream fileIn = new FileInputStream("data/" + file_name);
@@ -52,18 +58,27 @@ public class PhotoAlbum extends Application {
 	    } 
 	    return u;
 	}
-	*/
+	
+	/**
+	 * Updates the user list
+	 */
+	public void updateUserList() {
+		File dir = new File("data");
+		File[] directoryListing = dir.listFiles();
+		if (directoryListing != null) {
+			for (File child : directoryListing) {
+				String file_name = child.getName();
+				if (file_name.toLowerCase().contains(".ser")) {
+					User u = deSerialize(file_name);
+					PhotoAlbum.admin.getUserList().add(u);
+				}
+		    }
+		} else {
+		    System.out.println("Empty or invalid directory");
+		}
+	}
 	
 	public static void main(String[] args) {
 		launch(args);
-		
-		/*
-		User u = new Admin("admin", "admin");
-		u.serialize();
-		
-		User x = deSerialize(u.getUsername() + ".ser");
-		System.out.println();
-		System.out.println(x.getPassword());
-		*/
 	}
 }

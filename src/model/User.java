@@ -16,7 +16,7 @@ public abstract class User implements Serializable {
 	 * @param p Password
 	 */
 	public User(String n, String p) {
-		username = n;
+		username = n.toLowerCase();
 		password = p;
 	}
 	
