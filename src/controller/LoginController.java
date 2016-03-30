@@ -67,16 +67,7 @@ public class LoginController extends Controller {
 		String password = Password.getText();
 		if(username.equalsIgnoreCase("admin")){
 			if (password.equals(PhotoAlbum.admin.getPassword())) {
-				FXMLLoader loader = new FXMLLoader();   
-				loader.setLocation(getClass().getResource("/view/Admin.fxml"));
-			    AnchorPane root = (AnchorPane)loader.load();
-			    AdminController Admin = loader.getController();
-			    Admin.start(PhotoAlbum.stage);
-			    
-			    Scene scene = new Scene(root, 800, 600);
-			    PhotoAlbum.stage.setScene(scene);
-			    PhotoAlbum.stage.setResizable(false);
-			    PhotoAlbum.stage.show(); 
+				segue("/view/Admin.fxml");
 				return;
 			}
 			else {
@@ -94,7 +85,9 @@ public class LoginController extends Controller {
 					userwrong.setStyle("-fx-opacity: 0;");
 					Password.setStyle("-fx-text-box-border: white; -fx-focus-color: #008ED6;");
 					passwrong.setStyle("-fx-opacity: 0;");
-					System.out.println("Login successful.");
+					
+					segue("/view/Albums.fxml");
+					
 					return;
 				} else {
 					passwrong.setStyle("-fx-opacity: 1;");

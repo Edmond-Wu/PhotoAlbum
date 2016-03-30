@@ -1,11 +1,11 @@
 #name {
-	-fx-fill: #3498db;
+	-fx-fill: #FFFFFF;
 	-fx-alignment: center;
 	-fx-font: 56 Montserrat;
 }
 
 #add, #edit, #logout, #search{
-	-fx-text-fill: #006bb3;
+	-fx-text-fill: #FFFFFF;
 	-fx-font: 24 helvetica;
 	-fx-background-radius: 60;
 	-fx-background-color: transparent;
@@ -20,11 +20,11 @@
 }
 
 AnchorPane{
-	-fx-background-color: #ecf2f9;
+	-fx-background-color: #2980b9;
 }
 
 #albums{
-	-fx-background-color: #FFFFFF;
+	-fx-background-color: #f2f2f2;
 }
 
 ImageView{
