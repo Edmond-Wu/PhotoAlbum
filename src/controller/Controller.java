@@ -21,15 +21,29 @@ public abstract class Controller {
 	 * @throws IOException
 	 */
 	public void logout() throws IOException{
-		FXMLLoader loader = new FXMLLoader();   
-		loader.setLocation(getClass().getResource("/view/Login.fxml"));
-	    AnchorPane root = (AnchorPane)loader.load();
-	    LoginController login = loader.getController();
-	    login.start(PhotoAlbum.stage);
-	    
-	    Scene scene = new Scene(root, 800, 600);
-	    PhotoAlbum.stage.setScene(scene);
-	    PhotoAlbum.stage.setResizable(false);
-	    PhotoAlbum.stage.show(); 
+		ButtonType ok = new ButtonType("OK", ButtonData.OK_DONE);
+		ButtonType cancel = new ButtonType("Cancel", ButtonData.NO);
+		Dialog<ButtonType> dialog = new Dialog<ButtonType>();
+		dialog.getDialogPane().getButtonTypes().add(ok);
+		dialog.getDialogPane().getButtonTypes().add(cancel);
+		dialog.setHeaderText("Confirm.");
+		dialog.setContentText("Are you sure you want to logout?");
+		dialog.showAndWait().ifPresent(response -> {
+			FXMLLoader loader = new FXMLLoader();   
+			loader.setLocation(getClass().getResource("/view/Login.fxml"));
+			AnchorPane root;
+			try {
+				root = (AnchorPane)loader.load();
+				LoginController login = loader.getController();
+				login.start(PhotoAlbum.stage);
+
+				Scene scene = new Scene(root, 800, 600);
+				PhotoAlbum.stage.setScene(scene);
+				PhotoAlbum.stage.setResizable(false);
+				PhotoAlbum.stage.show(); 
+			} catch (Exception e) {
+				System.out.println("Error while logging out.");
+			}
+		});
 	}
 }

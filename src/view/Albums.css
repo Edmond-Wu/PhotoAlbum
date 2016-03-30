@@ -1,0 +1,32 @@
+#name {
+	-fx-fill: #3498db;
+	-fx-alignment: center;
+	-fx-font: 56 Montserrat;
+}
+
+#add, #edit, #logout, #search{
+	-fx-text-fill: #006bb3;
+	-fx-font: 24 helvetica;
+	-fx-background-radius: 60;
+	-fx-background-color: transparent;
+}
+
+#add:hover, #edit:hover, #logout:hover, #search:hover{
+	-fx-text-fill: #66c2ff;
+}
+
+#add{
+	-fx-font: 48 helvetica;
+}
+
+AnchorPane{
+	-fx-background-color: #ecf2f9;
+}
+
+#albums{
+	-fx-background-color: #FFFFFF;
+}
+
+ImageView{
+	-fx-alignment: center;
+}
