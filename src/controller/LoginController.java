@@ -87,7 +87,6 @@ public class LoginController extends Controller {
 					passwrong.setStyle("-fx-opacity: 0;");
 					
 					segue("/view/Albums.fxml");
-					
 					return;
 				} else {
 					passwrong.setStyle("-fx-opacity: 1;");
@@ -98,8 +97,8 @@ public class LoginController extends Controller {
 		}
 		//if not found
 		userwrong.setStyle("-fx-opacity: 1;");
-		Username.setStyle("-fx-text-box-border: red; -fx-focus-color: red;");
-		Password.setStyle("-fx-text-box-border: red; -fx-focus-color: red;");
+		Username.setStyle("-fx-text-box-border: #e67e22; -fx-focus-color: #e67e22;");
+		Password.setStyle("-fx-text-box-border: #e67e22; -fx-focus-color: #e67e22;");
 	}
 	
 	/**

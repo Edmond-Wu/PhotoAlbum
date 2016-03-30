@@ -1,9 +1,3 @@
-#name {
-	-fx-fill: #FFFFFF;
-	-fx-alignment: center;
-	-fx-font: 56 Montserrat;
-}
-
 #add, #edit, #logout, #search{
 	-fx-text-fill: #FFFFFF;
 	-fx-font: 24 helvetica;
@@ -29,4 +23,29 @@ AnchorPane{
 
 ImageView{
 	-fx-alignment: center;
+}
+
+.scroll-bar .increment-arrow,
+.scroll-bar .decrement-arrow
+{
+    -fx-shape: "";
+    -fx-padding:0;
+}
+
+.scroll-bar:horizontal {
+    -fx-opacity: 0;
+}
+
+
+.scroll-bar:vertical .thumb 
+{
+    -fx-background-color: #3498db;
+    -fx-background-insets: 2, 0, 0;
+    -fx-background-radius: 2em;
+}
+
+Text {
+	-fx-text-alignment: center;
+	-fx-font: 16 helvetica;
+	-fx-fill: #595959;
 }
