@@ -1,6 +1,8 @@
 package controller;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.ObjectInputStream;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -9,6 +11,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
+import model.User;
 
 /**
  * @author Edmond Wu & Vincent Xie
@@ -28,5 +31,4 @@ public class AlbumsController extends Controller implements Initializable{
 		Image image = new Image(file.toURI().toString());
 		imageView.setImage(image);		
 	}
-	
 }
