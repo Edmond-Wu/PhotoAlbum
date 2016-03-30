@@ -1,6 +1,5 @@
 package controller;
 
-import java.io.IOException;
 import app.PhotoAlbum;
 import java.io.*;
 import javafx.event.ActionEvent;
@@ -40,6 +39,26 @@ public class LoginController extends Controller {
 	}
 	
 	/**
+	 * Retrieves a user object from a file name
+	 * @param file_name Name of the user file
+	 * @return User object with its relevant data
+	 */
+	public User deSerialize(String file_name) {
+		User u = null;
+	    try {
+	    	FileInputStream fileIn = new FileInputStream("data/" + file_name);
+	        ObjectInputStream in = new ObjectInputStream(fileIn);
+	        u = (User) in.readObject();
+	        in.close();
+	        fileIn.close();
+	    } catch(Exception e) {
+	         System.out.println("Invalid deserialization.");
+	         return null;
+	    } 
+	    return u;
+	}
+	
+	/**
 	 * Updates the user list
 	 */
 	public void updateUserList() {
@@ -47,13 +66,14 @@ public class LoginController extends Controller {
 		File[] directoryListing = dir.listFiles();
 		if (directoryListing != null) {
 			for (File child : directoryListing) {
-				//Do something with child
+				String file_name = child.getName();
+				if (file_name.toLowerCase().contains(".ser")) {
+					User u = deSerialize(file_name);
+					PhotoAlbum.admin.getUserList().add(u);
+				}
 		    }
 		} else {
-		    // Handle the case where dir is not really a directory.
-		    // Checking dir.isDirectory() above would not be sufficient
-		    // to avoid race conditions with another process that deletes
-		    // directories.
+		    System.out.println("Empty or invalid directory");
 		}
 	}
 	
@@ -67,6 +87,7 @@ public class LoginController extends Controller {
 		String password = Password.getText();
 		if(username.equalsIgnoreCase("admin")){
 			if (password.equals(PhotoAlbum.admin.getPassword())) {
+				updateUserList();
 				segue("/view/Admin.fxml");
 				return;
 			}

@@ -30,7 +30,7 @@ public class NonAdminController extends Controller implements Initializable {
 		
 	}
 	
-	public void deSerialize(String file_name) {
+	public static User deSerialize(String file_name) {
 		User u = null;
 	    try {
 	    	FileInputStream fileIn = new FileInputStream("data/" + file_name);
@@ -40,9 +40,8 @@ public class NonAdminController extends Controller implements Initializable {
 	        fileIn.close();
 	    } catch(Exception e) {
 	         System.out.println("Invalid deserialization.");
-	         return;
+	         return null;
 	    } 
-	    System.out.println(u.getUsername());
-	    System.out.println(u.getPassword());
+	    return u;
 	}
 }

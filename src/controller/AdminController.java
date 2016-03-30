@@ -112,6 +112,7 @@ public class AdminController extends Controller implements Initializable {
 				}
 			}
 			PhotoAlbum.admin.getUserList().add(user);
+			user.serialize();
 			obsList.add(username);
 			list.getSelectionModel().select(obsList.size() - 1);
 			showInfo();
