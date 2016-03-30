@@ -16,16 +16,6 @@ import javafx.stage.Stage;
  */
 public abstract class Controller {
 	
-	Stage stage = null;
-
-	/**
-	 * Sets the stage for the controller.
-	 * @param primaryStage
-	 */
-	public void setController(Stage primaryStage){
-		this.stage = primaryStage;
-	}
-	
 	/**
 	 * Logs a user out.
 	 * @throws IOException
@@ -35,12 +25,11 @@ public abstract class Controller {
 		loader.setLocation(getClass().getResource("/view/Login.fxml"));
 	    AnchorPane root = (AnchorPane)loader.load();
 	    LoginController login = loader.getController();
-	    login.setController(stage);
-	    login.start(stage);
+	    login.start(PhotoAlbum.stage);
 	    
 	    Scene scene = new Scene(root, 800, 600);
-	    stage.setScene(scene);
-	    stage.setResizable(false);
-	    stage.show(); 
+	    PhotoAlbum.stage.setScene(scene);
+	    PhotoAlbum.stage.setResizable(false);
+	    PhotoAlbum.stage.show(); 
 	}
 }

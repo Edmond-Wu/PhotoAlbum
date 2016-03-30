@@ -21,7 +21,7 @@ public class NonAdminController extends Controller implements Initializable {
 	
 	
 	public void start(Stage mainStage) {
-		setController(mainStage);
+
 	}
 
 	@Override

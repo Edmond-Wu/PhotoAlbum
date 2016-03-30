@@ -44,8 +44,7 @@ public class AdminController extends Controller implements Initializable {
 	
 	private ObservableList<String> obsList;     
 
-	public void start(Stage mainStage) {
-		setController(mainStage);
+	public void start(Stage mainStage) {;
 		obsList = FXCollections.observableArrayList();
 		for (int i = 0; i < PhotoAlbum.admin.getUserList().size(); i++) {
 			obsList.add(i, PhotoAlbum.admin.getUserList().get(i).getUsername());
@@ -80,6 +79,13 @@ public class AdminController extends Controller implements Initializable {
 				Alert error = new Alert(AlertType.INFORMATION);
 				error.setHeaderText("Error!");
 				error.setContentText("Username and Password are required!");
+				error.show();
+				return;
+			}
+			if (username.equalsIgnoreCase("Admin")) {
+				Alert error = new Alert(AlertType.INFORMATION);
+				error.setHeaderText("Error!");
+				error.setContentText("Cannot create a user with username \"" + username + "\"!");
 				error.show();
 				return;
 			}

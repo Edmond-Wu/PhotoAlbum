@@ -36,7 +36,6 @@ public class LoginController extends Controller {
 	private Text passwrong;
 	
 	public void start(Stage mainStage) {                
-		setController(mainStage);
 	    Login.setDefaultButton(true);
 	}
 	
@@ -72,12 +71,12 @@ public class LoginController extends Controller {
 				loader.setLocation(getClass().getResource("/view/Admin.fxml"));
 			    AnchorPane root = (AnchorPane)loader.load();
 			    AdminController Admin = loader.getController();
-			    Admin.start(stage);
+			    Admin.start(PhotoAlbum.stage);
 			    
 			    Scene scene = new Scene(root, 800, 600);
-			    stage.setScene(scene);
-			    stage.setResizable(false);
-			    stage.show(); 
+			    PhotoAlbum.stage.setScene(scene);
+			    PhotoAlbum.stage.setResizable(false);
+			    PhotoAlbum.stage.show(); 
 				return;
 			}
 			else {

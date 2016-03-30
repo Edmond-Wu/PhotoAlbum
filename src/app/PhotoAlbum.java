@@ -20,10 +20,11 @@ import model.User;
 public class PhotoAlbum extends Application {
 	
 	public static Admin admin = new Admin("admin", "password");
+	public static Stage stage;
 	
 	@Override
 	public void start(Stage primaryStage) throws Exception {
-		
+		stage = primaryStage;
 		FXMLLoader loader = new FXMLLoader();   
 	    loader.setLocation(getClass().getResource("/view/Login.fxml"));
 	    AnchorPane root = (AnchorPane)loader.load();
