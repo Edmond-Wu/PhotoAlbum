@@ -21,6 +21,7 @@ import model.User;
 public class PhotoAlbum extends Application {
 	
 	public static Admin admin = new Admin("admin", "password");
+	public static User regular_user;
 	public static Stage stage;
 	
 	@Override

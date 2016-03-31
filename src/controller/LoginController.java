@@ -60,9 +60,9 @@ public class LoginController extends Controller {
 		} 
 		//search through list
 		for(int i = 0; i < PhotoAlbum.admin.getUserList().size(); i++){
-			User user = PhotoAlbum.admin.getUserList().get(i);
-			if(user.getUsername().equals(username)){
-				if(user.getPassword().equals(password)){
+			PhotoAlbum.regular_user = PhotoAlbum.admin.getUserList().get(i);
+			if(PhotoAlbum.regular_user.getUsername().equals(username)){
+				if(PhotoAlbum.regular_user.getPassword().equals(password)){
 					Username.setStyle("-fx-text-box-border: white; -fx-focus-color: #008ED6;");
 					userwrong.setStyle("-fx-opacity: 0;");
 					Password.setStyle("-fx-text-box-border: white; -fx-focus-color: #008ED6;");

@@ -23,6 +23,7 @@ import model.User;
  */
 public class AlbumsController extends Controller implements Initializable{
 	
+	
 	@FXML
 	private ImageView imageView;
 	
