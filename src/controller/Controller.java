@@ -35,11 +35,7 @@ public abstract class Controller {
 		dialog.setContentText("Are you sure you want to logout?");
 		dialog.showAndWait().ifPresent(response -> {
 			if (response == ok) {
-				try {
-					segue("/view/Login.fxml");
-				} catch (Exception e) {
-					System.out.println("Error while logging out.");
-				}
+				segue("/view/Login.fxml");
 			}
 		});
 	}
@@ -47,19 +43,22 @@ public abstract class Controller {
 	/**
 	 * Changes screen
 	 * @param fxml path to fxml file
-	 * @throws IOException 
 	 */
-	public void segue(String fxml) throws IOException{
-		FXMLLoader loader = new FXMLLoader(); 
-		loader.setLocation(getClass().getResource(fxml));
-		Pane root;
-		root = (Pane)loader.load();
-		Controller login = loader.getController();
-		login.start(PhotoAlbum.stage);
+	public void segue(String fxml){
+		try{
+			FXMLLoader loader = new FXMLLoader(); 
+			loader.setLocation(getClass().getResource(fxml));
+			Pane root;
+			root = (Pane)loader.load();
+			Controller login = loader.getController();
+			login.start(PhotoAlbum.stage);
 
-		Scene scene = new Scene(root, 800, 600);
-		PhotoAlbum.stage.setScene(scene);
-		PhotoAlbum.stage.setResizable(false);
-		PhotoAlbum.stage.show(); 
+			Scene scene = new Scene(root, 800, 600);
+			PhotoAlbum.stage.setScene(scene);
+			PhotoAlbum.stage.setResizable(false);
+			PhotoAlbum.stage.show(); 
+		} catch (Exception e){
+			e.printStackTrace();
+		}
 	}
 }

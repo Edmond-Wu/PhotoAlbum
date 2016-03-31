@@ -6,6 +6,7 @@ import java.io.ObjectInputStream;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -21,19 +22,19 @@ import model.User;
 /**
  * @author Edmond Wu & Vincent Xie
  */
-public class AlbumsController extends Controller implements Initializable{
+public class AlbumController extends Controller implements Initializable{
 	
 	@FXML
 	private ImageView imageView;
 	
 	@FXML
-	private ImageView album1;
+	private ImageView photo1;
 	
 	@FXML
 	private Text name1;
 	
 	@FXML
-	private ImageView album2;
+	private ImageView photo2;
 	
 	@FXML
 	private Text name2;
@@ -45,22 +46,23 @@ public class AlbumsController extends Controller implements Initializable{
 	    
 	}
 	
+	public void back(ActionEvent e){
+		segue("/view/Albums.fxml");
+	}
+	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		File file = new File("src/assets/Albums.png");
-		Image image = new Image(file.toURI().toString());
-		imageView.setImage(image);	
 		
 		File file1 = new File("src/assets/test.jpeg");
 		Image image1 = new Image(file1.toURI().toString());
-		album1.setImage(image1);		
+		photo1.setImage(image1);		
 		
 		Image image2 = new Image(file1.toURI().toString());
-		album2.setImage(image2);
+		photo2.setImage(image2);
 		
-		album1.addEventFilter(MouseEvent.MOUSE_PRESSED, event -> { segue("/view/Album.fxml"); });
+		photo1.addEventFilter(MouseEvent.MOUSE_PRESSED, event -> System.out.println("test"));
 		name1.addEventFilter(MouseEvent.MOUSE_PRESSED, event -> System.out.println("test"));
-		album2.addEventFilter(MouseEvent.MOUSE_PRESSED, event -> System.out.println("test"));
+		photo2.addEventFilter(MouseEvent.MOUSE_PRESSED, event -> System.out.println("test"));
 		name2.addEventFilter(MouseEvent.MOUSE_PRESSED, event -> System.out.println("test"));
 	}
 }
