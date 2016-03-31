@@ -47,7 +47,7 @@ public abstract class User implements Serializable {
 	         out.writeObject(this);
 	         out.close();
 	         fileOut.close();
-	         System.out.printf("Serialized data is saved in data/" + username + ".ser");
+	         System.out.println("Serialized data is saved in data/" + username + ".ser");
 	      } catch(IOException i) {
 	          System.out.println("Invalid serialization.");
 	      }
