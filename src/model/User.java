@@ -41,15 +41,15 @@ public abstract class User implements Serializable {
 	 */
 	public void serialize() {
 		try {
-	         FileOutputStream fileOut =
-	         new FileOutputStream("data/" + username + ".ser");
-	         ObjectOutputStream out = new ObjectOutputStream(fileOut);
-	         out.writeObject(this);
-	         out.close();
-	         fileOut.close();
-	         System.out.println("Serialized data is saved in data/" + username + ".ser");
-	      } catch(IOException i) {
-	          System.out.println("Invalid serialization.");
-	      }
+	        FileOutputStream fileOut = new FileOutputStream("data/" + username + ".ser");
+	        ObjectOutputStream out = new ObjectOutputStream(fileOut);
+	        out.writeObject(this);
+	        out.close();
+	        fileOut.close();
+	        System.out.println("Serialized data is saved in data/" + username + ".ser");
+	    } catch(Exception e) {
+	    	System.out.println("Invalid serialization.");
+	    	e.printStackTrace();
+	    }
 	}
 }

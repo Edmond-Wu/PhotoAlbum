@@ -8,6 +8,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 import app.PhotoAlbum;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -60,7 +61,14 @@ public class AlbumsController extends Controller implements Initializable{
 	private ListView<String> list;
 	
 	public void start(Stage mainStage) {                
-	    
+		obsList = FXCollections.observableArrayList();
+		for (int i = 0; i < PhotoAlbum.regular_user.getAlbums().size(); i++) {
+			obsList.add(i, PhotoAlbum.regular_user.getAlbums().get(i).getName());
+		}
+		//list.setItems(obsList); 
+		//list.getSelectionModel().select(0);
+		//showInfo();
+		//list.setOnMouseClicked((e) -> showInfo());
 	}
 	
 	@Override
@@ -112,8 +120,11 @@ public class AlbumsController extends Controller implements Initializable{
 			Album added = new Album(album_name);
 			PhotoAlbum.regular_user.getAlbums().add(added);
 			obsList.add(album_name);
-			list.getSelectionModel().select(obsList.size() - 1);
+			//list.getSelectionModel().select(obsList.size() - 1);
 			showInfo();
+		}
+		for (Album a : PhotoAlbum.regular_user.getAlbums()) {
+			System.out.println(a.getName());
 		}
 	}
 	
@@ -143,6 +154,10 @@ public class AlbumsController extends Controller implements Initializable{
 	}
 	
 	public void edit(ActionEvent e) {
+		
+	}
+	
+	public void search(ActionEvent e) {
 		
 	}
 	

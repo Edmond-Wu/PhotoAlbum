@@ -1,11 +1,12 @@
 package model;
 
+import java.io.*;
 import java.util.*;
 
 /**
  * @author Edmond Wu & Vincent Xie
  */
-public class Album {
+public class Album implements Serializable {
 	
 	private String name;
 	private ArrayList<Photo> photos;

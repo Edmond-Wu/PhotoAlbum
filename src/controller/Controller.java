@@ -1,6 +1,6 @@
 package controller;
 
-import java.io.IOException;
+import java.io.*;
 
 import app.PhotoAlbum;
 import javafx.fxml.FXMLLoader;
@@ -11,6 +11,7 @@ import javafx.scene.control.ButtonBar.ButtonData;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+import model.User;
 
 /**
  * @author Edmond Wu & Vincent Xie
@@ -35,9 +36,19 @@ public abstract class Controller {
 		dialog.setContentText("Are you sure you want to logout?");
 		dialog.showAndWait().ifPresent(response -> {
 			if (response == ok) {
+				if (PhotoAlbum.regular_user != null) {
+					System.out.println(PhotoAlbum.regular_user.getUsername());
+					PhotoAlbum.regular_user.serialize();
+				}
+				else {
+					for (User u : PhotoAlbum.admin.getUserList()) {
+						u.serialize();
+					}
+				}
 				segue("/view/Login.fxml");
 			}
 		});
+		
 	}
 	
 	/**

@@ -1,12 +1,13 @@
 package model;
 
+import java.io.*;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
 /**
 * @author Edmond Wu & Vincent Xie
 */
-public class Photo {
+public class Photo implements Serializable {
 	
 	private Calendar date_time;
 	private SimpleDateFormat sdf;

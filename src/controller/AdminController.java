@@ -2,6 +2,8 @@ package controller;
 
 import java.io.File;
 import java.net.URL;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
@@ -113,7 +115,7 @@ public class AdminController extends Controller implements Initializable {
 			}
 			PhotoAlbum.admin.getUserList().add(user);
 			obsList.add(username);
-			user.serialize();
+			//user.serialize();
 			list.getSelectionModel().select(obsList.size() - 1);
 			showInfo();
 		}
@@ -139,6 +141,11 @@ public class AdminController extends Controller implements Initializable {
 					obsList.remove(index);
 					PhotoAlbum.admin.getUserList().remove(index);
 					showInfo();
+					try {
+						Files.delete(Paths.get("data/" + username + ".ser"));
+					} catch (Exception e1) {
+						System.out.println("Invalid serialized file to be deleted.");
+					}
 				}
 			});
 		}
