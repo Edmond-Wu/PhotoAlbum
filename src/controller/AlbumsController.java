@@ -1,9 +1,7 @@
 package controller;
 
-import java.io.File;
+import java.io.*;
 import java.util.*;
-import java.io.FileInputStream;
-import java.io.ObjectInputStream;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -28,7 +26,6 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import model.Album;
-import model.User;
 import view.AddAlbumDialog;
 
 /**
@@ -65,10 +62,15 @@ public class AlbumsController extends Controller implements Initializable{
 		for (int i = 0; i < PhotoAlbum.regular_user.getAlbums().size(); i++) {
 			obsList.add(i, PhotoAlbum.regular_user.getAlbums().get(i).getName());
 		}
-		//list.setItems(obsList); 
-		//list.getSelectionModel().select(0);
-		//showInfo();
-		//list.setOnMouseClicked((e) -> showInfo());
+		for (Album a : PhotoAlbum.regular_user.getAlbums()) {
+			System.out.println(a.getName());
+		}
+		/*
+		list.setItems(obsList); 
+		list.getSelectionModel().select(0);
+		showInfo();
+		list.setOnMouseClicked((e) -> showInfo());
+		*/
 	}
 	
 	@Override
@@ -90,6 +92,10 @@ public class AlbumsController extends Controller implements Initializable{
 		name2.addEventFilter(MouseEvent.MOUSE_PRESSED, event -> System.out.println("test"));
 	}
 	
+	/**
+	 * Adds an album to the user's album list
+	 * @param e
+	 */
 	public void add(ActionEvent e) {
 		AddAlbumDialog dialog = new AddAlbumDialog();
 		Optional<ButtonType> result = dialog.showAndWait();
@@ -123,13 +129,10 @@ public class AlbumsController extends Controller implements Initializable{
 			//list.getSelectionModel().select(obsList.size() - 1);
 			showInfo();
 		}
-		for (Album a : PhotoAlbum.regular_user.getAlbums()) {
-			System.out.println(a.getName());
-		}
 	}
 	
 	/**
-	 * Removes from the list of users.
+	 * Removes from the list of albums
 	 * @param e
 	 */
 	public void delete(ActionEvent e){
@@ -154,11 +157,11 @@ public class AlbumsController extends Controller implements Initializable{
 	}
 	
 	public void edit(ActionEvent e) {
-		
+		System.out.println("edit");
 	}
 	
 	public void search(ActionEvent e) {
-		
+		System.out.println("search");
 	}
 	
 	public void showInfo() {

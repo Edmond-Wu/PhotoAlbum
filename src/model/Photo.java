@@ -71,4 +71,13 @@ public class Photo implements Serializable {
 	public String getCaption() {
 		return caption;
 	}
+	
+	/**
+	 * Prints out the list of tags
+	 */
+	public void printTags() {
+		for (String t : tags) {
+			System.out.println(t);
+		}
+	}
 }

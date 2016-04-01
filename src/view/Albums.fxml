@@ -11,8 +11,8 @@
 <?import javafx.scene.text.Text?>
 
 <AnchorPane prefHeight="600.0" prefWidth="800.0" stylesheets="@Albums.css" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.AlbumsController">	
-   <Button fx:id="edit" layoutX="14.0" layoutY="14.0" prefHeight="46.0" prefWidth="76.0" text="Edit" />
-   <Button fx:id="search" layoutX="14.0" layoutY="542.0" prefHeight="46.0" prefWidth="131.0" text="Search..." />
+   <Button fx:id="edit" layoutX="14.0" layoutY="14.0" onAction="#edit" prefHeight="46.0" prefWidth="76.0" text="Edit" />
+   <Button fx:id="search" layoutX="14.0" layoutY="542.0" onAction="#search" prefHeight="46.0" prefWidth="131.0" text="Search..." />
    <Button fx:id="logout" layoutX="688.0" layoutY="542.0" onAction="#logout" text="Log out" />
    <Button fx:id="add" layoutX="720.0" layoutY="-12.0" onAction="#add" prefHeight="72.0" prefWidth="100.0" text="+" />
    <ScrollPane layoutY="71.0" prefHeight="468.0" prefWidth="800.0">

@@ -37,26 +37,6 @@ public class Album implements Serializable {
 	}
 	
 	/**
-	 * Add a photo to the album
-	 * @param p photo to add
-	 */
-	public void addPhoto(Photo p) {
-		photos.add(p);
-	}
-	
-	/**
-	 * Remove a photo from the album if it's contained
-	 * @param p photo to be removed
-	 */
-	public void removePhoto(Photo p) {
-		try {
-			photos.remove(p);
-		} catch(Exception e) {
-			System.out.println("The photo you're trying to remove doesn't exist!");
-		}
-	}
-	
-	/**
 	 * Changes the album name
 	 * @param n New name of the album
 	 */
