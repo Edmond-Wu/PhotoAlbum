@@ -3,14 +3,14 @@ package controller;
 
 import java.io.File;
 import java.net.URL;
-import java.util.ResourceBundle;
+import java.util.*;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
+
 
 /**
  * @author Edmond Wu & Vincent Xie
@@ -19,7 +19,7 @@ public class PhotoController extends Controller implements Initializable{
 	
 	@FXML
 	private ImageView photo;
-
+	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		

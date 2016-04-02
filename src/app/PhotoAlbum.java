@@ -12,6 +12,7 @@ import javafx.scene.Scene;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
 import model.Admin;
+import model.Album;
 import model.NonAdminUser;
 import model.User;
 
@@ -22,6 +23,7 @@ public class PhotoAlbum extends Application {
 	
 	public static Admin admin = new Admin("admin", "password");
 	public static NonAdminUser regular_user;
+	public static Album album; //album belonging to regular_user
 	public static Stage stage;
 	
 	@Override

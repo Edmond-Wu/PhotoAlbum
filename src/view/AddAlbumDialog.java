@@ -38,8 +38,8 @@ public class AddAlbumDialog extends Dialog<ButtonType> {
     }
     
     /**
-     * Extracts username from dialog box.
-     * @return username
+     * Extracts album name from dialog box.
+     * @return album name
      */
     public String getAlbumName() {
     	return albumText.getText();
