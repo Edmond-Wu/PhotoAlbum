@@ -59,9 +59,11 @@ public class AlbumController extends Controller implements Initializable{
 		for (int i = 0; i < PhotoAlbum.regular_user.getAlbums().size(); i++) {
 			obsList.add(i, PhotoAlbum.regular_user.getAlbums().get(i).getName());
 		}
+		/*
 		for (Album a : PhotoAlbum.regular_user.getAlbums()) {
 			System.out.println(a.getName());
 		}
+		*/
 		/*
 		list.setItems(obsList); 
 		list.getSelectionModel().select(0);

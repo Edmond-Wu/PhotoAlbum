@@ -37,7 +37,6 @@ public abstract class Controller {
 		dialog.showAndWait().ifPresent(response -> {
 			if (response == ok) {
 				if (PhotoAlbum.regular_user != null) {
-					System.out.println(PhotoAlbum.regular_user.getUsername());
 					PhotoAlbum.regular_user.serialize();
 				}
 				else {
