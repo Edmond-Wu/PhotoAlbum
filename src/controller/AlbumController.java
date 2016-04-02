@@ -60,7 +60,7 @@ public class AlbumController extends Controller implements Initializable{
 		Image image2 = new Image(file1.toURI().toString());
 		photo2.setImage(image2);
 		
-		photo1.addEventFilter(MouseEvent.MOUSE_PRESSED, event -> System.out.println("test"));
+		photo1.addEventFilter(MouseEvent.MOUSE_PRESSED, event -> segue("/view/Photo.fxml"));
 		name1.addEventFilter(MouseEvent.MOUSE_PRESSED, event -> System.out.println("test"));
 		photo2.addEventFilter(MouseEvent.MOUSE_PRESSED, event -> System.out.println("test"));
 		name2.addEventFilter(MouseEvent.MOUSE_PRESSED, event -> System.out.println("test"));

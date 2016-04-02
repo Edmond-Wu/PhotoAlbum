@@ -1,11 +1,11 @@
-#add, #logout, #search{
+#edit, #logout, #search{
 	-fx-text-fill: #FFFFFF;
 	-fx-font: 24 helvetica;
 	-fx-background-radius: 60;
 	-fx-background-color: transparent;
 }
 
-#add:hover, #logout:hover, #search:hover{
+#edit:hover, #logout:hover, #search:hover{
 	-fx-text-fill: #66c2ff;
 }
 
@@ -16,14 +16,22 @@
     -fx-background-position: center center;
     -fx-background-color: transparent;
 }
-
 #back:hover{
 	-fx-background-image: url("../assets/back-blue.png");
 }
 
-#add{
-	-fx-font: 48 helvetica;
+#delete{
+	-fx-background-image: url("../assets/trash-white.png");
+	-fx-background-repeat: stretch;   
+    -fx-background-size: 50 50;
+    -fx-background-position: center center;
+    -fx-background-color: transparent;
 }
+
+#delete:hover{
+	-fx-background-image: url("../assets/trash-blue.png");
+}
+
 
 AnchorPane{
 	-fx-background-color: #2980b9;
@@ -57,9 +65,9 @@ ImageView{
 }
 
 Text {
-	-fx-text-alignment: center;
 	-fx-font: 16 helvetica;
-	-fx-fill: #595959;
+	-fx-fill: #FFFFFF;
+	-fx-text-alignment: center;
 }
 
 #title{
