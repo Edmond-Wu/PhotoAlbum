@@ -127,4 +127,13 @@ public class AlbumController extends Controller implements Initializable{
 			//showInfo();
 		}
 	}
+	
+	/**
+	 * Allows searching of albums.
+	 * @param e
+	 */
+	public void search(ActionEvent e) {
+		SearchController.albums = false;
+		segue("/view/Search.fxml");
+	}
 }

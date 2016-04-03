@@ -129,7 +129,6 @@ public class AlbumsController extends Controller implements Initializable{
 			PhotoAlbum.regular_user.getAlbums().add(added);
 			obsList.add(album_name);
 			//list.getSelectionModel().select(obsList.size() - 1);
-			showInfo();
 		}
 	}
 	
@@ -152,21 +151,26 @@ public class AlbumsController extends Controller implements Initializable{
 				if (response == ok) {
 					obsList.remove(index);
 					PhotoAlbum.regular_user.getAlbums().remove(index);
-					showInfo();
 				}
 			});
 		}
 	}
 	
+	/**
+	 * Allows editing of albums.
+	 * @param e
+	 */
 	public void edit(ActionEvent e) {
 		System.out.println("edit");
 	}
 	
+	/**
+	 * Allows searching of albums.
+	 * @param e
+	 */
 	public void search(ActionEvent e) {
-		System.out.println("search");
+		SearchController.albums = true;
+		segue("/view/Search.fxml");
 	}
 	
-	public void showInfo() {
-		
-	}
 }
