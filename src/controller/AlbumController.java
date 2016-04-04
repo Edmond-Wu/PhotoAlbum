@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.ObjectInputStream;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
@@ -14,6 +15,9 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.geometry.HPos;
+import javafx.geometry.Insets;
+import javafx.geometry.VPos;
 import javafx.scene.Node;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
@@ -22,6 +26,8 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.Priority;
+import javafx.scene.layout.RowConstraints;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import model.Album;
@@ -32,64 +38,29 @@ import view.AddPhotoDialog;
 /**
  * @author Edmond Wu & Vincent Xie
  */
-public class AlbumController extends Controller implements Initializable{
+public class AlbumController extends Controller {
 	
 	@FXML
 	private ImageView imageView;
 	
 	@FXML
-	private ImageView photo1;
-	
-	@FXML
-	private Text name1;
-	
-	@FXML
-	private ImageView photo2;
-	
-	@FXML
-	private Text name2;
-	
-	@FXML
 	private GridPane grid;
 	
-	private ObservableList<String> obsList;
+	@FXML
+	private Text title;
+	
 
 	public void start(Stage mainStage) {                
-		obsList = FXCollections.observableArrayList();
-		for (int i = 0; i < PhotoAlbum.regular_user.getAlbums().size(); i++) {
-			obsList.add(i, PhotoAlbum.regular_user.getAlbums().get(i).getName());
+		displayPhotos();
+		if(PhotoAlbum.album != null){
+			title.setText(PhotoAlbum.album.getName());
+		} else {
+			System.out.println("egesg");
 		}
-		/*
-		for (Album a : PhotoAlbum.regular_user.getAlbums()) {
-			System.out.println(a.getName());
-		}
-		*/
-		/*
-		list.setItems(obsList); 
-		list.getSelectionModel().select(0);
-		showInfo();
-		list.setOnMouseClicked((e) -> showInfo());
-		*/
 	}
 	
 	public void back(ActionEvent e){
 		segue("/view/Albums.fxml");
-	}
-	
-	@Override
-	public void initialize(URL location, ResourceBundle resources) {
-		
-		File file1 = new File("src/assets/test.jpeg");
-		Image image1 = new Image(file1.toURI().toString());
-		photo1.setImage(image1);		
-		
-		Image image2 = new Image(file1.toURI().toString());
-		photo2.setImage(image2);
-		
-		photo1.addEventFilter(MouseEvent.MOUSE_PRESSED, event -> segue("/view/Photo.fxml"));
-		name1.addEventFilter(MouseEvent.MOUSE_PRESSED, event -> System.out.println("test"));
-		photo2.addEventFilter(MouseEvent.MOUSE_PRESSED, event -> System.out.println("test"));
-		name2.addEventFilter(MouseEvent.MOUSE_PRESSED, event -> System.out.println("test"));
 	}
 	
 	public void add(ActionEvent e) {
@@ -121,10 +92,7 @@ public class AlbumController extends Controller implements Initializable{
 			}
 			Photo added = new Photo(photo_name);
 			PhotoAlbum.album.getPhotos().add(added);
-			//PhotoAlbum.regular_user.getAlbums().add(added);
-			obsList.add(photo_name);
-			//list.getSelectionModel().select(obsList.size() - 1);
-			//showInfo();
+			displayPhotos();
 		}
 	}
 	
@@ -135,5 +103,52 @@ public class AlbumController extends Controller implements Initializable{
 	public void search(ActionEvent e) {
 		SearchController.albums = false;
 		segue("/view/Search.fxml");
+	}
+	
+	/**
+	 * Displays Photos.
+	 */
+	public void displayPhotos(){
+		if(PhotoAlbum.album == null || PhotoAlbum.album.getPhotos() == null){
+			return;
+		}
+		grid.getChildren().clear();
+		File file1 = new File("src/assets/test.jpeg");
+		Image image1 = new Image(file1.toURI().toString());
+		ArrayList<Photo> albums = PhotoAlbum.album.getPhotos();
+		grid.setPrefHeight(Math.max(100 + (int)((albums.size() - 1) / 2) * 300, 468));
+		for(int i = grid.getRowConstraints().size(); i < Math.ceil(albums.size() / 2.0); i++){
+			RowConstraints row = new RowConstraints();
+			row.setMinHeight(10);
+			row.setPrefHeight(30);
+			row.setVgrow(Priority.SOMETIMES);
+			grid.getRowConstraints().add(row);
+		}
+		for(int i = 0; i <= albums.size() / 2; i++){
+			for(int j = 0; j < 2; j++){
+				if(2 * i + j < albums.size()){
+					ImageView test = new ImageView();
+					test.setFitHeight(190);
+					test.setFitWidth(320);
+					test.setPreserveRatio(true);
+					test.setPickOnBounds(true);
+					test.setImage(image1);
+					grid.add(test, j, i);
+					GridPane.setHalignment(test, HPos.CENTER);
+					GridPane.setValignment(test, VPos.CENTER);
+					GridPane.setMargin(test, new Insets(0, 0, 10, 0));
+					test.addEventFilter(MouseEvent.MOUSE_PRESSED, event -> { segue("/view/Album.fxml"); });
+
+					Text test1 = new Text();
+					test1.setText(albums.get(2 * i + j).getFileName());
+					test1.setWrappingWidth(366);
+					grid.add(test1, j, i);
+					GridPane.setHalignment(test1, HPos.CENTER);
+					GridPane.setValignment(test1, VPos.BOTTOM);
+					GridPane.setMargin(test1, new Insets(0, 0, 10, 0));
+					test1.addEventFilter(MouseEvent.MOUSE_PRESSED, event -> { segue("/view/Album.fxml"); });
+				}
+			}
+		}
 	}
 }
