@@ -54,8 +54,6 @@ public class AlbumController extends Controller {
 		displayPhotos();
 		if(PhotoAlbum.album != null){
 			title.setText(PhotoAlbum.album.getName());
-		} else {
-			System.out.println("egesg");
 		}
 	}
 	
