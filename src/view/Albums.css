@@ -67,3 +67,9 @@ Text {
 	-fx-font: 16 helvetica;
 	-fx-fill: #595959;
 }
+
+#select {
+	-fx-text-alignment: center;
+	-fx-font: 16 helvetica;
+	-fx-fill: #ffffff;
+}

@@ -59,7 +59,12 @@ public class AlbumsController extends Controller{
 	@FXML
 	private Button add;
 	
+	@FXML
+	private Text select;
+	
 	private ArrayList<Integer> selected;
+	
+	public static int selectint;
 
 	public void start(Stage mainStage) {   
 		File file = new File("src/assets/Albums.png");
@@ -67,6 +72,7 @@ public class AlbumsController extends Controller{
 		imageView.setImage(image);
 		hideButton(done);
 		hideButton(delete);
+		select.setOpacity(0);
 		displayAlbums();
 	}
 
@@ -129,6 +135,8 @@ public class AlbumsController extends Controller{
 			}
 		});
 		selected.clear();
+		selectint = 0;
+		select.setText(AlbumsController.selectint + " albums selected.");
 		displayAlbumsEdit();
 	}
 
@@ -138,6 +146,9 @@ public class AlbumsController extends Controller{
 	 */
 	public void edit(ActionEvent e) {
 		selected = new ArrayList<Integer>();
+		select.setOpacity(1);
+		selectint = 0;
+		select.setText(selected.size() + " albums selected.");
 		hideButton(edit);
 		hideButton(logout);
 		hideButton(search);
@@ -152,6 +163,8 @@ public class AlbumsController extends Controller{
 	 * @param e
 	 */
 	public void done(ActionEvent e) {
+		select.setOpacity(0);
+		select.setText("");
 		showButton(edit);
 		showButton(logout);
 		showButton(search);
@@ -166,6 +179,7 @@ public class AlbumsController extends Controller{
 				albums.get((i - 1) / 2).changeName(((TextField)node).getText());
 			}
 		}
+		selectint = 0;
 		displayAlbums();
 	}
 	
@@ -184,7 +198,7 @@ public class AlbumsController extends Controller{
 	public void displayAlbums(){
 		grid.getChildren().clear();
 		grid.getRowConstraints().clear();
-		File file1 = new File("src/assets/test.jpeg");
+		File file1 = new File("src/assets/trash-blue.png");
 		Image image1 = new Image(file1.toURI().toString());
 		ArrayList<Album> albums = PhotoAlbum.regular_user.getAlbums();
 		grid.setPrefHeight(70 + (int)((albums.size() + 1) / 2) * 211);
@@ -242,7 +256,7 @@ public class AlbumsController extends Controller{
 	public void displayAlbumsEdit(){
 		grid.getChildren().clear();
 		grid.getRowConstraints().clear();
-		File file1 = new File("src/assets/test.jpeg");
+		File file1 = new File("src/assets/trash-blue.png");
 		Image image1 = new Image(file1.toURI().toString());
 		ArrayList<Album> albums = PhotoAlbum.regular_user.getAlbums();
 		grid.setPrefHeight(70 + (int)((albums.size() + 1) / 2) * 211);
@@ -275,9 +289,13 @@ public class AlbumsController extends Controller{
 					cover.addEventFilter(MouseEvent.MOUSE_PRESSED, e -> { 
 						if(cover.getOpacity() == 0.5){
 							cover.setOpacity(1);
+							AlbumsController.selectint++;
+							select.setText(AlbumsController.selectint + " albums selected.");
 							selected.add(2 * GridPane.getRowIndex(cover) + GridPane.getColumnIndex(cover));
 						} else {
 							cover.setOpacity(0.5);
+							AlbumsController.selectint--;
+							select.setText(AlbumsController.selectint + " albums selected.");
 							selected.remove(new Integer(2 * GridPane.getRowIndex(cover) + GridPane.getColumnIndex(cover)));
 						}
 					});

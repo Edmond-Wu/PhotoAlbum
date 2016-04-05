@@ -8,10 +8,14 @@ Button{
 	-fx-background-color: #008ED6;
 	-fx-text-fill: WHITE;
 	-fx-alignment: center;
-	-fx-font: 16 helvetica;
+	-fx-font: 14 helvetica;
 	-fx-font-weight: bold;
 }
 
 Button:hover{
 	-fx-background-color: #005580;
+}
+
+#name{
+	-fx-fill: #e67e22;
 }
