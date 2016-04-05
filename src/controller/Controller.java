@@ -5,6 +5,7 @@ import java.io.*;
 import app.PhotoAlbum;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Dialog;
 import javafx.scene.control.ButtonBar.ButtonData;
@@ -70,5 +71,23 @@ public abstract class Controller {
 		} catch (Exception e){
 			e.printStackTrace();
 		}
+	}
+	
+	/**
+	 * Hides button and disables it
+	 * @param button
+	 */
+	public void hideButton(Button button){
+		button.setOpacity(0);
+		button.setDisable(true);
+	}
+	
+	/**
+	 * Shows button and enables it
+	 * @param button
+	 */
+	public void showButton(Button button){
+		button.setOpacity(1);
+		button.setDisable(false);
 	}
 }

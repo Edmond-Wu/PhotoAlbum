@@ -1,12 +1,18 @@
-#add, #edit, #logout, #search{
+Button{
 	-fx-text-fill: #FFFFFF;
 	-fx-font: 24 helvetica;
 	-fx-background-radius: 60;
 	-fx-background-color: transparent;
 }
 
-#add:hover, #edit:hover, #logout:hover, #search:hover{
+Button:hover{
 	-fx-text-fill: #66c2ff;
+}
+
+TextField {
+	-fx-background-radius: 10;
+	-fx-text-box-border: white; 
+	-fx-focus-color: #008ED6;
 }
 
 #add{
@@ -19,6 +25,18 @@ AnchorPane{
 
 #albums{
 	-fx-background-color: #f2f2f2;
+}
+
+#delete{
+	-fx-background-image: url("../assets/trash-white.png");
+	-fx-background-repeat: stretch;   
+    -fx-background-size: 50 50;
+    -fx-background-position: center center;
+    -fx-background-color: transparent;
+}
+
+#delete:hover{
+	-fx-background-image: url("../assets/trash-blue.png");
 }
 
 ImageView{
