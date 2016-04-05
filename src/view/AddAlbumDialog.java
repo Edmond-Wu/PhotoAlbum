@@ -25,6 +25,7 @@ public class AddAlbumDialog extends Dialog<ButtonType> {
         GridPane dPane = new GridPane();
         Label album = new Label("Album name: ");
         albumText = new TextField();
+        albumText.setPromptText("Required");
 
         dPane.setHgap(7D);
         dPane.setVgap(8D);
@@ -32,7 +33,7 @@ public class AddAlbumDialog extends Dialog<ButtonType> {
         GridPane.setConstraints(album, 0, 0);
         GridPane.setConstraints(albumText, 1, 0);
         
-        dPane.getChildren().addAll(albumText);
+        dPane.getChildren().addAll(album, albumText);
         getDialogPane().getButtonTypes().addAll(ok, cancel);
         getDialogPane().setContent(dPane);
     }

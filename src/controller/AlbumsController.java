@@ -22,6 +22,7 @@ import javafx.scene.control.ButtonBar.ButtonData;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Dialog;
 import javafx.scene.control.ListView;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -38,7 +39,7 @@ import view.AddAlbumDialog;
 /**
  * @author Edmond Wu & Vincent Xie
  */
-public class AlbumsController extends Controller implements Initializable{
+public class AlbumsController extends Controller{
 
 	@FXML
 	private ImageView imageView;
@@ -46,12 +47,7 @@ public class AlbumsController extends Controller implements Initializable{
 	@FXML
 	private GridPane grid;
 
-	public void start(Stage mainStage) {                
-
-	}
-
-	@Override
-	public void initialize(URL location, ResourceBundle resources) {
+	public void start(Stage mainStage) {   
 		File file = new File("src/assets/Albums.png");
 		Image image = new Image(file.toURI().toString());
 		imageView.setImage(image);	
@@ -140,7 +136,12 @@ public class AlbumsController extends Controller implements Initializable{
 		File file1 = new File("src/assets/test.jpeg");
 		Image image1 = new Image(file1.toURI().toString());
 		ArrayList<Album> albums = PhotoAlbum.regular_user.getAlbums();
-		grid.setPrefHeight(Math.max(100 + (int)((albums.size() - 1) / 2) * 300, 468));
+		grid.setPrefHeight(70 + (int)((albums.size() + 1) / 2) * 212);
+		if(albums.size() <= 2){
+			grid.setPrefHeight(240);
+		} else if(albums.size() <= 4){
+			grid.setPrefHeight(468);
+		}
 		for(int i = grid.getRowConstraints().size(); i < Math.ceil(albums.size() / 2.0); i++){
 			RowConstraints row = new RowConstraints();
 			row.setMinHeight(10);
@@ -151,26 +152,35 @@ public class AlbumsController extends Controller implements Initializable{
 		for(int i = 0; i <= albums.size() / 2; i++){
 			for(int j = 0; j < 2; j++){
 				if(2 * i + j < albums.size()){
-					ImageView test = new ImageView();
-					test.setFitHeight(190);
-					test.setFitWidth(320);
-					test.setPreserveRatio(true);
-					test.setPickOnBounds(true);
-					test.setImage(image1);
-					grid.add(test, j, i);
-					GridPane.setHalignment(test, HPos.CENTER);
-					GridPane.setValignment(test, VPos.CENTER);
-					GridPane.setMargin(test, new Insets(0, 0, 10, 0));
-					test.addEventFilter(MouseEvent.MOUSE_PRESSED, event -> { segue("/view/Album.fxml"); });
-
-					Text test1 = new Text();
-					test1.setText(albums.get(2 * i + j).getName());
-					test1.setWrappingWidth(366);
-					grid.add(test1, j, i);
-					GridPane.setHalignment(test1, HPos.CENTER);
-					GridPane.setValignment(test1, VPos.BOTTOM);
-					GridPane.setMargin(test1, new Insets(0, 0, 10, 0));
-					test1.addEventFilter(MouseEvent.MOUSE_PRESSED, event -> { segue("/view/Album.fxml"); });
+					ImageView cover = new ImageView();
+					cover.setFitHeight(190);
+					cover.setFitWidth(320);
+					cover.setPreserveRatio(true);
+					cover.setPickOnBounds(true);
+					cover.setImage(image1);
+					grid.add(cover, j, i);
+					GridPane.setHalignment(cover, HPos.CENTER);
+					GridPane.setValignment(cover, VPos.CENTER);
+					GridPane.setMargin(cover, new Insets(0, 0, 10, 0));
+					cover.addEventFilter(MouseEvent.MOUSE_PRESSED, e -> { 
+						PhotoAlbum.album = PhotoAlbum.regular_user
+								.getAlbums().get(
+										2 * GridPane.getRowIndex(cover) + GridPane.getColumnIndex(cover));
+						segue("/view/Album.fxml");
+					});
+					Text name = new Text();
+					name.setText(albums.get(2 * i + j).getName());
+					name.setWrappingWidth(366);
+					grid.add(name, j, i);
+					GridPane.setHalignment(name, HPos.CENTER);
+					GridPane.setValignment(name, VPos.BOTTOM);
+					GridPane.setMargin(name, new Insets(0, 0, 10, 0));
+					name.addEventFilter(MouseEvent.MOUSE_PRESSED, e -> { 
+						PhotoAlbum.album = PhotoAlbum.regular_user
+								.getAlbums().get(
+										2 * GridPane.getRowIndex(cover) + GridPane.getColumnIndex(cover));
+						segue("/view/Album.fxml");
+					});
 				}
 			}
 		}
