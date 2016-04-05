@@ -83,6 +83,7 @@ public class AlbumController extends Controller {
 			PhotoAlbum.album.getPhotos().add(added);
 			displayPhotos();
 		}
+		PhotoAlbum.regular_user.serialize();
 	}
 	
 	/**

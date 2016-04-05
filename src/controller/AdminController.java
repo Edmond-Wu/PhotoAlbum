@@ -112,6 +112,7 @@ public class AdminController extends Controller {
 			list.getSelectionModel().select(obsList.size() - 1);
 			showInfo();
 		}
+		PhotoAlbum.regular_user.serialize();
 	}
 
 	/**
@@ -142,6 +143,7 @@ public class AdminController extends Controller {
 				}
 			});
 		}
+		PhotoAlbum.regular_user.serialize();
 	}
 	
 	/**
