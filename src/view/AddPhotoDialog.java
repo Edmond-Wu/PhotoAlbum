@@ -5,16 +5,17 @@ package view;
 import java.io.File;
 import java.time.LocalDate;
 
-import app.PhotoAlbum;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonBar.ButtonData;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Dialog;
-import javafx.scene.control.Label;
+import javafx.scene.control.DialogPane;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
+import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
+import javafx.stage.Stage;
 
 public class AddPhotoDialog extends Dialog<ButtonType> {
 
@@ -30,14 +31,21 @@ public class AddPhotoDialog extends Dialog<ButtonType> {
      * Creates an add user dialog box.
      */
     public AddPhotoDialog() {
+    	DialogPane dialogPane = this.getDialogPane();
+    	dialogPane.getStylesheets().add(
+    	   getClass().getResource("Dialog.css").toExternalForm());
+    	
         setTitle("Add a photo");
         setHeaderText(null);
 
         GridPane dPane = new GridPane();
-        Label photo = new Label("Photo: ");
-        Label date = new Label("Date of photo: ");
-        Label cap = new Label("Caption: ");
-        Label tag = new Label("Tags: ");
+        dPane.setPrefWidth(400);
+        Text photo = new Text("Photo: ");
+        Text name = new Text("");
+        Text date = new Text("Date of photo: ");
+        Text cap = new Text("Caption: ");
+        Text tag = new Text("Tags: ");
+        
         caption = new TextField();
         dateTime = new DatePicker();
         tags = new TextField();
@@ -46,6 +54,7 @@ public class AddPhotoDialog extends Dialog<ButtonType> {
         dPane.setVgap(8D);
 
         GridPane.setConstraints(photo, 0, 0);
+        GridPane.setConstraints(name, 3, 0);
         GridPane.setConstraints(date, 0, 1);
         GridPane.setConstraints(cap, 0, 2);
         GridPane.setConstraints(tag, 0, 3);
@@ -58,14 +67,14 @@ public class AddPhotoDialog extends Dialog<ButtonType> {
         
         browse.setOnAction(
                 e -> {
-                        File file = browser.showOpenDialog(PhotoAlbum.stage);
-                        this.show();
+                		Stage stage = new Stage();
+                        File file = browser.showOpenDialog(stage);
                         if (file != null) {
-                            System.out.println(file.getName());
+                           	name.setText((file.getName()));
                         }
                 });
         
-        dPane.getChildren().addAll(photo, date, cap, tag, browse, dateTime, caption, tags);
+        dPane.getChildren().addAll(photo, name, date, cap, tag, browse, dateTime, caption, tags);
         getDialogPane().getButtonTypes().addAll(ok, cancel);
         getDialogPane().setContent(dPane);
     }

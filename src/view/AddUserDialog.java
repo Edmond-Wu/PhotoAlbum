@@ -5,10 +5,11 @@ package view;
 import javafx.scene.control.ButtonBar.ButtonData;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Dialog;
-import javafx.scene.control.Label;
+import javafx.scene.control.DialogPane;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
+import javafx.scene.text.Text;
 
 public class AddUserDialog extends Dialog<ButtonType> {
 
@@ -21,12 +22,16 @@ public class AddUserDialog extends Dialog<ButtonType> {
      * Creates an add user dialog box.
      */
     public AddUserDialog() {
+    	DialogPane dialogPane = this.getDialogPane();
+    	dialogPane.getStylesheets().add(
+    	   getClass().getResource("Dialog.css").toExternalForm());
+    	
         setTitle("Add a user");
         setHeaderText(null);
 
         GridPane dPane = new GridPane();
-        Label user = new Label("Username: ");
-        Label pass = new Label("Password: ");
+        Text user = new Text("Username: ");
+        Text pass = new Text("Password: ");
         userText = new TextField();
         passText = new PasswordField();
         userText.setPromptText("Required");

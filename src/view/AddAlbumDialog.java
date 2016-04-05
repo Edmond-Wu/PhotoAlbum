@@ -5,9 +5,10 @@ package view;
 import javafx.scene.control.ButtonBar.ButtonData;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Dialog;
-import javafx.scene.control.Label;
+import javafx.scene.control.DialogPane;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
+import javafx.scene.text.Text;
 
 public class AddAlbumDialog extends Dialog<ButtonType> {
 
@@ -19,11 +20,16 @@ public class AddAlbumDialog extends Dialog<ButtonType> {
      * Creates an add user dialog box.
      */
     public AddAlbumDialog() {
+    	
+    	DialogPane dialogPane = this.getDialogPane();
+    	dialogPane.getStylesheets().add(
+    	   getClass().getResource("Dialog.css").toExternalForm());
+    	
         setTitle("Add an album");
         setHeaderText(null);
 
         GridPane dPane = new GridPane();
-        Label album = new Label("Album name: ");
+        Text album = new Text("Album name: ");
         albumText = new TextField();
         albumText.setPromptText("Required");
 
