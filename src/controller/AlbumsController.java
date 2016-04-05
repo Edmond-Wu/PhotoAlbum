@@ -136,7 +136,7 @@ public class AlbumsController extends Controller{
 		File file1 = new File("src/assets/test.jpeg");
 		Image image1 = new Image(file1.toURI().toString());
 		ArrayList<Album> albums = PhotoAlbum.regular_user.getAlbums();
-		grid.setPrefHeight(70 + (int)((albums.size() + 1) / 2) * 212);
+		grid.setPrefHeight(70 + (int)((albums.size() + 1) / 2) * 211);
 		if(albums.size() <= 2){
 			grid.setPrefHeight(240);
 		} else if(albums.size() <= 4){
