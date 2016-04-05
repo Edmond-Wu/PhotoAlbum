@@ -133,22 +133,9 @@ public class AlbumController extends Controller {
 					GridPane.setValignment(cover, VPos.CENTER);
 					GridPane.setMargin(cover, new Insets(0, 0, 10, 0));
 					cover.addEventFilter(MouseEvent.MOUSE_PRESSED, e -> { 
-						PhotoAlbum.album = PhotoAlbum.regular_user
-								.getAlbums().get(
+						PhotoAlbum.photo = PhotoAlbum.album.getPhotos().get(
 										2 * GridPane.getRowIndex(cover) + GridPane.getColumnIndex(cover));
-						segue("/view/Album.fxml");
-					});
-					Text name = new Text();
-					name.setText(albums.get(2 * i + j).getCaption());
-					name.setWrappingWidth(366);
-					grid.add(name, j, i);
-					GridPane.setHalignment(name, HPos.CENTER);
-					GridPane.setValignment(name, VPos.BOTTOM);
-					name.addEventFilter(MouseEvent.MOUSE_PRESSED, e -> { 
-						PhotoAlbum.album = PhotoAlbum.regular_user
-								.getAlbums().get(
-										2 * GridPane.getRowIndex(cover) + GridPane.getColumnIndex(cover));
-						segue("/view/Album.fxml");
+						segue("/view/Photo.fxml");
 					});
 				}
 			}

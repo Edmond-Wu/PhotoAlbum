@@ -4,6 +4,7 @@ package app;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.ObjectInputStream;
+import java.util.ArrayList;
 
 import controller.LoginController;
 import javafx.application.Application;
@@ -14,6 +15,7 @@ import javafx.stage.Stage;
 import model.Admin;
 import model.Album;
 import model.NonAdminUser;
+import model.Photo;
 import model.User;
 
 /**
@@ -25,6 +27,8 @@ public class PhotoAlbum extends Application {
 	public static NonAdminUser regular_user;
 	public static Album album; //album belonging to regular_user
 	public static Stage stage;
+	public static ArrayList<Photo> search;
+	public static Photo photo;
 	
 	@Override
 	public void start(Stage primaryStage) throws Exception {
@@ -40,6 +44,8 @@ public class PhotoAlbum extends Application {
 	    primaryStage.setScene(scene);
 	    primaryStage.setResizable(false);
 	    primaryStage.show(); 
+	    
+	    search = new ArrayList<Photo>();
 	}
 	
 	/**
