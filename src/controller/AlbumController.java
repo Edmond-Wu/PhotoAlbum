@@ -1,12 +1,8 @@
 package controller;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.ObjectInputStream;
+import java.io.*;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.Optional;
-import java.util.ResourceBundle;
+import java.util.*;
 
 import app.PhotoAlbum;
 import javafx.collections.FXCollections;
@@ -88,7 +84,10 @@ public class AlbumController extends Controller {
 					return;
 				}
 			}
-			Photo added = new Photo(photo_name);
+			//String date = dialog.getDate();
+			String caption = dialog.getCaption();
+			String tags = dialog.getTags();
+			Photo added = new Photo(photo_name, caption, tags);
 			PhotoAlbum.album.getPhotos().add(added);
 			displayPhotos();
 		}
