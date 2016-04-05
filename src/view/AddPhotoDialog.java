@@ -87,8 +87,8 @@ public class AddPhotoDialog extends Dialog<ButtonType> {
                         File file = browser.showOpenDialog(stage);
                         if (file != null) {
                            	name.setText((file.getName()));
-                           	AddPhotoDialog.file = file;
                         }
+                        AddPhotoDialog.file = file;
                 });
         
         dPane.getChildren().addAll(photo, name, date, datePrompt, cap, tag, browse, dateTime, caption, tags);
