@@ -2,22 +2,29 @@
 
 package view;
 
+import java.io.File;
+import java.time.LocalDate;
+
+import app.PhotoAlbum;
+import javafx.scene.control.Button;
 import javafx.scene.control.ButtonBar.ButtonData;
 import javafx.scene.control.ButtonType;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.Dialog;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
+import javafx.stage.FileChooser;
 
 public class AddPhotoDialog extends Dialog<ButtonType> {
 
     private ButtonType ok = new ButtonType("OK", ButtonData.OK_DONE);
     private ButtonType cancel = new ButtonType("Cancel", ButtonData.CANCEL_CLOSE);
-    private ButtonType browse = new ButtonType("Browse...", ButtonData.APPLY);
-    private TextField photoText;
-    private TextField dateTime;
+    private Button browse = new Button("Browse...");
+    private DatePicker dateTime;
     private TextField caption;
     private TextField tags;
+    private FileChooser browser;
 
     /**
      * Creates an add user dialog box.
@@ -27,13 +34,12 @@ public class AddPhotoDialog extends Dialog<ButtonType> {
         setHeaderText(null);
 
         GridPane dPane = new GridPane();
-        Label photo = new Label("Photo name: ");
+        Label photo = new Label("Photo: ");
         Label date = new Label("Date of photo: ");
         Label cap = new Label("Caption: ");
         Label tag = new Label("Tags: ");
-        photoText = new TextField();
         caption = new TextField();
-        dateTime = new TextField();
+        dateTime = new DatePicker();
         tags = new TextField();
 
         dPane.setHgap(7D);
@@ -43,24 +49,24 @@ public class AddPhotoDialog extends Dialog<ButtonType> {
         GridPane.setConstraints(date, 0, 1);
         GridPane.setConstraints(cap, 0, 2);
         GridPane.setConstraints(tag, 0, 3);
-        GridPane.setConstraints(photoText, 1, 0);
+        GridPane.setConstraints(browse, 1, 0);
         GridPane.setConstraints(dateTime, 1, 1);
         GridPane.setConstraints(caption, 1, 2);
         GridPane.setConstraints(tags, 1, 3);
         
-        /*
-        GridPane.setConstraints(song, 0, 0);
-        GridPane.setConstraints(artist, 0, 1);
-        GridPane.setConstraints(album, 0, 2);
-        GridPane.setConstraints(year, 0, 3);
-        GridPane.setConstraints(songText, 1, 0);
-        GridPane.setConstraints(artistText, 1, 1);
-        GridPane.setConstraints(albumText, 1, 2);
-        GridPane.setConstraints(yearText, 1, 3);
-		*/
+        browser = new FileChooser();
         
-        dPane.getChildren().addAll(photo, date, cap, tag, photoText, dateTime, caption, tags);
-        getDialogPane().getButtonTypes().addAll(ok, cancel, browse);
+        browse.setOnAction(
+                e -> {
+                        File file = browser.showOpenDialog(PhotoAlbum.stage);
+                        this.show();
+                        if (file != null) {
+                            System.out.println(file.getName());
+                        }
+                });
+        
+        dPane.getChildren().addAll(photo, date, cap, tag, browse, dateTime, caption, tags);
+        getDialogPane().getButtonTypes().addAll(ok, cancel);
         getDialogPane().setContent(dPane);
     }
     
@@ -69,15 +75,15 @@ public class AddPhotoDialog extends Dialog<ButtonType> {
      * @return photo name
      */
     public String getPhotoName() {
-    	return photoText.getText();
+    	return ""; //change this
     }
     
     /**
      * Extracts date from the dialog box.
      * @return date of photo
      */
-    public String getDate() {
-    	return dateTime.getText();
+    public LocalDate getDate() {
+    	return dateTime.getValue();
     }
     
     /**

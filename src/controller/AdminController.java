@@ -1,18 +1,15 @@
 package controller;
 
 import java.io.File;
-import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.Optional;
-import java.util.ResourceBundle;
 
 import app.PhotoAlbum;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
 import javafx.scene.control.ListView;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
@@ -30,7 +27,7 @@ import view.AddUserDialog;
 /**
  * @author Edmond Wu & Vincent Xie
  */
-public class AdminController extends Controller implements Initializable {
+public class AdminController extends Controller {
 	
 	@FXML
 	private ImageView imageView;
@@ -46,7 +43,10 @@ public class AdminController extends Controller implements Initializable {
 	
 	private ObservableList<String> obsList;     
 
-	public void start(Stage mainStage) {;
+	public void start(Stage mainStage) {
+		File file = new File("src/assets/Admin.png");
+		Image image = new Image(file.toURI().toString());
+		imageView.setImage(image);	
 		obsList = FXCollections.observableArrayList();
 		for (int i = 0; i < PhotoAlbum.admin.getUserList().size(); i++) {
 			obsList.add(i, PhotoAlbum.admin.getUserList().get(i).getUsername());
@@ -55,13 +55,6 @@ public class AdminController extends Controller implements Initializable {
 		list.getSelectionModel().select(0);
 		showInfo();
 		list.setOnMouseClicked((e) -> showInfo());
-	}
-
-	@Override
-	public void initialize(URL location, ResourceBundle resources) {
-		File file = new File("src/assets/Admin.png");
-		Image image = new Image(file.toURI().toString());
-		imageView.setImage(image);		
 	}
 	
 	/**

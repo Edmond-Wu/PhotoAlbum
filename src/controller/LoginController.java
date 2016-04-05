@@ -4,15 +4,11 @@ import app.PhotoAlbum;
 import java.io.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import model.NonAdminUser;
-import model.User;
 
 /**
  * @author Edmond Wu & Vincent Xie

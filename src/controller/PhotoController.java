@@ -2,33 +2,28 @@ package controller;
 
 
 import java.io.File;
-import java.net.URL;
-import java.util.*;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.stage.Stage;
 
 
 /**
  * @author Edmond Wu & Vincent Xie
  */
-public class PhotoController extends Controller implements Initializable{
+public class PhotoController extends Controller{
 	
 	@FXML
 	private ImageView photo;
 	
-	@Override
-	public void initialize(URL location, ResourceBundle resources) {
-		
+	public void start(Stage mainStage) {
 		File file1 = new File("src/assets/test.jpeg");
 		Image image1 = new Image(file1.toURI().toString());
 		photo.setImage(image1);	
 		photo.setPreserveRatio(true);
 		centerImage(photo);
-		
 	}
 	
 	public void back(ActionEvent e){

@@ -1,15 +1,9 @@
 package controller;
 
 import java.io.*;
-import java.net.URL;
-import java.util.ResourceBundle;
 
-import app.PhotoAlbum;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
 import javafx.scene.control.ListView;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -21,7 +15,7 @@ import javafx.stage.Stage;
 /**
  * @author Edmond Wu & Vincent Xie
  */
-public class SearchController extends Controller implements Initializable{
+public class SearchController extends Controller {
 	
 	
 	public static boolean albums;
@@ -44,31 +38,11 @@ public class SearchController extends Controller implements Initializable{
 	@FXML
 	private GridPane grid;
 	
-	private ObservableList<String> obsList;
 	
 	@FXML
 	private ListView<String> list;
 	
 	public void start(Stage mainStage) {   
-		obsList = FXCollections.observableArrayList();
-		for (int i = 0; i < PhotoAlbum.regular_user.getAlbums().size(); i++) {
-			obsList.add(i, PhotoAlbum.regular_user.getAlbums().get(i).getName());
-		}
-		/*
-		for (Album a : PhotoAlbum.regular_user.getAlbums()) {
-			System.out.println(a.getName());
-		}
-		*/
-		/*
-		list.setItems(obsList); 
-		list.getSelectionModel().select(0);
-		showInfo();
-		list.setOnMouseClicked((e) -> showInfo());
-		*/
-	}
-	
-	@Override
-	public void initialize(URL location, ResourceBundle resources) {
 		File file = new File("src/assets/results.png");
 		Image image = new Image(file.toURI().toString());
 		imageView.setImage(image);	
