@@ -34,10 +34,17 @@ public class Photo implements Serializable {
 	 * Constructor if the caption is known
 	 * @param n name of photo file
 	 * @param c caption
+	 * @param t String containing all the tags
 	 */
-	public Photo(String n, String c) {
+	public Photo(String n, String c, String t) {
 		this(n);
 		caption = c;
+		String[] split = t.split("\\s*,\\s*");
+		for (int i = 0; i < split.length; i++) {
+			if (split[i].length() > 0) {
+				tags.add(split[i]);
+			}
+		}
 	}
 	
 	/**
