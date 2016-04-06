@@ -8,6 +8,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 
@@ -19,12 +20,20 @@ public class PhotoController extends Controller{
 	@FXML
 	private ImageView photo;
 	
+	@FXML
+	private Text caption;
+	
+	@FXML
+	private Text date;
+	
 	public void start(Stage mainStage) {
 		File file1 = PhotoAlbum.photo.getFile();
 		Image image1 = new Image(file1.toURI().toString());
 		photo.setImage(image1);	
 		photo.setPreserveRatio(true);
 		centerImage(photo);
+		caption.setText(PhotoAlbum.photo.getCaption());
+		date.setText(PhotoAlbum.photo.getDate().toString());
 	}
 	
 	public void back(ActionEvent e){

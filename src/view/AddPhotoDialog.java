@@ -56,9 +56,11 @@ public class AddPhotoDialog extends Dialog<ButtonType> {
         name.setWrappingWidth(200);
         
         caption = new TextField();
+        caption.setPromptText("Optional");
         dateTime = new DatePicker();
         dateTime.setPromptText("Optional");
         tags = new TextField();
+        tags.setPromptText("Optional");
 
         dPane.setHgap(7D);
         dPane.setVgap(8D);
