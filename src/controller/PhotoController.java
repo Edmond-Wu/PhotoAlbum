@@ -2,14 +2,19 @@ package controller;
 
 
 import java.io.File;
+import java.util.ArrayList;
 
 import app.PhotoAlbum;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.ButtonType;
+import javafx.scene.control.Dialog;
+import javafx.scene.control.ButtonBar.ButtonData;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import model.Photo;
 
 
 /**
@@ -36,8 +41,39 @@ public class PhotoController extends Controller{
 		date.setText(PhotoAlbum.photo.getDate().toString());
 	}
 	
+	/**
+	 * Goes to the previous page.
+	 * @param e
+	 */
 	public void back(ActionEvent e){
 		 segue("/view/Album.fxml");
+	}
+	
+	/**
+	 * Deletes the photo
+	 * @param e
+	 */
+	public void delete(ActionEvent e){
+		ButtonType ok = new ButtonType("OK", ButtonData.OK_DONE);
+		ButtonType cancel = new ButtonType("Cancel", ButtonData.NO);
+		Dialog<ButtonType> dialog = new Dialog<ButtonType>();
+		dialog.getDialogPane().getButtonTypes().add(ok);
+		dialog.getDialogPane().getButtonTypes().add(cancel);
+		dialog.setHeaderText("Confirm.");
+		dialog.setContentText("Are you sure you want to delete this photo?");
+		dialog.showAndWait().ifPresent(response -> {
+			if (response == ok) {
+				ArrayList<Photo> photos = PhotoAlbum.album.getPhotos();
+				for(int i = 0; i < photos.size(); i++){
+					if(photos.get(i).equals(PhotoAlbum.photo)){
+						photos.remove(i);
+						PhotoAlbum.regular_user.serialize();
+						segue("/view/Album.fxml");
+						return;
+					}
+				}
+			}
+		});
 	}
 	
 	/**

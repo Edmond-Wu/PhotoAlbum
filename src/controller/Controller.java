@@ -47,7 +47,6 @@ public abstract class Controller {
 				segue("/view/Login.fxml");
 			}
 		});
-		
 	}
 	
 	/**

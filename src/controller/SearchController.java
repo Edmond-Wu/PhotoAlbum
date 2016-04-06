@@ -58,6 +58,10 @@ public class SearchController extends Controller {
 		displayAlbums();
 	}
 	
+	/**
+	 * Goes to the previous page.
+	 * @param e
+	 */
 	public void back(ActionEvent e){
 		if(albums){
 			segue("/view/Albums.fxml");
