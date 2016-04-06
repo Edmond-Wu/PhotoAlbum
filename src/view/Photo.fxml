@@ -9,7 +9,7 @@
    <Button fx:id="back" layoutX="7.0" layoutY="-4.0" onAction="#back" prefHeight="75.0" prefWidth="114.0" />
    <Button fx:id="logout" layoutX="7.0" layoutY="541.0" onAction="#logout" text="Log out" />
    <Button fx:id="edit" layoutX="721.0" layoutY="10.0" prefHeight="46.0" prefWidth="76.0" text="Edit" />
-   <ImageView fx:id="photo" fitHeight="350.0" fitWidth="720.0" layoutX="35.0" layoutY="77.0" pickOnBounds="true" preserveRatio="true" />
+   <ImageView fx:id="photo" fitHeight="356.0" fitWidth="770.0" layoutX="15.0" layoutY="71.0" pickOnBounds="true" preserveRatio="true" />
    <Button fx:id="delete" layoutX="739.0" layoutY="537.0" prefHeight="54.0" prefWidth="53.0" />
    <Text layoutX="57.0" layoutY="465.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Sample Caption" wrappingWidth="405.23999977111816" />
    <Text layoutX="57.0" layoutY="494.0" strokeType="OUTSIDE" strokeWidth="0.0" text="People: Sample, Sample" wrappingWidth="405.2400052547455" />

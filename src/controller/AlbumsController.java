@@ -240,8 +240,6 @@ public class AlbumsController extends Controller{
 	public void displayAlbums(){
 		grid.getChildren().clear();
 		grid.getRowConstraints().clear();
-		File file1 = new File("src/assets/trash-blue.png");
-		Image image1 = new Image(file1.toURI().toString());
 		ArrayList<Album> albums = PhotoAlbum.regular_user.getAlbums();
 		grid.setPrefHeight(70 + (int)((albums.size() + 1) / 2) * 211);
 		if(albums.size() <= 2){
@@ -259,12 +257,19 @@ public class AlbumsController extends Controller{
 		for(int i = 0; i <= albums.size() / 2; i++){
 			for(int j = 0; j < 2; j++){
 				if(2 * i + j < albums.size()){
+					File file;
+					if(albums.get(2 * i + j).getPhotos().size() > 0){
+						file = albums.get(2 * i + j).getPhotos().get(0).getFile();
+					} else {
+						file = new File("src/assets/empty.jpg");
+					}
+					Image image = new Image(file.toURI().toString());
 					ImageView cover = new ImageView();
 					cover.setFitHeight(190);
 					cover.setFitWidth(320);
 					cover.setPreserveRatio(true);
 					cover.setPickOnBounds(true);
-					cover.setImage(image1);
+					cover.setImage(image);
 					grid.add(cover, j, i);
 					GridPane.setHalignment(cover, HPos.CENTER);
 					GridPane.setValignment(cover, VPos.CENTER);
@@ -298,8 +303,6 @@ public class AlbumsController extends Controller{
 	public void displayAlbumsEdit(){
 		grid.getChildren().clear();
 		grid.getRowConstraints().clear();
-		File file1 = new File("src/assets/trash-blue.png");
-		Image image1 = new Image(file1.toURI().toString());
 		ArrayList<Album> albums = PhotoAlbum.regular_user.getAlbums();
 		grid.setPrefHeight(70 + (int)((albums.size() + 1) / 2) * 211);
 		if(albums.size() <= 2){
@@ -317,12 +320,19 @@ public class AlbumsController extends Controller{
 		for(int i = 0; i <= albums.size() / 2; i++){
 			for(int j = 0; j < 2; j++){
 				if(2 * i + j < albums.size()){
+					File file;
+					if(albums.get(2 * i + j).getPhotos().size() > 0){
+						file = albums.get(2 * i + j).getPhotos().get(0).getFile();
+					} else {
+						file = new File("src/assets/empty.jpg");
+					}
+					Image image = new Image(file.toURI().toString());
 					ImageView cover = new ImageView();
 					cover.setFitHeight(190);
 					cover.setFitWidth(320);
 					cover.setPreserveRatio(true);
 					cover.setPickOnBounds(true);
-					cover.setImage(image1);
+					cover.setImage(image);
 					cover.setOpacity(0.5);
 					grid.add(cover, j, i);
 					GridPane.setHalignment(cover, HPos.CENTER);

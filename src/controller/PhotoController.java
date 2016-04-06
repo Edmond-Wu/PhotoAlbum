@@ -3,6 +3,7 @@ package controller;
 
 import java.io.File;
 
+import app.PhotoAlbum;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.image.Image;
@@ -19,7 +20,7 @@ public class PhotoController extends Controller{
 	private ImageView photo;
 	
 	public void start(Stage mainStage) {
-		File file1 = new File("src/assets/test.jpeg");
+		File file1 = PhotoAlbum.photo.getFile();
 		Image image1 = new Image(file1.toURI().toString());
 		photo.setImage(image1);	
 		photo.setPreserveRatio(true);
