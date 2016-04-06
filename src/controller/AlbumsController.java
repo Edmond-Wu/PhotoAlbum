@@ -133,13 +133,35 @@ public class AlbumsController extends Controller{
 					albums.set(i, null);
 				}
 				while(albums.remove(null));
+				selected.clear();
+				selectint = 0;
+				select.setText(selectint + " albums selected.");
+				displayAlbumsEdit();
+				PhotoAlbum.regular_user.serialize();
+			} else {
+				ObservableList<Node> list = grid.getChildren();
+				List<String> names = new ArrayList<String>();
+				for(int i = 0; i < list.size(); i++){
+					Node node = list.get(i);
+					if(node instanceof TextField){
+						names.add(((TextField)node).getText());
+					} else {
+						names.add("");
+					}
+				}
+				displayAlbumsEdit();
+				for(int i = 0; i < list.size(); i++){
+					Node node = list.get(i);
+					if(node instanceof TextField){
+						((TextField)node).setText(names.get(i));
+					} 
+				}
+				selected.clear();
+				selectint = 0;
+				select.setText(selectint + " albums selected.");
+				return;
 			}
 		});
-		selected.clear();
-		selectint = 0;
-		select.setText(AlbumsController.selectint + " albums selected.");
-		displayAlbumsEdit();
-		PhotoAlbum.regular_user.serialize();
 	}
 
 	/**
@@ -176,6 +198,23 @@ public class AlbumsController extends Controller{
 		hideButton(delete);
 		ObservableList<Node> list = grid.getChildren();
 		ArrayList<Album> albums = PhotoAlbum.regular_user.getAlbums();
+		List<String> names = new ArrayList<String>();
+		for(int i = 0; i < list.size(); i++){
+			Node node = list.get(i);
+			if(node instanceof TextField){
+				String name = ((TextField)node).getText();
+				if(names.contains(name)){
+					Alert error = new Alert(AlertType.INFORMATION);
+					error.setHeaderText("Error!");
+					error.setContentText("Duplicate album names!");
+					error.show();
+					selectint = 0;
+					displayAlbums();
+					return;
+				}
+				names.add(name);
+			}
+		}
 		for(int i = 0; i < list.size(); i++){
 			Node node = list.get(i);
 			if(node instanceof TextField){
