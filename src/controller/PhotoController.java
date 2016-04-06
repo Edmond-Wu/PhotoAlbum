@@ -16,7 +16,6 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import model.Photo;
 
-
 /**
  * @author Edmond Wu & Vincent Xie
  */
