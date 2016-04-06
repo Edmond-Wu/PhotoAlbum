@@ -111,6 +111,7 @@ public class AlbumsController extends Controller{
 			PhotoAlbum.regular_user.getAlbums().add(added);
 		}
 		displayAlbums();
+		PhotoAlbum.regular_user.serialize();
 	}
 
 	/**
@@ -138,6 +139,7 @@ public class AlbumsController extends Controller{
 		selectint = 0;
 		select.setText(AlbumsController.selectint + " albums selected.");
 		displayAlbumsEdit();
+		PhotoAlbum.regular_user.serialize();
 	}
 
 	/**
@@ -156,6 +158,7 @@ public class AlbumsController extends Controller{
 		showButton(done);
 		showButton(delete);
 		displayAlbumsEdit();
+		PhotoAlbum.regular_user.serialize();
 	}
 	
 	/**
