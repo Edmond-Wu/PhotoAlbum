@@ -34,6 +34,7 @@ public class AddPhotoDialog extends Dialog<ButtonType> {
      * Creates an add user dialog box.
      */
     public AddPhotoDialog() {
+    	file = null;
     	DialogPane dialogPane = this.getDialogPane();
     	dialogPane.getStylesheets().add(
     	   getClass().getResource("Dialog.css").toExternalForm());
