@@ -103,9 +103,15 @@ public class AlbumController extends Controller {
 		}
 		grid.getChildren().clear();
 		grid.getRowConstraints().clear();
-		File file1 = new File("src/assets/test.jpeg");
-		Image image1 = new Image(file1.toURI().toString());
 		ArrayList<Photo> albums = PhotoAlbum.album.getPhotos();
+		for(int i = 0; i < albums.size(); i++){
+			File file = albums.get(i).getFile();
+			if(!file.exists()){
+				System.out.println("Album removed");
+				albums.set(i, null);
+			}
+		}
+		while(albums.remove(null));
 		grid.setPrefHeight(70 + (int)((albums.size() + 1) / 2) * 211);
 		if(albums.size() <= 2){
 			grid.setPrefHeight(240);
@@ -122,12 +128,14 @@ public class AlbumController extends Controller {
 		for(int i = 0; i <= albums.size() / 2; i++){
 			for(int j = 0; j < 2; j++){
 				if(2 * i + j < albums.size()){
+					File file = albums.get(2 * i + j).getFile();
+					Image image = new Image(file.toURI().toString());
 					ImageView cover = new ImageView();
 					cover.setFitHeight(190);
 					cover.setFitWidth(320);
 					cover.setPreserveRatio(true);
 					cover.setPickOnBounds(true);
-					cover.setImage(image1);
+					cover.setImage(image);
 					grid.add(cover, j, i);
 					GridPane.setHalignment(cover, HPos.CENTER);
 					GridPane.setValignment(cover, VPos.CENTER);
