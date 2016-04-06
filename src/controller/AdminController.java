@@ -108,11 +108,11 @@ public class AdminController extends Controller {
 			}
 			PhotoAlbum.admin.getUserList().add(user);
 			obsList.add(username);
-			//user.serialize();
 			list.getSelectionModel().select(obsList.size() - 1);
 			showInfo();
+			PhotoAlbum.regular_user = user;
+			PhotoAlbum.regular_user.serialize();
 		}
-		PhotoAlbum.regular_user.serialize();
 	}
 
 	/**
