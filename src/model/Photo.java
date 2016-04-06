@@ -9,10 +9,8 @@ import java.util.*;
 */
 public class Photo implements Serializable {
 	
-	private Calendar date_time;
-	private SimpleDateFormat sdf;
-	//private Date date;
-	private String file_name;
+	private Date date;
+	private File file_name;
 	private ArrayList<String> tags;
 	private String caption;
 	
@@ -21,13 +19,10 @@ public class Photo implements Serializable {
 	 * Constructor with file name
 	 * @param n name of the photo file
 	 */
-	public Photo(String n) {
-		date_time = new GregorianCalendar();
-		//date = date_time.getTime();
-		file_name = n;
+	public Photo(File f) {
+		file_name = f;
 		tags = new ArrayList<String>();
 		caption = "";
-		sdf = new SimpleDateFormat("dd/M/yyyy");
 	}
 	
 	/**
@@ -36,8 +31,8 @@ public class Photo implements Serializable {
 	 * @param c caption
 	 * @param t String containing all the tags
 	 */
-	public Photo(String n, String c, String t) {
-		this(n);
+	public Photo(File f, String c, String t) {
+		this(f);
 		caption = c;
 		String[] split = t.split("\\s*,\\s*");
 		for (int i = 0; i < split.length; i++) {
@@ -51,15 +46,15 @@ public class Photo implements Serializable {
 	 * Gets the date-time of the photo (when last modified)
 	 * @return the date-time of the picture
 	 */
-	public String getDate() {
-		return sdf.format(date_time.getTime());
+	public Date getDate() {
+		return date;
 	}
 	
 	/**
 	 * Gets the file name of the photo (when last modified)
 	 * @return the file name of the picture
 	 */
-	public String getFileName() {
+	public File getFile() {
 		return file_name;
 	}
 	

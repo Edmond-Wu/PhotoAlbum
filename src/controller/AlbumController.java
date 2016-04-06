@@ -57,18 +57,17 @@ public class AlbumController extends Controller {
 		String click = result.get().getText();
 		
 		if (click.equals(ok)) {
-			String photo_name = dialog.getPhotoName();
-			if (photo_name.isEmpty()) {
+			File photo_file = AddPhotoDialog.file;
+			if (photo_file == null) {
 				Alert error = new Alert(AlertType.INFORMATION);
 				error.setHeaderText("Error!");
 				error.setContentText("Photo path is required!");
 				error.show();
 				return;
 			}
-			
-			for (int i = 0; i < PhotoAlbum.regular_user.getAlbums().size(); i++) {
+			for (int i = 0; i < PhotoAlbum.album.getPhotos().size(); i++) {
 				Photo p = PhotoAlbum.album.getPhotos().get(i);
-				if (photo_name.equalsIgnoreCase(p.getFileName())) {
+				if (p.getFile().equals(photo_file)) {
 					Alert error = new Alert(AlertType.INFORMATION);
 					error.setHeaderText("Error!");
 					error.setContentText("Photo already exists in album!");
@@ -79,7 +78,7 @@ public class AlbumController extends Controller {
 			//String date = dialog.getDate();
 			String caption = dialog.getCaption();
 			String tags = dialog.getTags();
-			Photo added = new Photo(photo_name, caption, tags);
+			Photo added = new Photo(photo_file, caption, tags);
 			PhotoAlbum.album.getPhotos().add(added);
 			displayPhotos();
 		}
