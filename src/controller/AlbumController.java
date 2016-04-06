@@ -107,7 +107,6 @@ public class AlbumController extends Controller {
 		for(int i = 0; i < albums.size(); i++){
 			File file = albums.get(i).getFile();
 			if(!file.exists()){
-				System.out.println("Album removed");
 				albums.set(i, null);
 			}
 		}
