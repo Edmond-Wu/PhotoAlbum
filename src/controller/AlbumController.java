@@ -2,6 +2,7 @@ package controller;
 
 import java.io.*;
 import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.*;
 
 import app.PhotoAlbum;
@@ -56,9 +57,9 @@ public class AlbumController extends Controller {
 		
 		String ok = ButtonType.OK.getText();
 		String click = result.get().getText();
-		
+		File photo_file;
 		if (click.equals(ok)) {
-			File photo_file = AddPhotoDialog.file;
+			photo_file = AddPhotoDialog.file;
 			if (photo_file == null) {
 				Alert error = new Alert(AlertType.INFORMATION);
 				error.setHeaderText("Error!");
@@ -77,6 +78,11 @@ public class AlbumController extends Controller {
 				}
 			}
 			LocalDate date = dialog.getDate();
+			//if no date is provided, use the file's last-modified date instead
+			if (date == null) {
+				Date d = new Date(photo_file.lastModified());
+				date = d.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+			}
 			String caption = dialog.getCaption();
 			String tags = dialog.getTags();
 			Photo added = new Photo(photo_file, date, caption, tags);
