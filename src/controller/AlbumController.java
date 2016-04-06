@@ -1,6 +1,7 @@
 package controller;
 
 import java.io.*;
+import java.time.LocalDate;
 import java.util.*;
 
 import app.PhotoAlbum;
@@ -75,10 +76,10 @@ public class AlbumController extends Controller {
 					return;
 				}
 			}
-			//String date = dialog.getDate();
+			LocalDate date = dialog.getDate();
 			String caption = dialog.getCaption();
 			String tags = dialog.getTags();
-			Photo added = new Photo(photo_file, caption, tags);
+			Photo added = new Photo(photo_file, date, caption, tags);
 			PhotoAlbum.album.getPhotos().add(added);
 			displayPhotos();
 		}
