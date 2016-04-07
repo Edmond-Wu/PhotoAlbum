@@ -12,7 +12,7 @@ public class Photo implements Serializable {
 	
 	private LocalDate date;
 	private File file_name;
-	private ArrayList<String> tags;
+	private HashMap<String, String> tags;
 	/*
 	private ArrayList<String> places;
 	private ArrayList<String> people;
@@ -22,28 +22,35 @@ public class Photo implements Serializable {
 	
 	/**
 	 * Constructor with file name
-	 * @param n name of the photo file
+	 * @param f name of the photo file
 	 */
 	public Photo(File f) {
 		file_name = f;
-		tags = new ArrayList<String>();
+		tags = new HashMap<String, String>();
 		caption = "";
 	}
 	
 	/**
 	 * Constructor if the caption is known
-	 * @param n name of photo file
+	 * @param f name of photo file
 	 * @param c caption
-	 * @param t String containing all the tags
+	 * @param people String containing all the people tags
+	 * @paramu places String containing all the place tags
 	 */
-	public Photo(File f, LocalDate d, String c, String t) {
+	public Photo(File f, LocalDate d, String c, String people, String places) {
 		this(f);
 		date = d;
 		caption = c;
-		String[] split = t.split("\\s*,\\s*");
-		for (int i = 0; i < split.length; i++) {
-			if (split[i].length() > 0) {
-				tags.add(split[i]);
+		String[] people_split = people.split("\\s*,\\s*");
+		String[] places_split = people.split("\\s*,\\s*");
+		for (int i = 0; i < people_split.length; i++) {
+			if (people_split[i].length() > 0) {
+				tags.put("Person " + i, people_split[i]);
+			}
+		}
+		for (int j = 0; j < places_split.length; j++) {
+			if (places_split[j].length() > 0) {
+				tags.put("Place " + j, places_split[j]);
 			}
 		}
 	}
@@ -68,7 +75,7 @@ public class Photo implements Serializable {
 	 * Gets the list of tags of the photo (when last modified)
 	 * @return the tags list of the picture
 	 */
-	public ArrayList<String> getTags() {
+	public HashMap<String, String> getTags() {
 		return tags;
 	}
 	
@@ -78,14 +85,5 @@ public class Photo implements Serializable {
 	 */
 	public String getCaption() {
 		return caption;
-	}
-	
-	/**
-	 * Prints out the list of tags
-	 */
-	public void printTags() {
-		for (String t : tags) {
-			System.out.println(t);
-		}
 	}
 }

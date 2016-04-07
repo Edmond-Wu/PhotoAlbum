@@ -84,8 +84,9 @@ public class AlbumController extends Controller {
 				date = d.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
 			}
 			String caption = dialog.getCaption();
-			String tags = dialog.getTags();
-			Photo added = new Photo(photo_file, date, caption, tags);
+			String place_tags = dialog.getPlacesTags();
+			String people_tags = dialog.getPeopleTags();
+			Photo added = new Photo(photo_file, date, caption, people_tags, place_tags);
 			PhotoAlbum.album.getPhotos().add(added);
 			displayPhotos();
 		}

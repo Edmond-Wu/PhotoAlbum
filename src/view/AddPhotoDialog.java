@@ -26,7 +26,8 @@ public class AddPhotoDialog extends Dialog<ButtonType> {
     private Button browse = new Button("Browse...");
     private DatePicker dateTime;
     private TextField caption;
-    private TextField tags;
+    private TextField places_tags;
+    private TextField people_tags;
     private FileChooser browser;
     public static File file;
 
@@ -51,7 +52,8 @@ public class AddPhotoDialog extends Dialog<ButtonType> {
         Text date = new Text("Date of photo: ");
         Text datePrompt = new Text("Uses last modified date \nif not specified. ");
         Text cap = new Text("Caption: ");
-        Text tag = new Text("Tags: ");
+        Text pl_tags = new Text("Place tags: ");
+        Text ppl_tags = new Text("People tags: ");
         
         name.setWrappingWidth(200);
         
@@ -59,8 +61,10 @@ public class AddPhotoDialog extends Dialog<ButtonType> {
         caption.setPromptText("Optional");
         dateTime = new DatePicker();
         dateTime.setPromptText("Optional");
-        tags = new TextField();
-        tags.setPromptText("Optional");
+        places_tags = new TextField();
+        people_tags = new TextField();
+        places_tags.setPromptText("Optional");
+        people_tags.setPromptText("Optional");
 
         dPane.setHgap(7D);
         dPane.setVgap(8D);
@@ -70,11 +74,13 @@ public class AddPhotoDialog extends Dialog<ButtonType> {
         GridPane.setConstraints(date, 0, 1);
         GridPane.setConstraints(datePrompt, 3, 1);
         GridPane.setConstraints(cap, 0, 2);
-        GridPane.setConstraints(tag, 0, 3);
+        GridPane.setConstraints(pl_tags, 0, 3);
+        GridPane.setConstraints(ppl_tags, 0, 4);
         GridPane.setConstraints(browse, 1, 0);
         GridPane.setConstraints(dateTime, 1, 1);
         GridPane.setConstraints(caption, 1, 2);
-        GridPane.setConstraints(tags, 1, 3);
+        GridPane.setConstraints(places_tags, 1, 3);
+        GridPane.setConstraints(people_tags, 1, 4);
         
         browser = new FileChooser();
         browser.setTitle("Open Photo");
@@ -94,7 +100,7 @@ public class AddPhotoDialog extends Dialog<ButtonType> {
                         AddPhotoDialog.file = file;
                 });
         
-        dPane.getChildren().addAll(photo, name, date, datePrompt, cap, tag, browse, dateTime, caption, tags);
+        dPane.getChildren().addAll(photo, name, date, datePrompt, cap, pl_tags, ppl_tags, browse, dateTime, caption, places_tags, people_tags);
         dialogPane.getButtonTypes().addAll(ok, cancel);
         dialogPane.setContent(dPane);
     }
@@ -124,10 +130,18 @@ public class AddPhotoDialog extends Dialog<ButtonType> {
     }
     
     /**
+     * Extracts places tags string from the dialog box.
+     * @return tags string
+     */
+    public String getPlacesTags() {
+    	return places_tags.getText();
+    }
+    
+    /**
      * Extracts tags string from the dialog box.
      * @return tags string
      */
-    public String getTags() {
-    	return tags.getText();
+    public String getPeopleTags() {
+    	return people_tags.getText();
     }
 }
