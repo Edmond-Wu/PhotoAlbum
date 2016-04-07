@@ -13,6 +13,7 @@ public class Photo implements Serializable {
 	private LocalDate date;
 	private File file_name;
 	private HashMap<String, String> tags;
+	private int likes;
 	/*
 	private ArrayList<String> places;
 	private ArrayList<String> people;
@@ -28,6 +29,7 @@ public class Photo implements Serializable {
 		file_name = f;
 		tags = new HashMap<String, String>();
 		caption = "";
+		likes = 0;
 	}
 	
 	/**
@@ -85,5 +87,20 @@ public class Photo implements Serializable {
 	 */
 	public String getCaption() {
 		return caption;
+	}
+	
+	/**
+	 * Returns the number of likes on a photo
+	 * @return the number of likes
+	 */
+	public int getLikes() {
+		return likes;
+	}
+	
+	/**
+	 * Increases the amount of likes on a photo by 1
+	 */
+	public void like() {
+		likes++;
 	}
 }
