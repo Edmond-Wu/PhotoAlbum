@@ -95,8 +95,8 @@ public class AddPhotoDialog extends Dialog<ButtonType> {
                 });
         
         dPane.getChildren().addAll(photo, name, date, datePrompt, cap, tag, browse, dateTime, caption, tags);
-        getDialogPane().getButtonTypes().addAll(ok, cancel);
-        getDialogPane().setContent(dPane);
+        dialogPane.getButtonTypes().addAll(ok, cancel);
+        dialogPane.setContent(dPane);
     }
     
     /**

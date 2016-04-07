@@ -91,4 +91,8 @@ public class PhotoController extends Controller{
 
         }
     }
+	
+	public void edit(ActionEvent e) {
+		
+	}
 }

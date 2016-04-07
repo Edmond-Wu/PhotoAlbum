@@ -13,6 +13,10 @@ public class Photo implements Serializable {
 	private LocalDate date;
 	private File file_name;
 	private ArrayList<String> tags;
+	/*
+	private ArrayList<String> places;
+	private ArrayList<String> people;
+	*/
 	private String caption;
 	
 	
