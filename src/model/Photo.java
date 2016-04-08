@@ -16,7 +16,7 @@ public class Photo implements Serializable {
 	private File file_name;
 	private HashMap<String, String> tags;
 	private int likes;
-	private ArrayList<NonAdminUser> likers;
+	private ArrayList<User> likers;
 	private String caption;
 	
 	
@@ -27,7 +27,7 @@ public class Photo implements Serializable {
 	public Photo(File f) {
 		file_name = f;
 		tags = new HashMap<String, String>();
-		likers = new ArrayList<NonAdminUser>();
+		likers = new ArrayList<User>();
 		caption = "";
 		likes = 0;
 	}
@@ -82,23 +82,14 @@ public class Photo implements Serializable {
 	 * @return the number of likes
 	 */
 	public int getLikes() {
-		return likes;
-	}
-	
-	/**
-	 * Increases the amount of likes on a photo by 1
-	 */
-	public void like() {
-		likes++;
-	}
-	
-	/**
-	 * Decreases the amount of likes on a photo by 1
-	 */
-	public void unlike() {
-		if(likes > 0){
-			likes--;
+		for(int i = 0; i < likers.size(); i++){
+			if(!PhotoAlbum.admin.getUserList().contains(likers.get(i))){
+				likers.remove(i);
+				i--;
+			}
 		}
+		likes = likers.size();
+		return likes;
 	}
 	
 	/**
@@ -113,6 +104,7 @@ public class Photo implements Serializable {
 	 */
 	public void addUserToLikers(){
 		likers.add(PhotoAlbum.logged_in);
+		likes = likers.size();
 	}
 	
 	/**
@@ -120,6 +112,7 @@ public class Photo implements Serializable {
 	 */
 	public void removeUserFromLikers(){
 		while(likers.remove(PhotoAlbum.logged_in));
+		likes = likers.size();
 	}
 	
 	/**

@@ -9,6 +9,7 @@ import javafx.fxml.FXML;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.geometry.VPos;
+import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -16,9 +17,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.RowConstraints;
-import javafx.scene.text.Text;
 import javafx.stage.Stage;
-import model.Album;
 import model.Photo;
 
 /**
@@ -33,16 +32,7 @@ public class SearchController extends Controller {
 	private ImageView imageView;
 	
 	@FXML
-	private ImageView album1;
-	
-	@FXML
-	private Text name1;
-	
-	@FXML
-	private ImageView album2;
-	
-	@FXML
-	private Text name2;
+	private Button add;
 	
 	@FXML
 	private GridPane grid;
@@ -55,6 +45,9 @@ public class SearchController extends Controller {
 		File file = new File("src/assets/results.png");
 		Image image = new Image(file.toURI().toString());
 		imageView.setImage(image);	
+		if(!PhotoAlbum.logged_in.equals(PhotoAlbum.regular_user)){
+			hideButton(add);
+		}
 		displayAlbums();
 	}
 	

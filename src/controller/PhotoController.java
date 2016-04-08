@@ -58,9 +58,16 @@ public class PhotoController extends Controller{
 	@FXML
 	private AnchorPane pane;
 	
+	@FXML
+	private Button delete;
+	
 	TextField newCaption;
 
 	public void start(Stage mainStage) {
+		if(!PhotoAlbum.logged_in.equals(PhotoAlbum.regular_user)){
+			hideButton(edit);
+			hideButton(delete);
+		}
 		hideButton(addTag);
 		hideButton(done);
 		File file1 = PhotoAlbum.photo.getFile();
@@ -192,11 +199,9 @@ public class PhotoController extends Controller{
 	public void like(ActionEvent e){
 		Photo photo = PhotoAlbum.photo;
 		if(photo.liked()){
-			photo.unlike();
 			photo.removeUserFromLikers();
 			likes.setText(photo.getLikes() + "");
 		} else {
-			photo.like();
 			photo.addUserToLikers();
 			likes.setText(photo.getLikes() + "   - You like this photo!");
 		}

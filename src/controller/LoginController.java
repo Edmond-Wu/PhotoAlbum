@@ -44,7 +44,6 @@ public class LoginController extends Controller {
 		String password = Password.getText();
 		if(username.equalsIgnoreCase("admin")){
 			if (password.equals(PhotoAlbum.admin.getPassword())) {
-				//updateUserList();
 				segue("/view/Admin.fxml");
 				return;
 			}

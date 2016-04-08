@@ -1,6 +1,6 @@
 Button{
 	-fx-text-fill: #FFFFFF;
-	-fx-font: 24 helvetica;
+	-fx-font: 24 Montserrat;
 	-fx-background-radius: 60;
 	-fx-background-color: transparent;
 }
@@ -66,6 +66,24 @@ Text {
 	-fx-text-alignment: center;
 	-fx-font: 16 helvetica;
 	-fx-fill: #595959;
+}
+
+#id {
+	-fx-text-alignment: center;
+	-fx-font: 24 Montserrat;
+	-fx-fill: #FFFFFF;
+}
+
+#back{
+	-fx-background-image: url("../assets/back-white.png");
+	-fx-background-repeat: stretch;   
+    -fx-background-size: 130 70;
+    -fx-background-position: center center;
+    -fx-background-color: transparent;
+}
+
+#back:hover{
+	-fx-background-image: url("../assets/back-blue.png");
 }
 
 #select {

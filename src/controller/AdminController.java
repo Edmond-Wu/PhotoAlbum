@@ -143,7 +143,6 @@ public class AdminController extends Controller {
 				}
 			});
 		}
-		PhotoAlbum.regular_user.serialize();
 	}
 	
 	/**

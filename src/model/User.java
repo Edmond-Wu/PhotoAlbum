@@ -9,6 +9,7 @@ public abstract class User implements Serializable {
 	
 	private String username;
 	private String password;
+	private boolean priv;
 	
 	/**
 	 * User constructor
@@ -18,6 +19,7 @@ public abstract class User implements Serializable {
 	public User(String n, String p) {
 		username = n.toLowerCase();
 		password = p;
+		priv = true;
 	}
 	
 	/**
@@ -35,6 +37,23 @@ public abstract class User implements Serializable {
 	public String getPassword() {
 		return password;
 	}
+	
+	/**
+	 * Gets privacy setting
+	 * @return privacy setting
+	 */
+	public boolean getPrivate() {
+		return priv;
+	}
+	
+	/**
+	 * Gets privacy setting
+	 * @param p privacy setting
+	 */
+	public void setPrivate(boolean p) {
+		priv = p;
+	}
+	
 	
 	/**
 	 * Serializes the user data

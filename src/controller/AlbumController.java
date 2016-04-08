@@ -14,6 +14,7 @@ import javafx.geometry.VPos;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -39,8 +40,14 @@ public class AlbumController extends Controller {
 	@FXML
 	private Text title;
 	
+	@FXML
+	private Button add;
+	
 
-	public void start(Stage mainStage) {                
+	public void start(Stage mainStage) { 
+		if(!PhotoAlbum.logged_in.equals(PhotoAlbum.regular_user)){
+			hideButton(add);
+		}
 		displayPhotos();
 		if(PhotoAlbum.album != null){
 			title.setText(PhotoAlbum.album.getName());

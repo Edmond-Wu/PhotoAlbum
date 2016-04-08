@@ -23,6 +23,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.RowConstraints;
 import javafx.scene.text.Text;
@@ -62,11 +63,35 @@ public class AlbumsController extends Controller{
 	@FXML
 	private Text select;
 	
+	@FXML
+	private Pane pane;
+	
+	@FXML
+	private Button back;
+	
+	@FXML
+	private Button view;
+	
 	private ArrayList<Integer> selected;
 	
 	public static int selectint;
 
-	public void start(Stage mainStage) {   
+	public void start(Stage mainStage) {  
+		if(!PhotoAlbum.logged_in.equals(PhotoAlbum.regular_user)){
+			hideButton(edit);
+			hideButton(add);
+			hideButton(view);
+			imageView.setOpacity(0);
+			
+			Text name = new Text(PhotoAlbum.regular_user.getUsername() + "'s Albums");
+			name.setLayoutX(130);
+			name.setLayoutY(44);
+			name.setId("id");
+			name.setWrappingWidth(560);
+			pane.getChildren().add(name);
+		} else {
+			hideButton(back);
+		}
 		File file = new File("src/assets/Albums.png");
 		Image image = new Image(file.toURI().toString());
 		imageView.setImage(image);
@@ -174,6 +199,7 @@ public class AlbumsController extends Controller{
 		select.setOpacity(1);
 		selectint = 0;
 		select.setText(selected.size() + " albums selected.");
+		hideButton(view);
 		hideButton(edit);
 		hideButton(logout);
 		hideButton(search);
@@ -191,6 +217,7 @@ public class AlbumsController extends Controller{
 	public void done(ActionEvent e) {
 		select.setOpacity(0);
 		select.setText("");
+		showButton(view);
 		showButton(edit);
 		showButton(logout);
 		showButton(search);
@@ -368,5 +395,22 @@ public class AlbumsController extends Controller{
 				}
 			}
 		}
+	}
+	
+	/**
+	 * Allows users to view other user's albums if they are public
+	 * @param e
+	 */
+	public void view(ActionEvent e){
+		segue("/view/Users.fxml");
+	}
+	
+	/**
+	 * Goes back to logged in user's page.
+	 * @param e
+	 */
+	public void back(ActionEvent e){
+		PhotoAlbum.regular_user = PhotoAlbum.logged_in;
+		segue("/view/Users.fxml");
 	}
 }
