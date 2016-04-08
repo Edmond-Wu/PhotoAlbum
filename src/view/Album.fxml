@@ -29,6 +29,6 @@
       </content>
    </ScrollPane>
    <Text fx:id="title" layoutX="130.0" layoutY="44.0" text="album name" wrappingWidth="560.9321746826172" />
-   <Button fx:id="search" onAction="#search" layoutX="14.0" layoutY="542.0" prefHeight="46.0" prefWidth="131.0" text="Search..." />
+   <Button fx:id="search" onAction="#search" layoutX="8.0" layoutY="542.0" prefHeight="46.0" prefWidth="260.0" text="Search this album..." />
    	
 </AnchorPane>

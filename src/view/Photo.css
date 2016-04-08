@@ -94,7 +94,3 @@ TextField {
 	-fx-text-box-border: white; 
 	-fx-focus-color: #008ED6;
 }
-
-#photo{
-	-fx-background-color: BLACK;
-}
