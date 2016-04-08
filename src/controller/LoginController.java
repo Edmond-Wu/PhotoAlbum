@@ -63,7 +63,7 @@ public class LoginController extends Controller {
 					userwrong.setStyle("-fx-opacity: 0;");
 					Password.setStyle("-fx-text-box-border: white; -fx-focus-color: #008ED6;");
 					passwrong.setStyle("-fx-opacity: 0;");
-					
+					PhotoAlbum.logged_in = (NonAdminUser) PhotoAlbum.admin.getUserList().get(i);
 					segue("/view/Albums.fxml");
 					return;
 				} else {

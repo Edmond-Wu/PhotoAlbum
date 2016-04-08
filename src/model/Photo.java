@@ -5,6 +5,8 @@ import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.util.*;
 
+import app.PhotoAlbum;
+
 /**
 * @author Edmond Wu & Vincent Xie
 */
@@ -14,10 +16,7 @@ public class Photo implements Serializable {
 	private File file_name;
 	private HashMap<String, String> tags;
 	private int likes;
-	/*
-	private ArrayList<String> places;
-	private ArrayList<String> people;
-	*/
+	private ArrayList<NonAdminUser> likers;
 	private String caption;
 	
 	
@@ -28,6 +27,7 @@ public class Photo implements Serializable {
 	public Photo(File f) {
 		file_name = f;
 		tags = new HashMap<String, String>();
+		likers = new ArrayList<NonAdminUser>();
 		caption = "";
 		likes = 0;
 	}
@@ -90,5 +90,43 @@ public class Photo implements Serializable {
 	 */
 	public void like() {
 		likes++;
+	}
+	
+	/**
+	 * Decreases the amount of likes on a photo by 1
+	 */
+	public void unlike() {
+		if(likes > 0){
+			likes--;
+		}
+	}
+	
+	/**
+	 * Gets if the user has liked the image already
+	 */
+	public boolean liked(){
+		return likers.contains(PhotoAlbum.logged_in);
+	}
+	
+	/**
+	 * Adds current user to likers.
+	 */
+	public void addUserToLikers(){
+		likers.add(PhotoAlbum.logged_in);
+	}
+	
+	/**
+	 * Removes current user from likers.
+	 */
+	public void removeUserFromLikers(){
+		while(likers.remove(PhotoAlbum.logged_in));
+	}
+	
+	/**
+	 * Sets caption.
+	 * @param caption new caption
+	 */
+	public void setCaption(String caption){
+		this.caption = caption;
 	}
 }

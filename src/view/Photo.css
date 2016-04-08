@@ -1,12 +1,20 @@
-#edit, #logout, #search{
+Button {
 	-fx-text-fill: #FFFFFF;
 	-fx-font: 24 helvetica;
 	-fx-background-radius: 60;
 	-fx-background-color: transparent;
 }
 
-#edit:hover, #logout:hover, #search:hover{
+Button:hover{
 	-fx-text-fill: #66c2ff;
+}
+
+#like {
+	-fx-background-image: url("../assets/like.png");
+	-fx-background-repeat: stretch;   
+    -fx-background-size: 30 30;
+    -fx-background-position: center center;
+    -fx-background-color: transparent;
 }
 
 #back{
@@ -16,6 +24,7 @@
     -fx-background-position: center center;
     -fx-background-color: transparent;
 }
+
 #back:hover{
 	-fx-background-image: url("../assets/back-blue.png");
 }
@@ -67,6 +76,9 @@ ImageView{
 Text {
 	-fx-font: 16 helvetica;
 	-fx-fill: #FFFFFF;
+}
+
+#date {
 	-fx-text-alignment: center;
 }
 
@@ -75,4 +87,14 @@ Text {
 	-fx-font: 24 Montserrat;
 	-fx-fill: #FFFFFF;
 	-fx-font-weight: bold;
+}
+
+TextField {
+	-fx-background-radius: 10;
+	-fx-text-box-border: white; 
+	-fx-focus-color: #008ED6;
+}
+
+#photo{
+	-fx-background-color: BLACK;
 }

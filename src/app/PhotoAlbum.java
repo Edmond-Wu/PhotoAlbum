@@ -22,6 +22,7 @@ import model.User;
 public class PhotoAlbum extends Application {
 	
 	public static Admin admin = new Admin("admin", "password");
+	public static NonAdminUser logged_in;
 	public static NonAdminUser regular_user;
 	public static Album album; //album belonging to regular_user
 	public static Stage stage;

@@ -125,7 +125,8 @@ public class AlbumsController extends Controller{
 		dialog.getDialogPane().getButtonTypes().add(ok);
 		dialog.getDialogPane().getButtonTypes().add(cancel);
 		dialog.setHeaderText("Confirm.");
-		dialog.setContentText("Are you sure you would like to delete the selected albums?");
+		dialog.setContentText("Are you sure you would like to delete the selected albums? (WARNING: This will" + 
+				" clear all unsaved name changes.)");
 		dialog.showAndWait().ifPresent(response -> {
 			if (response == ok) {
 				ArrayList<Album> albums = PhotoAlbum.regular_user.getAlbums();

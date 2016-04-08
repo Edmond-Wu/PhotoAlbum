@@ -40,17 +40,14 @@ public class AddPhotoDialog extends Dialog<ButtonType> {
         
         GridPane dPane = new GridPane();
         dPane.setPrefWidth(500);
-        dPane.setMinHeight(125);
         Text photo = new Text("Photo: ");
         Text name = new Text("");
         name.setFill(Color.ORANGE);
         Text cap = new Text("Caption: ");
         
-        name.setWrappingWidth(200);
-        
         caption = new TextField();
         caption.setPromptText("Optional");
-
+        
         dPane.setHgap(7D);
         dPane.setVgap(8D);
 
@@ -73,7 +70,12 @@ public class AddPhotoDialog extends Dialog<ButtonType> {
                 		Stage stage = new Stage();
                         File file = browser.showOpenDialog(stage);
                         if (file != null) {
-                           	name.setText((file.getName()));
+                        	String temp = file.getName();
+                        	if(temp.length() > 25){
+                        		temp = temp.substring(0, 25);
+                        		temp += "...";
+                        	}
+                           	name.setText(temp);
                         }
                         AddPhotoDialog.file = file;
                 });
