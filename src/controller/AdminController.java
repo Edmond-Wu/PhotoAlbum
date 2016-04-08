@@ -129,8 +129,7 @@ public class AdminController extends Controller {
 			dialog.getDialogPane().getButtonTypes().add(ok);
 			dialog.getDialogPane().getButtonTypes().add(cancel);
 			dialog.setHeaderText("Confirm.");
-			dialog.setContentText("Are you sure you would like to delete user " + 
-					PhotoAlbum.admin.getUserList().get(index).getUsername() + "?");
+			dialog.setContentText("Are you sure you would like to delete user " + user + "?");
 			dialog.showAndWait().ifPresent(response -> {
 				if (response == ok) {
 					obsList.remove(index);

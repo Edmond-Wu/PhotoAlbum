@@ -36,13 +36,8 @@ public abstract class Controller {
 		dialog.setContentText("Are you sure you want to logout?");
 		dialog.showAndWait().ifPresent(response -> {
 			if (response == ok) {
-				if (PhotoAlbum.regular_user != null) {
-					PhotoAlbum.regular_user.serialize();
-				}
-				else {
-					for (User u : PhotoAlbum.admin.getUserList()) {
-						u.serialize();
-					}
+				for (User u : PhotoAlbum.admin.getUserList()) {
+					u.serialize();
 				}
 				segue("/view/Login.fxml");
 			}
