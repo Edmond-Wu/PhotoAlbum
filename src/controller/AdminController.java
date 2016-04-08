@@ -122,6 +122,7 @@ public class AdminController extends Controller {
 	public void delete(ActionEvent e){
 		int index = list.getSelectionModel().getSelectedIndex();
 		if(index >= 0){
+			String user = PhotoAlbum.admin.getUserList().get(index).getUsername();
 			ButtonType ok = new ButtonType("OK", ButtonData.OK_DONE);
 			ButtonType cancel = new ButtonType("Cancel", ButtonData.NO);
 			Dialog<ButtonType> dialog = new Dialog<ButtonType>();
@@ -136,9 +137,10 @@ public class AdminController extends Controller {
 					PhotoAlbum.admin.getUserList().remove(index);
 					showInfo();
 					try {
-						Files.delete(Paths.get("data/" + username + ".ser"));
+						Files.delete(Paths.get("data/" + user + ".ser"));
 					} catch (Exception e1) {
 						System.out.println("Invalid serialized file to be deleted.");
+						e1.printStackTrace();
 					}
 				}
 			});
