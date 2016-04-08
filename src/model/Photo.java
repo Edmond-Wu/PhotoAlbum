@@ -2,7 +2,7 @@ package model;
 
 import java.io.*;
 import java.text.SimpleDateFormat;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.*;
 
 /**
@@ -10,7 +10,7 @@ import java.util.*;
 */
 public class Photo implements Serializable {
 	
-	private LocalDate date;
+	private LocalDateTime date;
 	private File file_name;
 	private ArrayList<String> tags;
 	private String caption;
@@ -32,7 +32,7 @@ public class Photo implements Serializable {
 	 * @param c caption
 	 * @param t String containing all the tags
 	 */
-	public Photo(File f, LocalDate d, String c, String t) {
+	public Photo(File f, LocalDateTime d, String c, String t) {
 		this(f);
 		date = d;
 		caption = c;
@@ -48,7 +48,7 @@ public class Photo implements Serializable {
 	 * Gets the date-time of the photo (when last modified)
 	 * @return the date-time of the picture
 	 */
-	public LocalDate getDate() {
+	public LocalDateTime getDate() {
 		return date;
 	}
 	

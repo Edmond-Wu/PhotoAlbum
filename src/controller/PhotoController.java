@@ -2,6 +2,8 @@ package controller;
 
 
 import java.io.File;
+import java.time.format.DateTimeFormatter;
+import java.time.format.FormatStyle;
 import java.util.ArrayList;
 
 import app.PhotoAlbum;
@@ -36,8 +38,8 @@ public class PhotoController extends Controller{
 		photo.setImage(image1);	
 		photo.setPreserveRatio(true);
 		centerImage(photo);
-		caption.setText(PhotoAlbum.photo.getCaption());
-		date.setText(PhotoAlbum.photo.getDate().toString());
+		caption.setText("Caption: " + PhotoAlbum.photo.getCaption());
+		date.setText(PhotoAlbum.photo.getDate().format(DateTimeFormatter.ofLocalizedDateTime(FormatStyle.MEDIUM)));
 	}
 	
 	/**

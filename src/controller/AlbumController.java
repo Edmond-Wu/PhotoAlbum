@@ -1,7 +1,7 @@
 package controller;
 
 import java.io.*;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.*;
 
@@ -77,15 +77,10 @@ public class AlbumController extends Controller {
 					return;
 				}
 			}
-			LocalDate date = dialog.getDate();
-			//if no date is provided, use the file's last-modified date instead
-			if (date == null) {
-				Date d = new Date(photo_file.lastModified());
-				date = d.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-			}
+			Date d = new Date(photo_file.lastModified());
+			LocalDateTime date = d.toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime();
 			String caption = dialog.getCaption();
-			String tags = dialog.getTags();
-			Photo added = new Photo(photo_file, date, caption, tags);
+			Photo added = new Photo(photo_file, date, caption, "");
 			PhotoAlbum.album.getPhotos().add(added);
 			displayPhotos();
 		}
