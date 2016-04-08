@@ -140,7 +140,6 @@ public class AdminController extends Controller {
 						Files.delete(Paths.get("data/" + user + ".ser"));
 					} catch (Exception e1) {
 						System.out.println("Invalid serialized file to be deleted.");
-						e1.printStackTrace();
 					}
 				}
 			});
