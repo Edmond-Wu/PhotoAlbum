@@ -59,7 +59,7 @@ public class AddPhotoDialog extends Dialog<ButtonType> {
         GridPane.setConstraints(cap, 0, 2);
         GridPane.setConstraints(browse, 1, 0);
         GridPane.setConstraints(caption, 1, 2);
-
+        
         browser = new FileChooser();
         browser.setTitle("Open Photo");
         browser.getExtensionFilters().addAll(
@@ -77,7 +77,6 @@ public class AddPhotoDialog extends Dialog<ButtonType> {
                         }
                         AddPhotoDialog.file = file;
                 });
-        
         dPane.getChildren().addAll(photo, name, cap, browse, caption);
         getDialogPane().getButtonTypes().addAll(ok, cancel);
         getDialogPane().setContent(dPane);
