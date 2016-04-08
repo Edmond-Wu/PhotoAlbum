@@ -1,7 +1,6 @@
 package model;
 
 import java.io.*;
-import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.util.*;
 
@@ -15,7 +14,6 @@ public class Photo implements Serializable {
 	private LocalDateTime date;
 	private File file_name;
 	private HashMap<String, String> tags;
-	private int likes;
 	private ArrayList<User> likers;
 	private String caption;
 	
@@ -29,7 +27,6 @@ public class Photo implements Serializable {
 		tags = new HashMap<String, String>();
 		likers = new ArrayList<User>();
 		caption = "";
-		likes = 0;
 	}
 	
 	/**
@@ -88,8 +85,7 @@ public class Photo implements Serializable {
 				i--;
 			}
 		}
-		likes = likers.size();
-		return likes;
+		return likers.size();
 	}
 	
 	/**
@@ -104,7 +100,6 @@ public class Photo implements Serializable {
 	 */
 	public void addUserToLikers(){
 		likers.add(PhotoAlbum.logged_in);
-		likes = likers.size();
 	}
 	
 	/**
@@ -112,7 +107,6 @@ public class Photo implements Serializable {
 	 */
 	public void removeUserFromLikers(){
 		while(likers.remove(PhotoAlbum.logged_in));
-		likes = likers.size();
 	}
 	
 	/**

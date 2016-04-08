@@ -120,6 +120,7 @@ public class AlbumController extends Controller {
 			}
 		}
 		while(albums.remove(null));
+		PhotoAlbum.regular_user.serialize();
 		grid.setPrefHeight(70 + (int)((albums.size() + 1) / 2) * 211);
 		if(albums.size() <= 2){
 			grid.setPrefHeight(240);

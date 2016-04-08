@@ -29,6 +29,7 @@ import javafx.scene.layout.RowConstraints;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import model.Album;
+import model.Photo;
 import view.AddAlbumDialog;
 
 /**
@@ -285,12 +286,21 @@ public class AlbumsController extends Controller{
 		for(int i = 0; i <= albums.size() / 2; i++){
 			for(int j = 0; j < 2; j++){
 				if(2 * i + j < albums.size()){
-					File file;
-					if(albums.get(2 * i + j).getPhotos().size() > 0){
-						file = albums.get(2 * i + j).getPhotos().get(0).getFile();
-					} else {
+					File file = new File("src/assets/empty.jpg");;
+					ArrayList<Photo> photos = albums.get(2 * i + j).getPhotos();
+					for(int k = 0; k < photos.size(); k++){
+						file = photos.get(k).getFile();
+						if(file.exists()){
+							break;
+						} else {
+							photos.set(k, null);
+						}
+					}
+					if(!file.exists()){
 						file = new File("src/assets/empty.jpg");
 					}
+					while(photos.remove(null));
+					PhotoAlbum.regular_user.serialize();
 					Image image = new Image(file.toURI().toString());
 					ImageView cover = new ImageView();
 					cover.setFitHeight(190);
@@ -348,12 +358,21 @@ public class AlbumsController extends Controller{
 		for(int i = 0; i <= albums.size() / 2; i++){
 			for(int j = 0; j < 2; j++){
 				if(2 * i + j < albums.size()){
-					File file;
-					if(albums.get(2 * i + j).getPhotos().size() > 0){
-						file = albums.get(2 * i + j).getPhotos().get(0).getFile();
-					} else {
+					File file = new File("src/assets/empty.jpg");;
+					ArrayList<Photo> photos = albums.get(2 * i + j).getPhotos();
+					for(int k = 0; k < photos.size(); k++){
+						file = photos.get(k).getFile();
+						if(file.exists()){
+							break;
+						} else {
+							photos.set(k, null);
+						}
+					}
+					if(!file.exists()){
 						file = new File("src/assets/empty.jpg");
 					}
+					while(photos.remove(null));
+					PhotoAlbum.regular_user.serialize();
 					Image image = new Image(file.toURI().toString());
 					ImageView cover = new ImageView();
 					cover.setFitHeight(190);
