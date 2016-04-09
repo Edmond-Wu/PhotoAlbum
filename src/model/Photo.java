@@ -116,4 +116,13 @@ public class Photo implements Serializable {
 	public void setCaption(String caption){
 		this.caption = caption;
 	}
+	
+	/**
+	 * Prints out the key-value pairs in the tags HashMap
+	 */
+	public void printTags() {
+		for (String key : tags.keySet()) {
+			System.out.println(key + ": " + tags.get(key));
+		}
+	}
 }

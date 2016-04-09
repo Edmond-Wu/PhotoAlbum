@@ -5,6 +5,7 @@ import java.io.File;
 import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
 import java.util.ArrayList;
+import java.util.Optional;
 
 import app.PhotoAlbum;
 import javafx.event.ActionEvent;
@@ -13,6 +14,8 @@ import javafx.fxml.FXML;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Dialog;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonBar.ButtonData;
 import javafx.scene.image.Image;
@@ -21,7 +24,9 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import model.Album;
 import model.Photo;
+import view.AddTagDialog;
 
 /**
  * @author Edmond Wu & Vincent Xie
@@ -175,6 +180,29 @@ public class PhotoController extends Controller{
 		newCaption.setText(PhotoAlbum.photo.getCaption());
 		newCaption.setPrefWidth(250);
 		pane.getChildren().add(newCaption);
+	}
+	
+	public void addTag(ActionEvent e) {
+		AddTagDialog dialog = new AddTagDialog();
+		Optional<ButtonType> result = dialog.showAndWait();
+		
+		String ok = ButtonType.OK.getText();
+		String click = result.get().getText();
+		
+		if (click.equals(ok)) {
+			String key = dialog.getKey();
+			String value = dialog.getValue();
+			if (key.isEmpty() || value.isEmpty()) {
+				Alert error = new Alert(AlertType.INFORMATION);
+				error.setHeaderText("Error!");
+				error.setContentText("Both key and value are required!");
+				error.show();
+				return;
+			}
+			PhotoAlbum.photo.getTags().put(key, value);
+		}
+		//PhotoAlbum.photo.printTags();
+		PhotoAlbum.regular_user.serialize();
 	}
 
 	/**

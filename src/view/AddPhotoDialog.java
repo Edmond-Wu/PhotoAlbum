@@ -32,8 +32,7 @@ public class AddPhotoDialog extends Dialog<ButtonType> {
     public AddPhotoDialog() {
     	file = null;
     	DialogPane dialogPane = this.getDialogPane();
-    	dialogPane.getStylesheets().add(
-    	   getClass().getResource("Dialog.css").toExternalForm());
+    	dialogPane.getStylesheets().add(getClass().getResource("Dialog.css").toExternalForm());
     	
         setTitle("Add a photo");
         setHeaderText(null);
@@ -80,8 +79,8 @@ public class AddPhotoDialog extends Dialog<ButtonType> {
                         AddPhotoDialog.file = file;
                 });
         dPane.getChildren().addAll(photo, name, cap, browse, caption);
-        getDialogPane().getButtonTypes().addAll(ok, cancel);
-        getDialogPane().setContent(dPane);
+        dialogPane.getButtonTypes().addAll(ok, cancel);
+        dialogPane.setContent(dPane);
     }
     
     /**

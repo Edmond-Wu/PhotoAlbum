@@ -15,7 +15,7 @@
    <Text fx:id="date" layoutX="530.0" layoutY="465.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="203.23999977111816" />
    <Text fx:id="likes" layoutX="131.0" layoutY="465.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="208.99998927116394" />
    <Button fx:id="like" layoutX="89.0" layoutY="438.0" onAction="#like" prefHeight="34.0" prefWidth="32.0" />
-   <Button fx:id="addTag" layoutX="-4.0" layoutY="541.0" prefHeight="46.0" prefWidth="210.0" text="Add/Edit tags..." />
+   <Button fx:id="addTag" layoutX="-4.0" layoutY="541.0" onAction="#addTag" prefHeight="46.0" prefWidth="210.0" text="Add/Edit tags..." />
    <Button fx:id="done" layoutX="705.0" layoutY="10.0" onAction="#done" prefHeight="46.0" prefWidth="99.0" text="Done" />
    	
 </AnchorPane>
