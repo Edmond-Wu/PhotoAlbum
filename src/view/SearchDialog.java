@@ -15,8 +15,7 @@ public class SearchDialog extends Dialog<ButtonType> {
 	private ButtonType ok = new ButtonType("OK", ButtonData.OK_DONE);
     private ButtonType cancel = new ButtonType("Cancel", ButtonData.CANCEL_CLOSE);
     private DatePicker dateTime;
-    private TextField ppl_tags;
-    private TextField pl_tags;
+    private DatePicker dateTime2;
     
     public SearchDialog() {
     	DialogPane dialogPane = this.getDialogPane();
@@ -26,54 +25,42 @@ public class SearchDialog extends Dialog<ButtonType> {
         GridPane dPane = new GridPane();
         dPane.setPrefWidth(500);
         dPane.setMinHeight(200);
-        Text date = new Text("Date: ");
-        Text people_tags = new Text("Tag people: ");
-        Text places_tags = new Text("Tag places: ");
+        Text date = new Text("Start Date for Search: ");
+        Text date2 = new Text("End Date for Search: ");
                 
-        ppl_tags = new TextField();
-        pl_tags = new TextField();
         dateTime = new DatePicker();
         dateTime.setPromptText("Optional");
-        ppl_tags.setPromptText("Optional");
-        pl_tags.setPromptText("Optional");
+        dateTime2 = new DatePicker();
+        dateTime2.setPromptText("Optional");
 
         dPane.setHgap(7D);
         dPane.setVgap(8D);
 
         GridPane.setConstraints(date, 0, 0);
-        GridPane.setConstraints(people_tags, 0, 1);
-        GridPane.setConstraints(places_tags, 0, 2);
         GridPane.setConstraints(dateTime, 1, 0);
-        GridPane.setConstraints(ppl_tags, 1, 1);
-        GridPane.setConstraints(pl_tags, 1, 2);
+        GridPane.setConstraints(date2, 0, 1);
+        GridPane.setConstraints(dateTime2, 1, 1);
+        
 
         
-        dPane.getChildren().addAll(date, people_tags, places_tags, dateTime, ppl_tags, pl_tags);
+        dPane.getChildren().addAll(date, date2, dateTime, dateTime2);
         dialogPane.getButtonTypes().addAll(ok, cancel);
         dialogPane.setContent(dPane);
     }
     
     /**
-     * Extracts date from the dialog box.
+     * Extracts start date from the dialog box.
      * @return date of photo
      */
-    public LocalDate getDate() {
+    public LocalDate getStartDate() {
     	return dateTime.getValue();
     }
     
     /**
-     * Extracts people-related tags string from the dialog box.
-     * @return tags string
+     * Extracts end date from the dialog box.
+     * @return date of photo
      */
-    public String getPeopleTags() {
-    	return ppl_tags.getText();
-    }
-    
-    /**
-     * Extracts places-related tags string from the dialog box.
-     * @return tags string
-     */
-    public String getPlaceTags() {
-    	return pl_tags.getText();
+    public LocalDate getEndDate() {
+    	return dateTime2.getValue();
     }
 }

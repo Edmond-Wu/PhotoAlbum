@@ -67,6 +67,8 @@ public class PhotoController extends Controller{
 	private Button delete;
 	
 	TextField newCaption;
+	
+	public static boolean search;
 
 	public void start(Stage mainStage) {
 		if(!PhotoAlbum.logged_in.equals(PhotoAlbum.regular_user)){
@@ -116,7 +118,11 @@ public class PhotoController extends Controller{
 	 * @param e
 	 */
 	public void back(ActionEvent e){
-		segue("/view/Album.fxml");
+		if(search == true){
+			segue("/view/Search.fxml");
+		} else {
+			segue("/view/Album.fxml");
+		}
 	}
 
 	/**

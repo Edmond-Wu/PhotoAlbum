@@ -37,6 +37,14 @@ public class Album implements Serializable {
 	}
 	
 	/**
+	 * Sets the photos in the album
+	 * @param ArrayList of photos
+	 */
+	public void setPhotos(ArrayList<Photo> photos) {
+		this.photos = photos;
+	}
+	
+	/**
 	 * Changes the album name
 	 * @param n New name of the album
 	 */

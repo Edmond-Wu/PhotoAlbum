@@ -1,6 +1,9 @@
 package controller;
 
 import java.io.*;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.*;
 
 import app.PhotoAlbum;
@@ -31,6 +34,8 @@ import javafx.stage.Stage;
 import model.Album;
 import model.Photo;
 import view.AddAlbumDialog;
+import view.AddPhotoDialog;
+import view.SearchDialog;
 
 /**
  * @author Edmond Wu & Vincent Xie
@@ -232,6 +237,15 @@ public class AlbumsController extends Controller{
 			Node node = list.get(i);
 			if(node instanceof TextField){
 				String name = ((TextField)node).getText();
+				if(name.length() == 0){
+					Alert error = new Alert(AlertType.INFORMATION);
+					error.setHeaderText("Error!");
+					error.setContentText("Cannot have empty album names!");
+					error.show();
+					selectint = 0;
+					displayAlbums();
+					return;
+				}
 				if(names.contains(name)){
 					Alert error = new Alert(AlertType.INFORMATION);
 					error.setHeaderText("Error!");
@@ -260,7 +274,42 @@ public class AlbumsController extends Controller{
 	 */
 	public void search(ActionEvent e) {
 		SearchController.albums = true;
-		segue("/view/Search.fxml");
+		SearchDialog dialog = new SearchDialog();
+		Optional<ButtonType> result = dialog.showAndWait();
+		
+		String ok = ButtonType.OK.getText();
+		String click = result.get().getText();
+		if (click.equals(ok)) {
+			PhotoAlbum.search = new ArrayList<Photo>();
+			
+			LocalDate startDate = dialog.getStartDate();
+			LocalDate endDate = dialog.getEndDate();
+
+			ArrayList<Album> albums = PhotoAlbum.regular_user.getAlbums();
+			for(Album a : albums){
+				ArrayList<Photo> photos = a.getPhotos();
+				for(int i = 0; i < photos.size(); i++){
+					File file = photos.get(i).getFile();
+					Date d = new Date(file.lastModified());
+					LocalDate date = d.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+					if(startDate == null){
+						if(date.compareTo(endDate) <= 0){
+							PhotoAlbum.search.add(photos.get(i));
+						}
+					} else if (endDate == null){
+						if(date.compareTo(startDate) >= 0){ 
+							PhotoAlbum.search.add(photos.get(i));
+						}
+					}
+					if(startDate != null && endDate != null){
+						if(date.compareTo(startDate) >= 0 && date.compareTo(endDate) <= 0){
+							PhotoAlbum.search.add(photos.get(i));
+						}
+					}
+				}
+			}
+			segue("/view/Search.fxml");
+		}
 	}
 
 	/**

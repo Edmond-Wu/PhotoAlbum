@@ -1,6 +1,7 @@
 package controller;
 
 import java.io.*;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.*;
@@ -23,8 +24,10 @@ import javafx.scene.layout.Priority;
 import javafx.scene.layout.RowConstraints;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import model.Album;
 import model.Photo;
 import view.AddPhotoDialog;
+import view.SearchDialog;
 
 /**
  * @author Edmond Wu & Vincent Xie
@@ -100,7 +103,40 @@ public class AlbumController extends Controller {
 	 */
 	public void search(ActionEvent e) {
 		SearchController.albums = false;
-		segue("/view/Search.fxml");
+		SearchDialog dialog = new SearchDialog();
+		Optional<ButtonType> result = dialog.showAndWait();
+
+		String ok = ButtonType.OK.getText();
+		String click = result.get().getText();
+		if (click.equals(ok)) {
+			PhotoAlbum.search = new ArrayList<Photo>();
+
+			LocalDate startDate = dialog.getStartDate();
+			LocalDate endDate = dialog.getEndDate();
+
+			ArrayList<Photo> photos = PhotoAlbum.album.getPhotos();
+			for(int i = 0; i < photos.size(); i++){
+				File file = photos.get(i).getFile();
+				Date d = new Date(file.lastModified());
+				LocalDate date = d.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+				if(startDate == null){
+					if(date.compareTo(endDate) <= 0){
+						PhotoAlbum.search.add(photos.get(i));
+					}
+				} else if (endDate == null){
+					if(date.compareTo(startDate) >= 0){ 
+						PhotoAlbum.search.add(photos.get(i));
+					}
+				}
+				if(startDate != null && endDate != null){
+					if(date.compareTo(startDate) >= 0 && date.compareTo(endDate) <= 0){
+						PhotoAlbum.search.add(photos.get(i));
+					}
+				}
+
+			}
+			segue("/view/Search.fxml");
+		}
 	}
 	
 	/**
@@ -152,6 +188,7 @@ public class AlbumController extends Controller {
 					cover.addEventFilter(MouseEvent.MOUSE_PRESSED, e -> { 
 						PhotoAlbum.photo = PhotoAlbum.album.getPhotos().get(
 										2 * GridPane.getRowIndex(cover) + GridPane.getColumnIndex(cover));
+						PhotoController.search = false;
 						segue("/view/Photo.fxml");
 					});
 				}
