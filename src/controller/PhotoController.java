@@ -1,11 +1,10 @@
 package controller;
 
 
-import java.io.File;
+import java.io.*;
+import java.util.*;
 import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
-import java.util.ArrayList;
-import java.util.Optional;
 
 import app.PhotoAlbum;
 import javafx.event.ActionEvent;
@@ -24,7 +23,6 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
-import model.Album;
 import model.Photo;
 import view.AddTagDialog;
 
@@ -39,6 +37,9 @@ public class PhotoController extends Controller{
 	@FXML
 	private Text caption;
 
+	@FXML
+	private Text tags;
+	
 	@FXML
 	private Text date;
 
@@ -67,8 +68,10 @@ public class PhotoController extends Controller{
 	private Button delete;
 	
 	TextField newCaption;
-	
+
 	public static boolean search;
+
+	private String tag_display;
 
 	public void start(Stage mainStage) {
 		if(!PhotoAlbum.logged_in.equals(PhotoAlbum.regular_user)){
@@ -83,6 +86,12 @@ public class PhotoController extends Controller{
 		photo.setPreserveRatio(true);
 		centerImage(photo);
 		caption.setText("Caption: " + PhotoAlbum.photo.getCaption());
+		tag_display = "";
+		for (String key : PhotoAlbum.photo.getTags().keySet()) {
+			tag_display += key + " - " + PhotoAlbum.photo.getTags().get(key) + ", ";
+		}
+		tag_display = tag_display.substring(0, tag_display.length() - 2);
+		tags.setText("Tags: " + tag_display);
 		date.setText(PhotoAlbum.photo.getDate().format(DateTimeFormatter.ofLocalizedDateTime(FormatStyle.MEDIUM)));
 		setUpLikeButton();
 	}
@@ -206,8 +215,14 @@ public class PhotoController extends Controller{
 				return;
 			}
 			PhotoAlbum.photo.getTags().put(key, value);
+			if (tag_display.length() == 0) {
+				tag_display += key + " - " + value;
+			}
+			else {
+				tag_display += ", " + key + " - " + value;
+			}
+			tags.setText("Tags: " + tag_display);
 		}
-		//PhotoAlbum.photo.printTags();
 		PhotoAlbum.regular_user.serialize();
 	}
 
@@ -240,5 +255,12 @@ public class PhotoController extends Controller{
 			likes.setText(photo.getLikes() + "   - You like this photo!");
 		}
 		PhotoAlbum.regular_user.serialize();
+	}
+	
+	/**
+	 * Displays tags.
+	 */
+	public void displayTags() {
+		
 	}
 }
