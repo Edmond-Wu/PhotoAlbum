@@ -5,6 +5,15 @@ Button {
 	-fx-background-color: transparent;
 }
 
+ScrollPane{
+	-fx-background-color: #f2f2f2;
+}
+
+#tags {
+	-fx-font: 16 Montserrat;
+	-fx-fill: #000000;
+}
+
 Button:hover{
 	-fx-text-fill: #66c2ff;
 }
@@ -74,7 +83,7 @@ ImageView{
 }
 
 Text {
-	-fx-font: 16 helvetica;
+	-fx-font: 16 Montserrat;
 	-fx-fill: #FFFFFF;
 }
 

@@ -25,8 +25,6 @@ public class SearchDialog extends Dialog<ButtonType> {
         setHeaderText(null);
         
         GridPane dPane = new GridPane();
-        dPane.setPrefWidth(500);
-        dPane.setMinHeight(200);
         Text date = new Text("Start Date for Search: ");
         Text date2 = new Text("End Date for Search: ");
         Text key_search = new Text("Search tag keys: ");

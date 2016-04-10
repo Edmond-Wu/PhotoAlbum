@@ -22,7 +22,7 @@
 }
 
 #add{
-	-fx-font: 48 helvetica;
+	-fx-font: 48 Montserrat;
 }
 
 AnchorPane{
@@ -58,7 +58,7 @@ ImageView{
 
 Text {
 	-fx-text-alignment: center;
-	-fx-font: 16 helvetica;
+	-fx-font: 16 Montserrat;
 	-fx-fill: #595959;
 }
 

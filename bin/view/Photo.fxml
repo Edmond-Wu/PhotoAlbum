@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.text.Text?>
 
 <AnchorPane fx:id="pane" prefHeight="600.0" prefWidth="800.0" stylesheets="@Photo.css" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.PhotoController">	
@@ -13,15 +12,15 @@
    <Button fx:id="edit" layoutX="721.0" layoutY="10.0" onAction="#edit" prefHeight="46.0" prefWidth="76.0" text="Edit" />
    <ImageView fx:id="photo" fitHeight="356.0" fitWidth="770.0" layoutX="15.0" layoutY="71.0" pickOnBounds="true" preserveRatio="true" />
    <Button fx:id="delete" layoutX="739.0" layoutY="537.0" onAction="#delete" prefHeight="54.0" prefWidth="53.0" />
-   <Text fx:id="caption" layoutX="89.0" layoutY="504.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="405.23999977111816" />
+   <Text fx:id="caption" layoutX="89.0" layoutY="504.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="370.23999977111816" />
    <Text fx:id="date" layoutX="530.0" layoutY="465.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="203.23999977111816" />
    <Text fx:id="likes" layoutX="131.0" layoutY="465.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="208.99998927116394" />
    <Button fx:id="like" layoutX="89.0" layoutY="438.0" onAction="#like" prefHeight="34.0" prefWidth="32.0" />
-   <Button fx:id="addTag" layoutX="-4.0" layoutY="541.0" onAction="#addTag" prefHeight="46.0" prefWidth="210.0" text="Add/Edit tags..." />
+   <Button fx:id="addTag" layoutX="-4.0" layoutY="541.0" onAction="#addTag" prefHeight="46.0" prefWidth="150.0" text="Add a tag" />
    <Button fx:id="done" layoutX="705.0" layoutY="10.0" onAction="#done" prefHeight="46.0" prefWidth="99.0" text="Done" />
-   <ScrollPane layoutX="89.0" layoutY="515.0" prefWidth="620.0">
+   <ScrollPane layoutX="484.0" layoutY="490.0" prefHeight="46.0" prefWidth="308.0">
    		<content>
-   			<Text fx:id="tags" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="405.23999977111816"/>
+   			<Text fx:id="tags" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="308" />
    		</content>
    </ScrollPane>
 </AnchorPane>

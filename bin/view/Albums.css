@@ -88,6 +88,6 @@ Text {
 
 #select {
 	-fx-text-alignment: center;
-	-fx-font: 16 helvetica;
+	-fx-font: 16 Montserrat;
 	-fx-fill: #ffffff;
 }
