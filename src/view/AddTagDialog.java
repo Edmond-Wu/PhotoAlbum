@@ -25,7 +25,6 @@ public class AddTagDialog extends Dialog<ButtonType> {
         setHeaderText(null);
         
         GridPane dPane = new GridPane();
-        dPane.setPrefWidth(500);
         Text key = new Text("Tag key: ");
         Text value = new Text("Tag value: ");
         
