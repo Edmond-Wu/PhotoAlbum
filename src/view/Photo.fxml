@@ -23,4 +23,5 @@
    			<Text fx:id="tags" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="308" />
    		</content>
    </ScrollPane>
+   <Button fx:id="removeTag" layoutX="598.0" layoutY="541.0" onAction="#removeTag" prefHeight="46.0" prefWidth="194.0" text="Remove a tag" />
 </AnchorPane>

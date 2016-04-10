@@ -25,6 +25,7 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import model.Photo;
 import view.AddTagDialog;
+import view.RemoveTagDialog;
 
 /**
  * @author Edmond Wu & Vincent Xie
@@ -67,6 +68,9 @@ public class PhotoController extends Controller{
 	@FXML
 	private Button delete;
 	
+	@FXML
+	private Button removeTag;
+	
 	TextField newCaption;
 
 	public static boolean search;
@@ -79,6 +83,7 @@ public class PhotoController extends Controller{
 			hideButton(delete);
 		}
 		hideButton(addTag);
+		hideButton(removeTag);
 		hideButton(done);
 		File file1 = PhotoAlbum.photo.getFile();
 		Image image1 = new Image(file1.toURI().toString());
@@ -187,8 +192,10 @@ public class PhotoController extends Controller{
 	public void edit(ActionEvent e) {
 		hideButton(edit);
 		hideButton(logout);
+		hideButton(delete);
 		showButton(addTag);
 		showButton(done);
+		showButton(removeTag);
 		
 		caption.setText("Caption: ");
 		newCaption = new TextField();
@@ -199,6 +206,10 @@ public class PhotoController extends Controller{
 		pane.getChildren().add(newCaption);
 	}
 	
+	/**
+	 * Adds a tag.
+	 * @param e ActionEvent
+	 */
 	public void addTag(ActionEvent e) {
 		AddTagDialog dialog = new AddTagDialog();
 		Optional<ButtonType> result = dialog.showAndWait();
@@ -216,16 +227,32 @@ public class PhotoController extends Controller{
 				error.show();
 				return;
 			}
-			PhotoAlbum.photo.getTags().put(key, value);
-			if (tag_display.length() == 0) {
-				tag_display += key + " - " + value;
+			if(PhotoAlbum.photo.getTags().put(key, value) != null){
+				Alert error = new Alert(AlertType.INFORMATION);
+				error.setHeaderText("Caution!");
+				error.setContentText("Duplicate tag key! The tag has been edited.");
+				error.show();
 			}
-			else {
-				tag_display += ", " + key + " - " + value;
-			}
-			tags.setText("Tags: " + tag_display);
+			displayTags();
 		}
 		PhotoAlbum.regular_user.serialize();
+	}
+	
+	/**
+	 * Displays tags.
+	 */
+	public void displayTags(){
+		HashMap<String, String> tagslist = PhotoAlbum.photo.getTags();
+		tag_display = "";
+		for(String key: tagslist.keySet()){
+			if (tag_display.length() == 0) {
+				tag_display += key + " - " + tagslist.get(key);
+			}
+			else {
+				tag_display += ", " + key + " - " + tagslist.get(key);
+			}
+		}
+		tags.setText("Tags: " + tag_display);
 	}
 
 	/**
@@ -235,8 +262,10 @@ public class PhotoController extends Controller{
 	public void done(ActionEvent e){
 		hideButton(addTag);
 		hideButton(done);
+		hideButton(removeTag);
 		showButton(edit);
 		showButton(logout);
+		showButton(delete);
 		PhotoAlbum.photo.setCaption(newCaption.getText());
 		pane.getChildren().remove(newCaption);
 		newCaption = new TextField();
@@ -260,9 +289,25 @@ public class PhotoController extends Controller{
 	}
 	
 	/**
-	 * Displays tags.
+	 * Removes tags based on the key or value given
+	 * @param e ActionEvent
 	 */
-	public void displayTags() {
+	public void removeTag(ActionEvent e){
+		RemoveTagDialog dialog = new RemoveTagDialog();
+		Optional<ButtonType> result = dialog.showAndWait();
 		
+		String ok = ButtonType.OK.getText();
+		String click = result.get().getText();
+		if (click.equals(ok)) {
+			Photo photo = PhotoAlbum.photo;
+			HashMap<String, String> tags = photo.getTags();
+			if(dialog.getKey().length() > 0){
+				String key = dialog.getKey().trim();
+				while(tags.remove(key) != null);
+			} 
+			displayTags();
+			PhotoAlbum.regular_user.serialize();
+		}
 	}
+
 }
