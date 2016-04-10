@@ -13,7 +13,7 @@ public class Photo implements Serializable {
 	
 	private LocalDateTime date;
 	private File file_name;
-	private HashMap<String, String> tags;
+	private HashMap<String, ArrayList<String>> tags;
 	private ArrayList<User> likers;
 	private String caption;
 	
@@ -24,7 +24,7 @@ public class Photo implements Serializable {
 	 */
 	public Photo(File f) {
 		file_name = f;
-		tags = new HashMap<String, String>();
+		tags = new HashMap<String, ArrayList<String>>();
 		likers = new ArrayList<User>();
 		caption = "";
 	}
@@ -62,8 +62,29 @@ public class Photo implements Serializable {
 	 * Gets the list of tags of the photo (when last modified)
 	 * @return the tags list of the picture
 	 */
-	public HashMap<String, String> getTags() {
+	public HashMap<String, ArrayList<String>> getTags() {
 		return tags;
+	}
+	
+	/**
+	 * Gets the display form of the tags
+	 * @return all the tags of the photo in display form
+	 */
+	public String getTagDisplay() {
+		String display = "";
+		for (String key : tags.keySet()) {
+			String key_display = key + ": ";
+			for (int i = 0; i < tags.get(key).size(); i++) {
+				String val = tags.get(key).get(i);
+				key_display += val + ", ";
+			}
+			key_display = key_display.substring(0, key_display.length() - 2);
+			display += key_display + "; ";
+		}
+		if (display.length() > 0) {
+			display = display.substring(0, display.length() - 2);
+		}
+		return display;
 	}
 	
 	/**
@@ -122,7 +143,9 @@ public class Photo implements Serializable {
 	 */
 	public void printTags() {
 		for (String key : tags.keySet()) {
-			System.out.println(key + ": " + tags.get(key));
+			for (int i = 0; i < tags.get(key).size(); i++) {
+				System.out.println(key + " - " + tags.get(key).get(i));
+			}
 		}
 	}
 }

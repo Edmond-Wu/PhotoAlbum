@@ -86,14 +86,8 @@ public class PhotoController extends Controller{
 		photo.setPreserveRatio(true);
 		centerImage(photo);
 		caption.setText("Caption: " + PhotoAlbum.photo.getCaption());
-		tag_display = "";
-		for (String key : PhotoAlbum.photo.getTags().keySet()) {
-			tag_display += key + " - " + PhotoAlbum.photo.getTags().get(key) + ", ";
-		}
-		if (tag_display.length() > 0) {
-			tag_display = tag_display.substring(0, tag_display.length() - 2);
-		}
-		tags.setText("Tags: " + tag_display);
+		tag_display = PhotoAlbum.photo.getTagDisplay();
+		tags.setText("Tags - " + tag_display);
 		date.setText(PhotoAlbum.photo.getDate().format(DateTimeFormatter.ofLocalizedDateTime(FormatStyle.MEDIUM)));
 		setUpLikeButton();
 	}
@@ -207,8 +201,8 @@ public class PhotoController extends Controller{
 		String click = result.get().getText();
 		
 		if (click.equals(ok)) {
-			String key = dialog.getKey();
-			String value = dialog.getValue();
+			String key = dialog.getKey().toLowerCase();
+			String value = dialog.getValue().toLowerCase();
 			if (key.trim().length() == 0 || value.trim().length() == 0) {
 				Alert error = new Alert(AlertType.INFORMATION);
 				error.setHeaderText("Error!");
@@ -216,14 +210,17 @@ public class PhotoController extends Controller{
 				error.show();
 				return;
 			}
-			PhotoAlbum.photo.getTags().put(key, value);
-			if (tag_display.length() == 0) {
-				tag_display += key + " - " + value;
+			ArrayList<String> vals;
+			if (PhotoAlbum.photo.getTags().containsKey(key)) {
+				vals = PhotoAlbum.photo.getTags().get(key);
 			}
 			else {
-				tag_display += ", " + key + " - " + value;
+				vals = new ArrayList<String>();
+				PhotoAlbum.photo.getTags().put(key, vals);
 			}
-			tags.setText("Tags: " + tag_display);
+			PhotoAlbum.photo.getTags().get(key).add(value);
+			tag_display = PhotoAlbum.photo.getTagDisplay();
+			tags.setText("Tags - " + tag_display);
 		}
 		PhotoAlbum.regular_user.serialize();
 	}

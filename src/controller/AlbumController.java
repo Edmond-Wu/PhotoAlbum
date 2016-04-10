@@ -121,8 +121,8 @@ public class AlbumController extends Controller {
 
 			LocalDate startDate = dialog.getStartDate();
 			LocalDate endDate = dialog.getEndDate();
-			String key = dialog.getKey();
-			String value = dialog.getValue();
+			String key = dialog.getKey().toLowerCase();
+			String value = dialog.getValue().toLowerCase();
 			
 			if (startDate == null && endDate == null && key.trim().length() == 0 && value.trim().length() == 0) {
 				return;
@@ -133,22 +133,20 @@ public class AlbumController extends Controller {
 				File file = photos.get(i).getFile();
 				Date d = new Date(file.lastModified());
 				LocalDate date = d.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-				if (startDate == null && endDate == null) {
-					if (key.trim().length() > 0) {
-						for (String k : photos.get(i).getTags().keySet()) {
-							if (k.contains(key)) {
-								if (!PhotoAlbum.search.contains(photos.get(i))) {
-									PhotoAlbum.search.add(photos.get(i));
-								}
+				if (key.trim().length() > 0) {
+					for (String k : photos.get(i).getTags().keySet()) {
+						if (k.contains(key)) {
+							if (!PhotoAlbum.search.contains(photos.get(i))) {
+								PhotoAlbum.search.add(photos.get(i));
 							}
 						}
 					}
-					if (value.trim().length() > 0) {
-						for (String k : photos.get(i).getTags().keySet()) {
-							if (photos.get(i).getTags().get(k).contains(key)) {
-								if (!PhotoAlbum.search.contains(photos.get(i))) {
-									PhotoAlbum.search.add(photos.get(i));
-								}
+				}
+				if (value.trim().length() > 0) {
+					for (String k : photos.get(i).getTags().keySet()) {
+						for (int j = 0; j < photos.get(i).getTags().get(k).size(); j++) {
+							if (photos.get(i).getTags().get(k).get(j).contains(value)) {
+								PhotoAlbum.search.add(photos.get(i));
 							}
 						}
 					}
