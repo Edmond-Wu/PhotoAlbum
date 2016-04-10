@@ -40,7 +40,7 @@ public class PhotoController extends Controller{
 
 	@FXML
 	private Text tags;
-	
+
 	@FXML
 	private Text date;
 
@@ -61,16 +61,16 @@ public class PhotoController extends Controller{
 
 	@FXML
 	private Button like;
-	
+
 	@FXML
 	private AnchorPane pane;
-	
+
 	@FXML
 	private Button delete;
-	
+
 	@FXML
 	private Button removeTag;
-	
+
 	TextField newCaption;
 
 	public static boolean search;
@@ -91,14 +91,8 @@ public class PhotoController extends Controller{
 		photo.setPreserveRatio(true);
 		centerImage(photo);
 		caption.setText("Caption: " + PhotoAlbum.photo.getCaption());
-		tag_display = "";
-		for (String key : PhotoAlbum.photo.getTags().keySet()) {
-			tag_display += key + " - " + PhotoAlbum.photo.getTags().get(key) + ", ";
-		}
-		if (tag_display.length() > 0) {
-			tag_display = tag_display.substring(0, tag_display.length() - 2);
-		}
-		tags.setText("Tags: " + tag_display);
+		tag_display = PhotoAlbum.photo.getTagDisplay();
+		tags.setText("Tags - " + tag_display);
 		date.setText(PhotoAlbum.photo.getDate().format(DateTimeFormatter.ofLocalizedDateTime(FormatStyle.MEDIUM)));
 		setUpLikeButton();
 	}
@@ -196,7 +190,7 @@ public class PhotoController extends Controller{
 		showButton(addTag);
 		showButton(done);
 		showButton(removeTag);
-		
+
 		caption.setText("Caption: ");
 		newCaption = new TextField();
 		newCaption.setLayoutX(153);
@@ -205,7 +199,7 @@ public class PhotoController extends Controller{
 		newCaption.setPrefWidth(250);
 		pane.getChildren().add(newCaption);
 	}
-	
+
 	/**
 	 * Adds a tag.
 	 * @param e ActionEvent
@@ -213,13 +207,13 @@ public class PhotoController extends Controller{
 	public void addTag(ActionEvent e) {
 		AddTagDialog dialog = new AddTagDialog();
 		Optional<ButtonType> result = dialog.showAndWait();
-		
+
 		String ok = ButtonType.OK.getText();
 		String click = result.get().getText();
-		
+
 		if (click.equals(ok)) {
-			String key = dialog.getKey();
-			String value = dialog.getValue();
+			String key = dialog.getKey().toLowerCase();
+			String value = dialog.getValue().toLowerCase();
 			if (key.trim().length() == 0 || value.trim().length() == 0) {
 				Alert error = new Alert(AlertType.INFORMATION);
 				error.setHeaderText("Error!");
@@ -227,30 +221,17 @@ public class PhotoController extends Controller{
 				error.show();
 				return;
 			}
-			if(PhotoAlbum.photo.getTags().put(key, value) != null){
-				Alert error = new Alert(AlertType.INFORMATION);
-				error.setHeaderText("Caution!");
-				error.setContentText("Duplicate tag key! The tag has been edited.");
-				error.show();
-			}
-			displayTags();
-		}
-		PhotoAlbum.regular_user.serialize();
-	}
-	
-	/**
-	 * Displays tags.
-	 */
-	public void displayTags(){
-		HashMap<String, String> tagslist = PhotoAlbum.photo.getTags();
-		tag_display = "";
-		for(String key: tagslist.keySet()){
-			if (tag_display.length() == 0) {
-				tag_display += key + " - " + tagslist.get(key);
+			ArrayList<String> vals;
+			if (PhotoAlbum.photo.getTags().containsKey(key)) {
+				vals = PhotoAlbum.photo.getTags().get(key);
 			}
 			else {
-				tag_display += ", " + key + " - " + tagslist.get(key);
+				vals = new ArrayList<String>();
+				PhotoAlbum.photo.getTags().put(key, vals);
 			}
+			PhotoAlbum.photo.getTags().get(key).add(value);
+			tag_display = PhotoAlbum.photo.getTagDisplay();
+			tags.setText("Tags - " + tag_display);
 		}
 		tags.setText("Tags: " + tag_display);
 	}
@@ -287,7 +268,7 @@ public class PhotoController extends Controller{
 		}
 		PhotoAlbum.regular_user.serialize();
 	}
-	
+
 	/**
 	 * Removes tags based on the key or value given
 	 * @param e ActionEvent
@@ -295,17 +276,18 @@ public class PhotoController extends Controller{
 	public void removeTag(ActionEvent e){
 		RemoveTagDialog dialog = new RemoveTagDialog();
 		Optional<ButtonType> result = dialog.showAndWait();
-		
+
 		String ok = ButtonType.OK.getText();
 		String click = result.get().getText();
 		if (click.equals(ok)) {
 			Photo photo = PhotoAlbum.photo;
-			HashMap<String, String> tags = photo.getTags();
+			HashMap<String, ArrayList<String>> taglist = photo.getTags();
 			if(dialog.getKey().length() > 0){
 				String key = dialog.getKey().trim();
-				while(tags.remove(key) != null);
+				while(taglist.remove(key) != null);
 			} 
-			displayTags();
+			tag_display = PhotoAlbum.photo.getTagDisplay();
+			tags.setText("Tags - " + tag_display);
 			PhotoAlbum.regular_user.serialize();
 		}
 	}
