@@ -16,6 +16,8 @@ public class SearchDialog extends Dialog<ButtonType> {
     private ButtonType cancel = new ButtonType("Cancel", ButtonData.CANCEL_CLOSE);
     private DatePicker dateTime;
     private DatePicker dateTime2;
+    private TextField key;
+    private TextField value;
     
     public SearchDialog() {
     	DialogPane dialogPane = this.getDialogPane();
@@ -27,11 +29,17 @@ public class SearchDialog extends Dialog<ButtonType> {
         dPane.setMinHeight(200);
         Text date = new Text("Start Date for Search: ");
         Text date2 = new Text("End Date for Search: ");
+        Text key_search = new Text("Search tag keys: ");
+        Text value_search = new Text("Search tag values: ");
                 
         dateTime = new DatePicker();
         dateTime.setPromptText("Optional");
         dateTime2 = new DatePicker();
         dateTime2.setPromptText("Optional");
+        key = new TextField();
+        key.setPromptText("Optional");
+        value = new TextField();
+        value.setPromptText("Optional");
 
         dPane.setHgap(7D);
         dPane.setVgap(8D);
@@ -40,10 +48,13 @@ public class SearchDialog extends Dialog<ButtonType> {
         GridPane.setConstraints(dateTime, 1, 0);
         GridPane.setConstraints(date2, 0, 1);
         GridPane.setConstraints(dateTime2, 1, 1);
-        
+        GridPane.setConstraints(key_search, 0, 2);
+        GridPane.setConstraints(key, 1, 2);
+        GridPane.setConstraints(value_search, 0, 3);
+        GridPane.setConstraints(value, 1, 3);
 
         
-        dPane.getChildren().addAll(date, date2, dateTime, dateTime2);
+        dPane.getChildren().addAll(date, date2, dateTime, dateTime2, key_search, key, value_search, value);
         dialogPane.getButtonTypes().addAll(ok, cancel);
         dialogPane.setContent(dPane);
     }
@@ -62,5 +73,21 @@ public class SearchDialog extends Dialog<ButtonType> {
      */
     public LocalDate getEndDate() {
     	return dateTime2.getValue();
+    }
+    
+    /**
+     * Gets the String value of the key search
+     * @return search key
+     */
+    public String getKey() {
+    	return key.getText();
+    }
+    
+    /**
+     * Gets the String value of the value search
+     * @return search value
+     */
+    public String getValue() {
+    	return value.getText();
     }
 }

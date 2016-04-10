@@ -57,10 +57,18 @@ public class AlbumController extends Controller {
 		}
 	}
 	
+	/**
+	 * Reloads a previous page
+	 * @param Mouse click event
+	 */
 	public void back(ActionEvent e){
 		segue("/view/Albums.fxml");
 	}
 	
+	/**
+	 * Method for adding a photo
+	 * @param e Mouse click event
+	 */
 	public void add(ActionEvent e) {
 		AddPhotoDialog dialog = new AddPhotoDialog();
 		Optional<ButtonType> result = dialog.showAndWait();
@@ -99,7 +107,7 @@ public class AlbumController extends Controller {
 	
 	/**
 	 * Allows searching of albums.
-	 * @param e
+	 * @param e Mouse click event
 	 */
 	public void search(ActionEvent e) {
 		SearchController.albums = false;
@@ -113,12 +121,38 @@ public class AlbumController extends Controller {
 
 			LocalDate startDate = dialog.getStartDate();
 			LocalDate endDate = dialog.getEndDate();
-
+			String key = dialog.getKey();
+			String value = dialog.getValue();
+			
+			if (startDate == null && endDate == null && key.trim().length() == 0 && value.trim().length() == 0) {
+				return;
+			}
+			
 			ArrayList<Photo> photos = PhotoAlbum.album.getPhotos();
 			for(int i = 0; i < photos.size(); i++){
 				File file = photos.get(i).getFile();
 				Date d = new Date(file.lastModified());
 				LocalDate date = d.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+				if (startDate == null && endDate == null) {
+					if (key.trim().length() > 0) {
+						for (String k : photos.get(i).getTags().keySet()) {
+							if (k.contains(key)) {
+								if (!PhotoAlbum.search.contains(photos.get(i))) {
+									PhotoAlbum.search.add(photos.get(i));
+								}
+							}
+						}
+					}
+					if (value.trim().length() > 0) {
+						for (String k : photos.get(i).getTags().keySet()) {
+							if (photos.get(i).getTags().get(k).contains(key)) {
+								if (!PhotoAlbum.search.contains(photos.get(i))) {
+									PhotoAlbum.search.add(photos.get(i));
+								}
+							}
+						}
+					}
+				}
 				if(startDate == null){
 					if(date.compareTo(endDate) <= 0){
 						PhotoAlbum.search.add(photos.get(i));
@@ -132,8 +166,7 @@ public class AlbumController extends Controller {
 					if(date.compareTo(startDate) >= 0 && date.compareTo(endDate) <= 0){
 						PhotoAlbum.search.add(photos.get(i));
 					}
-				}
-
+				}	
 			}
 			segue("/view/Search.fxml");
 		}
