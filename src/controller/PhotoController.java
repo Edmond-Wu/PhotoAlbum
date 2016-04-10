@@ -90,7 +90,7 @@ public class PhotoController extends Controller{
 		for (String key : PhotoAlbum.photo.getTags().keySet()) {
 			tag_display += key + " - " + PhotoAlbum.photo.getTags().get(key) + ", ";
 		}
-		tag_display = tag_display.substring(0, tag_display.length() - 2);
+		//tag_display = tag_display.substring(0, tag_display.length() - 2);
 		tags.setText("Tags: " + tag_display);
 		date.setText(PhotoAlbum.photo.getDate().format(DateTimeFormatter.ofLocalizedDateTime(FormatStyle.MEDIUM)));
 		setUpLikeButton();
