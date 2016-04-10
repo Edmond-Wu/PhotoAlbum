@@ -151,6 +151,9 @@ public class AlbumController extends Controller {
 						}
 					}
 				}
+				if (startDate == null && endDate == null) {
+					
+				}
 				if(startDate == null){
 					if(date.compareTo(endDate) <= 0){
 						PhotoAlbum.search.add(photos.get(i));
