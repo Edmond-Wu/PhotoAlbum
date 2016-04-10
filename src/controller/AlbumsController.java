@@ -2,7 +2,6 @@ package controller;
 
 import java.io.*;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.*;
 
@@ -312,7 +311,6 @@ public class AlbumsController extends Controller{
 							for (String k : photos.get(i).getTags().keySet()) {
 								if (photos.get(i).getTags().get(k).contains(value)) {
 									if (!PhotoAlbum.search.contains(photos.get(i))) {
-										System.out.println("hello");
 										PhotoAlbum.search.add(photos.get(i));
 									}
 								}
@@ -334,7 +332,6 @@ public class AlbumsController extends Controller{
 									for (String k : photos.get(i).getTags().keySet()) {
 										if (photos.get(i).getTags().get(k).contains(value)) {
 											if (!PhotoAlbum.search.contains(photos.get(i))) {
-												System.out.println("hello");
 												PhotoAlbum.search.add(photos.get(i));
 											}
 										}
@@ -358,7 +355,6 @@ public class AlbumsController extends Controller{
 									for (String k : photos.get(i).getTags().keySet()) {
 										if (photos.get(i).getTags().get(k).contains(value)) {
 											if (!PhotoAlbum.search.contains(photos.get(i))) {
-												System.out.println("hello");
 												PhotoAlbum.search.add(photos.get(i));
 											}
 										}
