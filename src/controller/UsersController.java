@@ -86,5 +86,4 @@ public class UsersController extends Controller {
 		}
 		segue("/view/Albums.fxml");
 	}
-	
 }

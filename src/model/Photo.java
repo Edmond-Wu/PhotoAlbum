@@ -30,13 +30,12 @@ public class Photo implements Serializable {
 	}
 	
 	/**
-	 * Constructor if the caption is known
-	 * @param f name of photo file
+	 * Constructor with additional parameters
+	 * @param f name of the photo file
+	 * @param d date that the photo was last modified
 	 * @param c caption
-	 * @param people String containing all the people tags
-	 * @paramu places String containing all the place tags
 	 */
-	public Photo(File f, LocalDateTime d, String c, String t) {
+	public Photo(File f, LocalDateTime d, String c) {
 		this(f);
 		date = d;
 		caption = c;
@@ -59,8 +58,8 @@ public class Photo implements Serializable {
 	}
 	
 	/**
-	 * Gets the list of tags of the photo (when last modified)
-	 * @return the tags list of the picture
+	 * Gets the HashMap of tags of the photo (when last modified)
+	 * @return tags HashMap
 	 */
 	public HashMap<String, ArrayList<String>> getTags() {
 		return tags;

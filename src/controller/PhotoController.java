@@ -291,5 +291,4 @@ public class PhotoController extends Controller{
 			PhotoAlbum.regular_user.serialize();
 		}
 	}
-
 }

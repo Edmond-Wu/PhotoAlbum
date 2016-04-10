@@ -24,7 +24,7 @@ public class PhotoAlbum extends Application {
 	public static Admin admin = new Admin("admin", "password");
 	public static NonAdminUser logged_in;
 	public static NonAdminUser regular_user;
-	public static Album album; //album belonging to regular_user
+	public static Album album;
 	public static Stage stage;
 	public static ArrayList<Photo> search;
 	public static Photo photo;
@@ -68,7 +68,7 @@ public class PhotoAlbum extends Application {
 	}
 	
 	/**
-	 * Updates the user list
+	 * Updates the user list from pre-existing serialized files
 	 */
 	public void updateUserList() {
 		File dir = new File("data");
@@ -86,6 +86,10 @@ public class PhotoAlbum extends Application {
 		}
 	}
 	
+	/**
+	 * Main method
+	 * @param args
+	 */
 	public static void main(String[] args) {
 		launch(args);
 	}

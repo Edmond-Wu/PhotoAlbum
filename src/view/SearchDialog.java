@@ -19,6 +19,9 @@ public class SearchDialog extends Dialog<ButtonType> {
     private TextField key;
     private TextField value;
     
+    /**
+     * Creates a search dialog box
+     */
     public SearchDialog() {
     	DialogPane dialogPane = this.getDialogPane();
     	setTitle("Search for photos");

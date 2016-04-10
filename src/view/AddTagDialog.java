@@ -8,7 +8,6 @@ import javafx.scene.control.ButtonBar.ButtonData;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.Text;
 
-
 public class AddTagDialog extends Dialog<ButtonType> {
 	private ButtonType ok = new ButtonType("OK", ButtonData.OK_DONE);
     private ButtonType cancel = new ButtonType("Cancel", ButtonData.CANCEL_CLOSE);

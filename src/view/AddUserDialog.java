@@ -65,5 +65,4 @@ public class AddUserDialog extends Dialog<ButtonType> {
     public String getPassword() {
     	return passText.getText();
     }
-    
 }

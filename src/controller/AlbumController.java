@@ -98,7 +98,7 @@ public class AlbumController extends Controller {
 			Date d = new Date(photo_file.lastModified());
 			LocalDateTime date = d.toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime();
 			String caption = dialog.getCaption();
-			Photo added = new Photo(photo_file, date, caption, "");
+			Photo added = new Photo(photo_file, date, caption);
 			PhotoAlbum.album.getPhotos().add(added);
 			displayPhotos();
 		}

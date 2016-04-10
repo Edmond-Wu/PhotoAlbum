@@ -13,6 +13,9 @@ public class RemoveTagDialog extends Dialog<ButtonType> {
     private ButtonType cancel = new ButtonType("Cancel", ButtonData.CANCEL_CLOSE);
     private TextField key;
     
+    /**
+     * Creates a remove tag dialog box
+     */
     public RemoveTagDialog() {
     	DialogPane dialogPane = this.getDialogPane();
     	setTitle("Delete Tags");
