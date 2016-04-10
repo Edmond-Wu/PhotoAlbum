@@ -123,12 +123,14 @@ public class AlbumController extends Controller {
 			LocalDate endDate = dialog.getEndDate();
 			String key = dialog.getKey().toLowerCase();
 			String value = dialog.getValue().toLowerCase();
-			
-			if (startDate == null && endDate == null && key.trim().length() == 0 && value.trim().length() == 0) {
+
+			if (startDate == null && endDate == null && key.length() == 0 && value.length() == 0) {
+				segue("/view/Search.fxml");
 				return;
 			}
-			
-			ArrayList<Photo> photos = PhotoAlbum.album.getPhotos();
+
+			Album a = PhotoAlbum.album;
+			ArrayList<Photo> photos = a.getPhotos();
 			for(int i = 0; i < photos.size(); i++){
 				File file = photos.get(i).getFile();
 				Date d = new Date(file.lastModified());
@@ -136,7 +138,7 @@ public class AlbumController extends Controller {
 				if (key.trim().length() > 0) {
 					for (String k : photos.get(i).getTags().keySet()) {
 						if (k.contains(key)) {
-							if (!PhotoAlbum.search.contains(photos.get(i))) {
+							if (!PhotoAlbum.search.contains(photos.get(i).getFile())) {
 								PhotoAlbum.search.add(photos.get(i));
 							}
 						}
@@ -151,23 +153,54 @@ public class AlbumController extends Controller {
 						}
 					}
 				}
-				if (startDate == null && endDate == null) {
-					
-				}
-				if(startDate == null){
+				if(startDate == null && endDate != null){
 					if(date.compareTo(endDate) <= 0){
-						PhotoAlbum.search.add(photos.get(i));
+						if (!PhotoAlbum.search.contains(photos.get(i))) {
+							if (key.length() > 0) {
+								for (String k : photos.get(i).getTags().keySet()) {
+									if (k.contains(key)) {
+										if (!PhotoAlbum.search.contains(photos.get(i).getFile())) {
+											PhotoAlbum.search.add(photos.get(i));
+										}
+									}
+								}
+							}
+							if (value.length() > 0) {
+								for (String k : photos.get(i).getTags().keySet()) {
+									if (photos.get(i).getTags().get(k).contains(value)) {
+										if (!PhotoAlbum.search.contains(photos.get(i))) {
+											PhotoAlbum.search.add(photos.get(i));
+										}
+									}
+								}
+							}
+						}
 					}
-				} else if (endDate == null){
+				} else if (endDate == null && startDate != null){
 					if(date.compareTo(startDate) >= 0){ 
-						PhotoAlbum.search.add(photos.get(i));
+						if (!PhotoAlbum.search.contains(photos.get(i).getFile())) {
+							if (key.length() > 0) {
+								for (String k : photos.get(i).getTags().keySet()) {
+									if (k.contains(key)) {
+										if (!PhotoAlbum.search.contains(photos.get(i).getFile())) {
+											PhotoAlbum.search.add(photos.get(i));
+										}
+									}
+								}
+							}
+							if (value.length() > 0) {
+								for (String k : photos.get(i).getTags().keySet()) {
+									if (photos.get(i).getTags().get(k).contains(value)) {
+										if (!PhotoAlbum.search.contains(photos.get(i))) {
+											PhotoAlbum.search.add(photos.get(i));
+										}
+									}
+								}
+							}
+						}
 					}
+
 				}
-				if(startDate != null && endDate != null){
-					if(date.compareTo(startDate) >= 0 && date.compareTo(endDate) <= 0){
-						PhotoAlbum.search.add(photos.get(i));
-					}
-				}	
 			}
 			segue("/view/Search.fxml");
 		}
