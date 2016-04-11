@@ -70,6 +70,12 @@ public class PhotoController extends Controller{
 
 	@FXML
 	private Button removeTag;
+	
+	@FXML
+	private Button backward;
+	
+	@FXML
+	private Button forward;
 
 	TextField newCaption;
 
@@ -95,6 +101,15 @@ public class PhotoController extends Controller{
 		tags.setText("Tags - " + tag_display);
 		date.setText(PhotoAlbum.photo.getDate().format(DateTimeFormatter.ofLocalizedDateTime(FormatStyle.MEDIUM)));
 		setUpLikeButton();
+		int index = PhotoAlbum.album.getPhotos().indexOf(PhotoAlbum.photo);
+		if(index == 0){
+			backward.setOpacity(.5);
+			backward.setDisable(true);
+		} 
+		if (index == PhotoAlbum.album.getPhotos().size() - 1){
+			forward.setOpacity(.5);
+			forward.setDisable(true);
+		}
 	}
 
 	/**
@@ -290,5 +305,31 @@ public class PhotoController extends Controller{
 			tags.setText("Tags - " + tag_display);
 			PhotoAlbum.regular_user.serialize();
 		}
+	}
+	
+	/**
+	 * Goes to the next photo in the album.
+	 * @param e
+	 */
+	public void forward(ActionEvent e){
+		int index = PhotoAlbum.album.getPhotos().indexOf(PhotoAlbum.photo);
+		if(index == PhotoAlbum.album.getPhotos().size() - 1){
+			return;
+		}
+		PhotoAlbum.photo = PhotoAlbum.album.getPhotos().get(index + 1);
+		segue("/view/Photo.fxml");
+	}
+	
+	/**
+	 * Goes to the previous photo in the album.
+	 * @param e
+	 */
+	public void backward(ActionEvent e){
+		int index = PhotoAlbum.album.getPhotos().indexOf(PhotoAlbum.photo);
+		if(index == 0){
+			return;
+		}
+		PhotoAlbum.photo = PhotoAlbum.album.getPhotos().get(index - 1);
+		segue("/view/Photo.fxml");
 	}
 }

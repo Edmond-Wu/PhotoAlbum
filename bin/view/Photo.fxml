@@ -10,7 +10,7 @@
    <Button fx:id="back" layoutX="7.0" layoutY="-4.0" onAction="#back" prefHeight="75.0" prefWidth="114.0" />
    <Button fx:id="logout" layoutX="7.0" layoutY="541.0" onAction="#logout" text="Log out" />
    <Button fx:id="edit" layoutX="721.0" layoutY="10.0" onAction="#edit" prefHeight="46.0" prefWidth="76.0" text="Edit" />
-   <ImageView fx:id="photo" fitHeight="356.0" fitWidth="770.0" layoutX="15.0" layoutY="71.0" pickOnBounds="true" preserveRatio="true" />
+   <ImageView fx:id="photo" fitHeight="356.0" fitWidth="700.0" layoutX="53.0" layoutY="71.0" pickOnBounds="true" preserveRatio="true" />
    <Button fx:id="delete" layoutX="739.0" layoutY="537.0" onAction="#delete" prefHeight="54.0" prefWidth="53.0" />
    <Text fx:id="caption" layoutX="89.0" layoutY="504.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="370.23999977111816" />
    <Text fx:id="date" layoutX="530.0" layoutY="465.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="203.23999977111816" />
@@ -24,4 +24,6 @@
    		</content>
    </ScrollPane>
    <Button fx:id="removeTag" layoutX="598.0" layoutY="541.0" onAction="#removeTag" prefHeight="46.0" prefWidth="194.0" text="Remove a tag" />
+   <Button fx:id="backward" layoutX="0.0" layoutY="222.0" onAction="#backward" prefHeight="54.0" prefWidth="53.0" />
+   <Button fx:id="forward" layoutX="750.0" layoutY="222.0" onAction="#forward" prefHeight="54.0" prefWidth="53.0" />
 </AnchorPane>

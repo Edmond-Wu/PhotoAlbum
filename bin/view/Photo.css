@@ -38,6 +38,30 @@ Button:hover{
 	-fx-background-image: url("../assets/back-blue.png");
 }
 
+#forward{
+	-fx-background-image: url("../assets/forward-white.png");
+	-fx-background-repeat: stretch;   
+    -fx-background-size: 50 50;
+    -fx-background-position: center center;
+    -fx-background-color: transparent;
+}
+
+#forward:hover{
+	-fx-background-image: url("../assets/forward-blue.png");
+}
+
+#backward{
+	-fx-background-image: url("../assets/backward-white.png");
+	-fx-background-repeat: stretch;   
+    -fx-background-size: 50 50;
+    -fx-background-position: center center;
+    -fx-background-color: transparent;
+}
+
+#backward:hover{
+	-fx-background-image: url("../assets/backward-blue.png");
+}
+
 #delete{
 	-fx-background-image: url("../assets/trash-white.png");
 	-fx-background-repeat: stretch;   
