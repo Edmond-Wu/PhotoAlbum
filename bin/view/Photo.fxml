@@ -8,7 +8,8 @@
 
 <AnchorPane fx:id="pane" prefHeight="600.0" prefWidth="800.0" stylesheets="@Photo.css" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.PhotoController">	
    <Button fx:id="back" layoutX="7.0" layoutY="-4.0" onAction="#back" prefHeight="75.0" prefWidth="114.0" />
-   <Button fx:id="logout" layoutX="7.0" layoutY="541.0" onAction="#logout" text="Log out" />
+   <Button fx:id="logout" layoutX="688.0" layoutY="541.0" onAction="#logout" text="Log out" />
+   <Button fx:id="move" layoutX="-5.0" layoutY="542.0" onAction="#move" text="Move photo..." />
    <Button fx:id="edit" layoutX="721.0" layoutY="10.0" onAction="#edit" prefHeight="46.0" prefWidth="76.0" text="Edit" />
    <ImageView fx:id="photo" fitHeight="356.0" fitWidth="700.0" layoutX="53.0" layoutY="71.0" pickOnBounds="true" preserveRatio="true" />
    <Button fx:id="delete" layoutX="739.0" layoutY="537.0" onAction="#delete" prefHeight="54.0" prefWidth="53.0" />

@@ -23,8 +23,11 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import model.Album;
 import model.Photo;
+import view.AddAlbumDialog;
 import view.AddTagDialog;
+import view.MovePhotoDialog;
 import view.RemoveTagDialog;
 
 /**
@@ -76,6 +79,9 @@ public class PhotoController extends Controller{
 	
 	@FXML
 	private Button forward;
+	
+	@FXML
+	private Button move;
 
 	TextField newCaption;
 
@@ -84,13 +90,16 @@ public class PhotoController extends Controller{
 	private String tag_display;
 
 	public void start(Stage mainStage) {
-		if(!PhotoAlbum.logged_in.equals(PhotoAlbum.regular_user)){
-			hideButton(edit);
-			hideButton(delete);
-		}
 		hideButton(addTag);
 		hideButton(removeTag);
 		hideButton(done);
+		hideButton(logout);
+		if(!PhotoAlbum.logged_in.equals(PhotoAlbum.regular_user)){
+			hideButton(edit);
+			hideButton(delete);
+			hideButton(move);
+			showButton(logout);
+		}
 		File file1 = PhotoAlbum.photo.getFile();
 		Image image1 = new Image(file1.toURI().toString());
 		photo.setImage(image1);	
@@ -200,7 +209,7 @@ public class PhotoController extends Controller{
 	 */
 	public void edit(ActionEvent e) {
 		hideButton(edit);
-		hideButton(logout);
+		hideButton(move);
 		hideButton(delete);
 		showButton(addTag);
 		showButton(done);
@@ -260,7 +269,7 @@ public class PhotoController extends Controller{
 		hideButton(done);
 		hideButton(removeTag);
 		showButton(edit);
-		showButton(logout);
+		showButton(move);
 		showButton(delete);
 		PhotoAlbum.photo.setCaption(newCaption.getText());
 		pane.getChildren().remove(newCaption);
@@ -331,5 +340,48 @@ public class PhotoController extends Controller{
 		}
 		PhotoAlbum.photo = PhotoAlbum.album.getPhotos().get(index - 1);
 		segue("/view/Photo.fxml");
+	}
+	
+	/**
+	 * Moves photo to another album.
+	 * @param e
+	 */
+	public void move(ActionEvent e){
+		MovePhotoDialog dialog = new MovePhotoDialog();
+		Optional<ButtonType> result = dialog.showAndWait();
+
+		String ok = ButtonType.OK.getText();
+		String click = result.get().getText();
+
+		if (click.equals(ok)) {
+			String album_name = dialog.getAlbumName();
+			if (album_name == null) {
+				Alert error = new Alert(AlertType.INFORMATION);
+				error.setHeaderText("Error!");
+				error.setContentText("Album is required!");
+				error.show();
+				return;
+			}
+
+			for (int i = 0; i < PhotoAlbum.regular_user.getAlbums().size(); i++) {
+				Album a = PhotoAlbum.regular_user.getAlbums().get(i);
+				if (album_name.equals(a.getName())) {
+					for(Photo p: a.getPhotos()){
+						File file = PhotoAlbum.photo.getFile();
+						if(p.getFile().equals(file)){
+							Alert error = new Alert(AlertType.INFORMATION);
+							error.setHeaderText("Error!");
+							error.setContentText("Photo already in that album!");
+							error.show();
+							return;
+						}
+					}
+					a.getPhotos().add(PhotoAlbum.photo);
+					PhotoAlbum.album.getPhotos().remove(PhotoAlbum.photo);
+					segue("/view/Album.fxml");
+					return;
+				}
+			}	
+		}
 	}
 }
