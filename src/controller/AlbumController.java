@@ -121,8 +121,8 @@ public class AlbumController extends Controller {
 
 			LocalDate startDate = dialog.getStartDate();
 			LocalDate endDate = dialog.getEndDate();
-			String key = dialog.getKey().toLowerCase();
-			String value = dialog.getValue().toLowerCase();
+			String key = dialog.getKey().trim().toLowerCase();
+			String value = dialog.getValue().trim().toLowerCase();
 
 			if (startDate == null && endDate == null && key.length() == 0 && value.length() == 0) {
 				segue("/view/Search.fxml");
@@ -135,28 +135,47 @@ public class AlbumController extends Controller {
 				File file = photos.get(i).getFile();
 				Date d = new Date(file.lastModified());
 				LocalDate date = d.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-				if (key.trim().length() > 0) {
-					for (String k : photos.get(i).getTags().keySet()) {
-						if (k.contains(key)) {
-							if (!PhotoAlbum.search.contains(photos.get(i).getFile())) {
-								PhotoAlbum.search.add(photos.get(i));
+				if(startDate == null && endDate == null){
+					if(key.length() > 0 && value.length() > 0){
+						for (String k : photos.get(i).getTags().keySet()) {
+							if (k.contains(key) && photos.get(i).getTags().get(k).contains(value)) {
+								if (!PhotoAlbum.search.contains(photos.get(i).getFile())) {
+									PhotoAlbum.search.add(photos.get(i));
+								}
 							}
 						}
 					}
-				}
-				if (value.trim().length() > 0) {
-					for (String k : photos.get(i).getTags().keySet()) {
-						for (int j = 0; j < photos.get(i).getTags().get(k).size(); j++) {
-							if (photos.get(i).getTags().get(k).get(j).contains(value)) {
-								PhotoAlbum.search.add(photos.get(i));
+					if (key.length() > 0 && value.length() == 0) {
+						for (String k : photos.get(i).getTags().keySet()) {
+							if (k.contains(key)) {
+								if (!PhotoAlbum.search.contains(photos.get(i).getFile())) {
+									PhotoAlbum.search.add(photos.get(i));
+								}
 							}
 						}
 					}
-				}
-				if(startDate == null && endDate != null){
+					if (value.length() > 0 && key.length() == 0) {
+						for (String k : photos.get(i).getTags().keySet()) {
+							if (photos.get(i).getTags().get(k).contains(value)) {
+								if (!PhotoAlbum.search.contains(photos.get(i))) {
+									PhotoAlbum.search.add(photos.get(i));
+								}
+							}
+						}
+					}
+				} else if(startDate == null && endDate != null){
 					if(date.compareTo(endDate) <= 0){
 						if (!PhotoAlbum.search.contains(photos.get(i))) {
-							if (key.length() > 0) {
+							if(key.length() > 0 && value.length() > 0){
+								for (String k : photos.get(i).getTags().keySet()) {
+									if (k.contains(key) && photos.get(i).getTags().get(k).contains(value)) {
+										if (!PhotoAlbum.search.contains(photos.get(i).getFile())) {
+											PhotoAlbum.search.add(photos.get(i));
+										}
+									}
+								}
+							}
+							if (key.length() > 0 && value.length() == 0) {
 								for (String k : photos.get(i).getTags().keySet()) {
 									if (k.contains(key)) {
 										if (!PhotoAlbum.search.contains(photos.get(i).getFile())) {
@@ -165,7 +184,7 @@ public class AlbumController extends Controller {
 									}
 								}
 							}
-							if (value.length() > 0) {
+							if (value.length() > 0 && key.length() == 0) {
 								for (String k : photos.get(i).getTags().keySet()) {
 									if (photos.get(i).getTags().get(k).contains(value)) {
 										if (!PhotoAlbum.search.contains(photos.get(i))) {
@@ -179,7 +198,16 @@ public class AlbumController extends Controller {
 				} else if (endDate == null && startDate != null){
 					if(date.compareTo(startDate) >= 0){ 
 						if (!PhotoAlbum.search.contains(photos.get(i).getFile())) {
-							if (key.length() > 0) {
+							if(key.length() > 0 && value.length() > 0){
+								for (String k : photos.get(i).getTags().keySet()) {
+									if (k.contains(key) && photos.get(i).getTags().get(k).contains(value)) {
+										if (!PhotoAlbum.search.contains(photos.get(i).getFile())) {
+											PhotoAlbum.search.add(photos.get(i));
+										}
+									}
+								}
+							}
+							if (key.length() > 0 && value.length() == 0) {
 								for (String k : photos.get(i).getTags().keySet()) {
 									if (k.contains(key)) {
 										if (!PhotoAlbum.search.contains(photos.get(i).getFile())) {
@@ -188,7 +216,7 @@ public class AlbumController extends Controller {
 									}
 								}
 							}
-							if (value.length() > 0) {
+							if (value.length() > 0 && key.length() == 0) {
 								for (String k : photos.get(i).getTags().keySet()) {
 									if (photos.get(i).getTags().get(k).contains(value)) {
 										if (!PhotoAlbum.search.contains(photos.get(i))) {
@@ -199,7 +227,38 @@ public class AlbumController extends Controller {
 							}
 						}
 					}
-
+				} else {
+					if(date.compareTo(startDate) >= 0 && date.compareTo(endDate) <= 0){ 
+						if (!PhotoAlbum.search.contains(photos.get(i).getFile())) {
+							if(key.length() > 0 && value.length() > 0){
+								for (String k : photos.get(i).getTags().keySet()) {
+									if (k.contains(key) && photos.get(i).getTags().get(k).contains(value)) {
+										if (!PhotoAlbum.search.contains(photos.get(i).getFile())) {
+											PhotoAlbum.search.add(photos.get(i));
+										}
+									}
+								}
+							}
+							if (key.length() > 0 && value.length() == 0) {
+								for (String k : photos.get(i).getTags().keySet()) {
+									if (k.contains(key)) {
+										if (!PhotoAlbum.search.contains(photos.get(i).getFile())) {
+											PhotoAlbum.search.add(photos.get(i));
+										}
+									}
+								}
+							}
+							if (value.length() > 0 && key.length() == 0) {
+								for (String k : photos.get(i).getTags().keySet()) {
+									if (photos.get(i).getTags().get(k).contains(value)) {
+										if (!PhotoAlbum.search.contains(photos.get(i))) {
+											PhotoAlbum.search.add(photos.get(i));
+										}
+									}
+								}
+							}
+						}
+					}
 				}
 			}
 			segue("/view/Search.fxml");
@@ -257,6 +316,18 @@ public class AlbumController extends Controller {
 										2 * GridPane.getRowIndex(cover) + GridPane.getColumnIndex(cover));
 						PhotoController.search = false;
 						segue("/view/Photo.fxml");
+					});
+					Text name = new Text();
+					name.setText(albums.get(2 * i + j).getCaption());
+					name.setWrappingWidth(366);
+					grid.add(name, j, i);
+					GridPane.setHalignment(name, HPos.CENTER);
+					GridPane.setValignment(name, VPos.BOTTOM);
+					name.addEventFilter(MouseEvent.MOUSE_PRESSED, e -> { 
+						PhotoAlbum.album = PhotoAlbum.regular_user
+								.getAlbums().get(
+										2 * GridPane.getRowIndex(cover) + GridPane.getColumnIndex(cover));
+						segue("/view/Album.fxml");
 					});
 				}
 			}
