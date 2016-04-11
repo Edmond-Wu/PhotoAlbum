@@ -301,123 +301,221 @@ public class AlbumsController extends Controller{
 						if(key.length() > 0 && value.length() > 0){
 							for (String k : photos.get(i).getTags().keySet()) {
 								if (k.contains(key) && photos.get(i).getTags().get(k).contains(value)) {
-									if (!PhotoAlbum.search.contains(photos.get(i).getFile())) {
+									boolean duplicate = false;
+									for(Photo p: PhotoAlbum.search){
+										if(p.getFile().equals(photos.get(i).getFile())){
+											duplicate = true;
+										}
+									}
+									if(duplicate == false){
 										PhotoAlbum.search.add(photos.get(i));
 									}
 								}
 							}
-						}
-						if (key.length() > 0 && value.length() == 0) {
+						} else if (key.length() > 0 && value.length() == 0) {
 							for (String k : photos.get(i).getTags().keySet()) {
 								if (k.contains(key)) {
-									if (!PhotoAlbum.search.contains(photos.get(i).getFile())) {
+									boolean duplicate = false;
+									for(Photo p: PhotoAlbum.search){
+										if(p.getFile().equals(photos.get(i).getFile())){
+											duplicate = true;
+										}
+									}
+									if(duplicate == false){
 										PhotoAlbum.search.add(photos.get(i));
 									}
 								}
 							}
-						}
-						if (value.length() > 0 && key.length() == 0) {
+						} else if (value.length() > 0 && key.length() == 0) {
 							for (String k : photos.get(i).getTags().keySet()) {
 								if (photos.get(i).getTags().get(k).contains(value)) {
-									if (!PhotoAlbum.search.contains(photos.get(i))) {
+									boolean duplicate = false;
+									for(Photo p: PhotoAlbum.search){
+										if(p.getFile().equals(photos.get(i).getFile())){
+											duplicate = true;
+										}
+									}
+									if(duplicate == false){
 										PhotoAlbum.search.add(photos.get(i));
 									}
 								}
+							}
+						} else {
+							boolean duplicate = false;
+							for(Photo p: PhotoAlbum.search){
+								if(p.getFile().equals(photos.get(i).getFile())){
+									duplicate = true;
+								}
+							}
+							if(duplicate == false){
+								PhotoAlbum.search.add(photos.get(i));
 							}
 						}
 					} else if(startDate == null && endDate != null){
 						if(date.compareTo(endDate) <= 0){
-							if (!PhotoAlbum.search.contains(photos.get(i))) {
-								if(key.length() > 0 && value.length() > 0){
-									for (String k : photos.get(i).getTags().keySet()) {
-										if (k.contains(key) && photos.get(i).getTags().get(k).contains(value)) {
-											if (!PhotoAlbum.search.contains(photos.get(i).getFile())) {
-												PhotoAlbum.search.add(photos.get(i));
+							if(key.length() > 0 && value.length() > 0){
+								for (String k : photos.get(i).getTags().keySet()) {
+									if (k.contains(key) && photos.get(i).getTags().get(k).contains(value)) {
+										boolean duplicate = false;
+										for(Photo p: PhotoAlbum.search){
+											if(p.getFile().equals(photos.get(i).getFile())){
+												duplicate = true;
 											}
+										}
+										if(duplicate == false){
+											PhotoAlbum.search.add(photos.get(i));
 										}
 									}
 								}
-								if (key.length() > 0 && value.length() == 0) {
-									for (String k : photos.get(i).getTags().keySet()) {
-										if (k.contains(key)) {
-											if (!PhotoAlbum.search.contains(photos.get(i).getFile())) {
-												PhotoAlbum.search.add(photos.get(i));
+							} else if (key.length() > 0 && value.length() == 0) {
+								for (String k : photos.get(i).getTags().keySet()) {
+									if (k.contains(key)) {
+										boolean duplicate = false;
+										for(Photo p: PhotoAlbum.search){
+											if(p.getFile().equals(photos.get(i).getFile())){
+												duplicate = true;
 											}
+										}
+										if(duplicate == false){
+											PhotoAlbum.search.add(photos.get(i));
 										}
 									}
 								}
-								if (value.length() > 0 && key.length() == 0) {
-									for (String k : photos.get(i).getTags().keySet()) {
-										if (photos.get(i).getTags().get(k).contains(value)) {
-											if (!PhotoAlbum.search.contains(photos.get(i))) {
-												PhotoAlbum.search.add(photos.get(i));
+							} else if (value.length() > 0 && key.length() == 0) {
+								for (String k : photos.get(i).getTags().keySet()) {
+									if (photos.get(i).getTags().get(k).contains(value)) {
+										boolean duplicate = false;
+										for(Photo p: PhotoAlbum.search){
+											if(p.getFile().equals(photos.get(i).getFile())){
+												duplicate = true;
 											}
 										}
+										if(duplicate == false){
+											PhotoAlbum.search.add(photos.get(i));
+										}
 									}
+								}
+							} else {
+								boolean duplicate = false;
+								for(Photo p: PhotoAlbum.search){
+									if(p.getFile().equals(photos.get(i).getFile())){
+										duplicate = true;
+									}
+								}
+								if(duplicate == false){
+									PhotoAlbum.search.add(photos.get(i));
 								}
 							}
 						}
 					} else if (endDate == null && startDate != null){
 						if(date.compareTo(startDate) >= 0){ 
-							if (!PhotoAlbum.search.contains(photos.get(i).getFile())) {
-								if(key.length() > 0 && value.length() > 0){
-									for (String k : photos.get(i).getTags().keySet()) {
-										if (k.contains(key) && photos.get(i).getTags().get(k).contains(value)) {
-											if (!PhotoAlbum.search.contains(photos.get(i).getFile())) {
-												PhotoAlbum.search.add(photos.get(i));
+							if(key.length() > 0 && value.length() > 0){
+								for (String k : photos.get(i).getTags().keySet()) {
+									if (k.contains(key) && photos.get(i).getTags().get(k).contains(value)) {
+										boolean duplicate = false;
+										for(Photo p: PhotoAlbum.search){
+											if(p.getFile().equals(photos.get(i).getFile())){
+												duplicate = true;
 											}
+										}
+										if(duplicate == false){
+											PhotoAlbum.search.add(photos.get(i));
 										}
 									}
 								}
-								if (key.length() > 0 && value.length() == 0) {
-									for (String k : photos.get(i).getTags().keySet()) {
-										if (k.contains(key)) {
-											if (!PhotoAlbum.search.contains(photos.get(i).getFile())) {
-												PhotoAlbum.search.add(photos.get(i));
+							} else if (key.length() > 0 && value.length() == 0) {
+								for (String k : photos.get(i).getTags().keySet()) {
+									if (k.contains(key)) {
+										boolean duplicate = false;
+										for(Photo p: PhotoAlbum.search){
+											if(p.getFile().equals(photos.get(i).getFile())){
+												duplicate = true;
 											}
+										}
+										if(duplicate == false){
+											PhotoAlbum.search.add(photos.get(i));
 										}
 									}
 								}
-								if (value.length() > 0 && key.length() == 0) {
-									for (String k : photos.get(i).getTags().keySet()) {
-										if (photos.get(i).getTags().get(k).contains(value)) {
-											if (!PhotoAlbum.search.contains(photos.get(i))) {
-												PhotoAlbum.search.add(photos.get(i));
+							} else if (value.length() > 0 && key.length() == 0) {
+								for (String k : photos.get(i).getTags().keySet()) {
+									if (photos.get(i).getTags().get(k).contains(value)) {
+										boolean duplicate = false;
+										for(Photo p: PhotoAlbum.search){
+											if(p.getFile().equals(photos.get(i).getFile())){
+												duplicate = true;
 											}
 										}
+										if(duplicate == false){
+											PhotoAlbum.search.add(photos.get(i));
+										}
 									}
+								}
+							} else {
+								boolean duplicate = false;
+								for(Photo p: PhotoAlbum.search){
+									if(p.getFile().equals(photos.get(i).getFile())){
+										duplicate = true;
+									}
+								}
+								if(duplicate == false){
+									PhotoAlbum.search.add(photos.get(i));
 								}
 							}
 						}
 					} else {
 						if(date.compareTo(startDate) >= 0 && date.compareTo(endDate) <= 0){ 
-							if (!PhotoAlbum.search.contains(photos.get(i).getFile())) {
-								if(key.length() > 0 && value.length() > 0){
-									for (String k : photos.get(i).getTags().keySet()) {
-										if (k.contains(key) && photos.get(i).getTags().get(k).contains(value)) {
-											if (!PhotoAlbum.search.contains(photos.get(i).getFile())) {
-												PhotoAlbum.search.add(photos.get(i));
+							if(key.length() > 0 && value.length() > 0){
+								for (String k : photos.get(i).getTags().keySet()) {
+									if (k.contains(key) && photos.get(i).getTags().get(k).contains(value)) {
+										boolean duplicate = false;
+										for(Photo p: PhotoAlbum.search){
+											if(p.getFile().equals(photos.get(i).getFile())){
+												duplicate = true;
 											}
+										}
+										if(duplicate == false){
+											PhotoAlbum.search.add(photos.get(i));
 										}
 									}
 								}
-								if (key.length() > 0 && value.length() == 0) {
-									for (String k : photos.get(i).getTags().keySet()) {
-										if (k.contains(key)) {
-											if (!PhotoAlbum.search.contains(photos.get(i).getFile())) {
-												PhotoAlbum.search.add(photos.get(i));
+							} else if (key.length() > 0 && value.length() == 0) {
+								for (String k : photos.get(i).getTags().keySet()) {
+									if (k.contains(key)) {
+										boolean duplicate = false;
+										for(Photo p: PhotoAlbum.search){
+											if(p.getFile().equals(photos.get(i).getFile())){
+												duplicate = true;
 											}
+										}
+										if(duplicate == false){
+											PhotoAlbum.search.add(photos.get(i));
 										}
 									}
 								}
-								if (value.length() > 0 && key.length() == 0) {
-									for (String k : photos.get(i).getTags().keySet()) {
-										if (photos.get(i).getTags().get(k).contains(value)) {
-											if (!PhotoAlbum.search.contains(photos.get(i))) {
-												PhotoAlbum.search.add(photos.get(i));
+							} else if (value.length() > 0 && key.length() == 0) {
+								for (String k : photos.get(i).getTags().keySet()) {
+									if (photos.get(i).getTags().get(k).contains(value)) {
+										boolean duplicate = false;
+										for(Photo p: PhotoAlbum.search){
+											if(p.getFile().equals(photos.get(i).getFile())){
+												duplicate = true;
 											}
 										}
+										if(duplicate == false){
+											PhotoAlbum.search.add(photos.get(i));
+										}
 									}
+								}
+							} else {
+								boolean duplicate = false;
+								for(Photo p: PhotoAlbum.search){
+									if(p.getFile().equals(photos.get(i).getFile())){
+										duplicate = true;
+									}
+								}
+								if(duplicate == false){
+									PhotoAlbum.search.add(photos.get(i));
 								}
 							}
 						}
