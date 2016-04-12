@@ -45,5 +45,4 @@ public class RemoveTagDialog extends Dialog<ButtonType> {
     public String getKey() {
     	return key.getText();
     }
-    
 }
