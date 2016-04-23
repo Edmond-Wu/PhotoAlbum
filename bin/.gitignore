@@ -1,3 +1,5 @@
-/controller/
-/view/
+/app/
 /assets/
+/controller/
+/model/
+/view/

@@ -258,6 +258,7 @@ public class PhotoController extends Controller{
 			tags.setText("Tags - " + tag_display);
 		}
 		tags.setText("Tags: " + tag_display);
+		PhotoAlbum.regular_user.serialize();
 	}
 
 	/**
@@ -381,7 +382,8 @@ public class PhotoController extends Controller{
 					segue("/view/Album.fxml");
 					return;
 				}
-			}	
+			}
+			PhotoAlbum.regular_user.serialize();
 		}
 	}
 }
