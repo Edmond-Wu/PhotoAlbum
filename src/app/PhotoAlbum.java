@@ -62,7 +62,6 @@ public class PhotoAlbum extends Application {
 	        fileIn.close();
 	    } catch(Exception e) {
 	         System.out.println("Invalid deserialization.");
-	         return null;
 	    } 
 	    return u;
 	}
