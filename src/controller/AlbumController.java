@@ -102,7 +102,9 @@ public class AlbumController extends Controller {
 			PhotoAlbum.album.getPhotos().add(added);
 			displayPhotos();
 		}
+		
 		PhotoAlbum.regular_user.serialize();
+		//PhotoAlbum.regular_user.toJson();
 	}
 	
 	/**
@@ -380,7 +382,10 @@ public class AlbumController extends Controller {
 			}
 		}
 		while(albums.remove(null));
+		
 		PhotoAlbum.regular_user.serialize();
+		//PhotoAlbum.regular_user.toJson();
+		
 		grid.setPrefHeight(70 + (int)((albums.size() + 1) / 2) * 211);
 		if(albums.size() <= 2){
 			grid.setPrefHeight(240);
@@ -422,9 +427,8 @@ public class AlbumController extends Controller {
 					GridPane.setHalignment(name, HPos.CENTER);
 					GridPane.setValignment(name, VPos.BOTTOM);
 					name.addEventFilter(MouseEvent.MOUSE_PRESSED, e -> { 
-						PhotoAlbum.album = PhotoAlbum.regular_user
-								.getAlbums().get(
-										2 * GridPane.getRowIndex(cover) + GridPane.getColumnIndex(cover));
+						PhotoAlbum.album = PhotoAlbum.regular_user.getAlbums().get(
+							2 * GridPane.getRowIndex(cover) + GridPane.getColumnIndex(cover));
 						segue("/view/Album.fxml");
 					});
 				}

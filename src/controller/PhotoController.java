@@ -25,7 +25,6 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import model.Album;
 import model.Photo;
-import view.AddAlbumDialog;
 import view.AddTagDialog;
 import view.MovePhotoDialog;
 import view.RemoveTagDialog;
@@ -177,7 +176,10 @@ public class PhotoController extends Controller{
 				for(int i = 0; i < photos.size(); i++){
 					if(photos.get(i).equals(PhotoAlbum.photo)){
 						photos.remove(i);
+						
 						PhotoAlbum.regular_user.serialize();
+						//PhotoAlbum.regular_user.toJson();
+						
 						segue("/view/Album.fxml");
 						return;
 					}
@@ -258,7 +260,9 @@ public class PhotoController extends Controller{
 			tags.setText("Tags - " + tag_display);
 		}
 		tags.setText("Tags: " + tag_display);
+		
 		PhotoAlbum.regular_user.serialize();
+		//PhotoAlbum.regular_user.toJson();
 	}
 
 	/**
@@ -276,7 +280,9 @@ public class PhotoController extends Controller{
 		pane.getChildren().remove(newCaption);
 		newCaption = new TextField();
 		caption.setText("Caption: " + PhotoAlbum.photo.getCaption());
+		
 		PhotoAlbum.regular_user.serialize();
+		//PhotoAlbum.regular_user.toJson();
 	}
 
 	/**
@@ -291,7 +297,9 @@ public class PhotoController extends Controller{
 			photo.addUserToLikers();
 			likes.setText(photo.getLikes() + "   - You like this photo!");
 		}
+		
 		PhotoAlbum.regular_user.serialize();
+		//PhotoAlbum.regular_user.toJson();
 	}
 
 	/**
@@ -313,7 +321,9 @@ public class PhotoController extends Controller{
 			} 
 			tag_display = PhotoAlbum.photo.getTagDisplay();
 			tags.setText("Tags - " + tag_display);
+			
 			PhotoAlbum.regular_user.serialize();
+			//PhotoAlbum.regular_user.toJson();
 		}
 	}
 	
@@ -383,7 +393,9 @@ public class PhotoController extends Controller{
 					return;
 				}
 			}
+			
 			PhotoAlbum.regular_user.serialize();
+			//PhotoAlbum.regular_user.toJson();
 		}
 	}
 }

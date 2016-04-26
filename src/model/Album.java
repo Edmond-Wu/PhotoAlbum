@@ -11,6 +11,10 @@ public class Album implements Serializable {
 	private String name;
 	private ArrayList<Photo> photos;
 	
+	public Album() {
+		
+	}
+	
 	/**
 	 * Constructor with album name
 	 * @param s name of the photo album

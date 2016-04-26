@@ -38,6 +38,7 @@ public abstract class Controller {
 			if (response == ok) {
 				for (User u : PhotoAlbum.admin.getUserList()) {
 					u.serialize();
+					//u.toJson();
 				}
 				segue("/view/Login.fxml");
 			}

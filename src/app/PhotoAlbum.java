@@ -54,7 +54,7 @@ public class PhotoAlbum extends Application {
 	 * @param file_name Name of the user file
 	 * @return User object with its relevant data
 	 */
-	public User deSerialize(String file_name) {
+	public User deserialize(String file_name) {
 		User u = null;
 	    try {
 	    	FileInputStream fileIn = new FileInputStream("data/" + file_name);
@@ -93,9 +93,8 @@ public class PhotoAlbum extends Application {
 		if (directoryListing != null) {
 			for (File child : directoryListing) {
 				String file_name = child.getName();
-				if (file_name.toLowerCase().contains(".json")) {
-					NonAdminUser u = jsonDeserialize(child);
-					System.out.println(u.getUsername());
+				if (file_name.toLowerCase().contains(".ser")) {
+					User u = deserialize(file_name);
 					PhotoAlbum.admin.getUserList().add(u);
 				}
 		    }

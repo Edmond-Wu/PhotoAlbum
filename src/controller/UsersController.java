@@ -59,7 +59,9 @@ public class UsersController extends Controller {
 		} else {
 			user.setPrivate(true);
 		}
-		user.serialize();
+		
+		//user.serialize();
+		user.toJson();
 	}
 	
 	/**

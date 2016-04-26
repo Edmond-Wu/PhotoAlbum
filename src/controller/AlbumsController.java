@@ -140,7 +140,9 @@ public class AlbumsController extends Controller{
 			PhotoAlbum.regular_user.getAlbums().add(added);
 		}
 		displayAlbums();
+		
 		PhotoAlbum.regular_user.serialize();
+		//PhotoAlbum.regular_user.toJson();
 	}
 
 	/**
@@ -167,7 +169,10 @@ public class AlbumsController extends Controller{
 				selectint = 0;
 				select.setText(selectint + " albums selected.");
 				displayAlbumsEdit();
+				
 				PhotoAlbum.regular_user.serialize();
+				//PhotoAlbum.regular_user.toJson();
+				
 			} else {
 				ObservableList<Node> list = grid.getChildren();
 				List<String> names = new ArrayList<String>();
@@ -211,7 +216,9 @@ public class AlbumsController extends Controller{
 		showButton(done);
 		showButton(delete);
 		displayAlbumsEdit();
+		
 		PhotoAlbum.regular_user.serialize();
+		//PhotoAlbum.regular_user.toJson();
 	}
 	
 	/**
@@ -563,7 +570,10 @@ public class AlbumsController extends Controller{
 						file = new File("src/assets/empty.jpg");
 					}
 					while(photos.remove(null));
+					
 					PhotoAlbum.regular_user.serialize();
+					//PhotoAlbum.regular_user.toJson();
+					
 					Image image = new Image(file.toURI().toString());
 					ImageView cover = new ImageView();
 					cover.setFitHeight(190);
@@ -588,9 +598,8 @@ public class AlbumsController extends Controller{
 					GridPane.setHalignment(name, HPos.CENTER);
 					GridPane.setValignment(name, VPos.BOTTOM);
 					name.addEventFilter(MouseEvent.MOUSE_PRESSED, e -> { 
-						PhotoAlbum.album = PhotoAlbum.regular_user
-								.getAlbums().get(
-										2 * GridPane.getRowIndex(cover) + GridPane.getColumnIndex(cover));
+						PhotoAlbum.album = PhotoAlbum.regular_user.getAlbums().get(
+							2 * GridPane.getRowIndex(cover) + GridPane.getColumnIndex(cover));
 						segue("/view/Album.fxml");
 					});
 				}
@@ -635,7 +644,10 @@ public class AlbumsController extends Controller{
 						file = new File("src/assets/empty.jpg");
 					}
 					while(photos.remove(null));
+					
 					PhotoAlbum.regular_user.serialize();
+					//PhotoAlbum.regular_user.toJson();
+					
 					Image image = new Image(file.toURI().toString());
 					ImageView cover = new ImageView();
 					cover.setFitHeight(190);
@@ -670,9 +682,8 @@ public class AlbumsController extends Controller{
 					GridPane.setHalignment(name, HPos.CENTER);
 					GridPane.setValignment(name, VPos.BOTTOM);
 					name.addEventFilter(MouseEvent.MOUSE_PRESSED, e -> { 
-						PhotoAlbum.album = PhotoAlbum.regular_user
-								.getAlbums().get(
-										2 * GridPane.getRowIndex(cover) + GridPane.getColumnIndex(cover));
+						PhotoAlbum.album = PhotoAlbum.regular_user.getAlbums().get(
+							2 * GridPane.getRowIndex(cover) + GridPane.getColumnIndex(cover));
 					});
 				}
 			}

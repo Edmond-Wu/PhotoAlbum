@@ -17,6 +17,9 @@ public class Photo implements Serializable {
 	private ArrayList<User> likers;
 	private String caption;
 	
+	public Photo() {
+		
+	}
 	
 	/**
 	 * Constructor with file name

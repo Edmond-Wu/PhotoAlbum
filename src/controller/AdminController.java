@@ -111,8 +111,9 @@ public class AdminController extends Controller {
 			list.getSelectionModel().select(obsList.size() - 1);
 			showInfo();
 			PhotoAlbum.regular_user = user;
+			
 			PhotoAlbum.regular_user.serialize();
-			PhotoAlbum.regular_user.toJson();
+			//PhotoAlbum.regular_user.toJson();
 		}
 	}
 
@@ -138,6 +139,7 @@ public class AdminController extends Controller {
 					showInfo();
 					try {
 						Files.delete(Paths.get("data/" + user + ".ser"));
+						//Files.delete(Paths.get("data/" + user + ".json"));
 					} catch (Exception e1) {
 						System.out.println("Invalid serialized file to be deleted.");
 					}

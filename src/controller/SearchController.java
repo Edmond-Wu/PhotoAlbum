@@ -86,7 +86,10 @@ public class SearchController extends Controller {
 			}
 		}
 		while(albums.remove(null));
+		
 		PhotoAlbum.regular_user.serialize();
+		//PhotoAlbum.regular_user.toJson();
+		
 		grid.setPrefHeight(70 + (int)((albums.size() + 1) / 2) * 211);
 		if(albums.size() <= 2){
 			grid.setPrefHeight(240);
@@ -161,7 +164,10 @@ public class SearchController extends Controller {
 			added.setPhotos(PhotoAlbum.search);
 			PhotoAlbum.regular_user.getAlbums().add(added);
 			displayAlbums();
+			
 			PhotoAlbum.regular_user.serialize();
+			//PhotoAlbum.regular_user.toJson();
+			
 			Alert conf = new Alert(AlertType.INFORMATION);
 			conf.setContentText("Album created successfully!");
 			conf.show();
