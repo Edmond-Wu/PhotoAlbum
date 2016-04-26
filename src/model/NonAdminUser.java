@@ -9,6 +9,10 @@ public class NonAdminUser extends User {
 	
 	private ArrayList<Album> albums;
 	
+	public NonAdminUser() {
+		
+	}
+	
 	/**
 	 * Constructor with username and password
 	 * @param u username

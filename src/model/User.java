@@ -2,6 +2,8 @@ package model;
 
 import java.io.*;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 /**
  * @author Edmond Wu & Vincent Xie
  */
@@ -10,6 +12,10 @@ public abstract class User implements Serializable {
 	private String username;
 	private String password;
 	private boolean priv;
+	
+	public User() {
+		
+	}
 	
 	/**
 	 * User constructor
@@ -74,6 +80,12 @@ public abstract class User implements Serializable {
 	 * Converts user to json file
 	 */
 	public void toJson() {
-		
+		ObjectMapper mapper = new ObjectMapper();
+		String file_name = "data/" + username + ".json";
+		try {
+			mapper.writeValue(new File(file_name), this);
+		} catch (Exception e) {
+			System.out.println("Invalid json serialization.");
+		}
 	}
 }

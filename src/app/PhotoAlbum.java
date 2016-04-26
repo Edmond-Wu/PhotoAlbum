@@ -4,6 +4,8 @@ package app;
 import java.io.*;
 import java.util.*;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 import controller.LoginController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -71,8 +73,14 @@ public class PhotoAlbum extends Application {
 	 * @param file_name
 	 * @return User object
 	 */
-	public User jsonDeserialize(String file_name) {
-		User u = null;
+	public NonAdminUser jsonDeserialize(File file) {
+		NonAdminUser u = null;
+		ObjectMapper mapper = new ObjectMapper();
+		try {
+			u = mapper.readValue(file, NonAdminUser.class);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		return u;
 	}
 	
@@ -85,8 +93,9 @@ public class PhotoAlbum extends Application {
 		if (directoryListing != null) {
 			for (File child : directoryListing) {
 				String file_name = child.getName();
-				if (file_name.toLowerCase().contains(".ser")) {
-					User u = deSerialize(file_name);
+				if (file_name.toLowerCase().contains(".json")) {
+					NonAdminUser u = jsonDeserialize(child);
+					System.out.println(u.getUsername());
 					PhotoAlbum.admin.getUserList().add(u);
 				}
 		    }

@@ -112,6 +112,7 @@ public class AdminController extends Controller {
 			showInfo();
 			PhotoAlbum.regular_user = user;
 			PhotoAlbum.regular_user.serialize();
+			PhotoAlbum.regular_user.toJson();
 		}
 	}
 
