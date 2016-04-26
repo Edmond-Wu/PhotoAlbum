@@ -67,6 +67,16 @@ public class PhotoAlbum extends Application {
 	}
 	
 	/**
+	 * Json deserialization
+	 * @param file_name
+	 * @return User object
+	 */
+	public User jsonDeserialize(String file_name) {
+		User u = null;
+		return u;
+	}
+	
+	/**
 	 * Updates the user list from pre-existing serialized files
 	 */
 	public void updateUserList() {

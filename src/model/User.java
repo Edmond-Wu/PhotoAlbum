@@ -69,4 +69,11 @@ public abstract class User implements Serializable {
 	    	System.out.println("Invalid serialization.");
 	    }
 	}
+	
+	/**
+	 * Converts user to json file
+	 */
+	public void toJson() {
+		
+	}
 }
