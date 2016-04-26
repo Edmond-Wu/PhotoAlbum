@@ -111,7 +111,7 @@ public class AdminController extends Controller {
 			list.getSelectionModel().select(obsList.size() - 1);
 			showInfo();
 			PhotoAlbum.regular_user = user;
-			PhotoAlbum.regular_user.serialize();
+			PhotoAlbum.regular_user.toJson();
 		}
 	}
 
