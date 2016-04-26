@@ -1,10 +1,6 @@
 package model;
 
 import java.io.*;
-import com.fasterxml.jackson.*;
-import com.fasterxml.jackson.core.JsonGenerationException;
-import com.fasterxml.jackson.databind.JsonMappingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 
 /**
  * @author Edmond Wu & Vincent Xie
@@ -72,18 +68,5 @@ public abstract class User implements Serializable {
 	    } catch(Exception e) {
 	    	System.out.println("Invalid serialization.");
 	    }
-	}
-	
-	/**
-	 * Json serialization
-	 */
-	public void toJson() {
-		ObjectMapper mapper = new ObjectMapper();
-		String file_name = "data/" + username + ".json";
-		try {
-			mapper.writeValue(new File(file_name), this);
-		} catch (Exception e) {
-			e.printStackTrace();
-		} 
 	}
 }
